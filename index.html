@@ -7,207 +7,411 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.62);
+      --glass-border: rgba(255, 255, 255, 0.78);
+      --apple-ink: #1d1d1f;
+      --apple-sub: #6e6e73;
+    }
     body {
-      font-family: 'Noto Sans TC', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans TC', sans-serif;
+      color: var(--apple-ink);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
       -webkit-tap-highlight-color: transparent;
     }
     .serif-title {
       font-family: 'Playfair Display', 'Noto Sans TC', serif;
     }
+    /* Apple 風格動態液態毛玻璃 */
     .glass-card {
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.82);
-      box-shadow: 0 10px 30px 0 rgba(31, 38, 135, 0.06);
+      background: var(--glass-bg);
+      backdrop-filter: saturate(190%) blur(28px);
+      -webkit-backdrop-filter: saturate(190%) blur(28px);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.07), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
     }
     .glass-pill {
-      background: rgba(255, 255, 255, 0.62);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.85);
+    }
+    .glass-drawer {
+      background: rgba(255, 255, 255, 0.86);
+      backdrop-filter: saturate(200%) blur(36px);
+      -webkit-backdrop-filter: saturate(200%) blur(36px);
+      border-left: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: -20px 0 60px rgba(15, 23, 42, 0.14);
+    }
+    .apple-headline {
+      letter-spacing: -0.03em;
+      line-height: 1.08;
     }
     @keyframes floatSlow {
       0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(16px, -20px) scale(1.05); }
+      50% { transform: translate(22px, -24px) scale(1.07); }
     }
     @keyframes shakeCup {
       0%, 100% { transform: rotate(0deg); }
       25% { transform: rotate(-6deg) translateY(-4px); }
       75% { transform: rotate(6deg) translateY(-4px); }
     }
-    .blob-anim-1 { animation: floatSlow 9s ease-in-out infinite; }
-    .blob-anim-2 { animation: floatSlow 12s ease-in-out infinite reverse; }
+    .blob-anim-1 { animation: floatSlow 10s ease-in-out infinite; }
+    .blob-anim-2 { animation: floatSlow 13s ease-in-out infinite reverse; }
     .shaking { animation: shakeCup 0.45s ease-in-out infinite; }
     .liquid-transition {
       transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .custom-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
-    .custom-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.25); border-radius: 9999px; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(100,116,139,0.35); border-radius: 9999px; }
+    .custom-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.2); border-radius: 9999px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: rgba(100,116,139,0.3); border-radius: 9999px; }
   </style>
 </head>
-<body class="min-h-screen text-slate-800 relative selection:bg-slate-800 selection:text-white transition-colors duration-700 pb-20 lg:pb-10" id="app-body">
+<body class="min-h-screen relative selection:bg-slate-900 selection:text-white transition-colors duration-700 pb-16" id="app-body">
 
   <!-- 動態流體情緒漸層背景 -->
   <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-    <div id="bg-gradient" class="absolute inset-0 transition-all duration-1000 bg-gradient-to-br from-amber-50 via-rose-50 to-sky-100"></div>
-    <div id="blob-1" class="blob-anim-1 absolute -top-24 -left-24 w-72 sm:w-96 h-72 sm:h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-50 transition-colors duration-1000 bg-amber-200"></div>
-    <div id="blob-2" class="blob-anim-2 absolute top-1/3 -right-20 w-80 sm:w-[28rem] h-80 sm:h-[28rem] rounded-full mix-blend-multiply filter blur-3xl opacity-50 transition-colors duration-1000 bg-rose-200"></div>
-    <div id="blob-3" class="blob-anim-1 absolute -bottom-24 left-1/3 w-72 sm:w-96 h-72 sm:h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-45 transition-colors duration-1000 bg-sky-200"></div>
+    <div id="bg-gradient" class="absolute inset-0 transition-all duration-1000 bg-gradient-to-br from-amber-50/90 via-rose-50/80 to-sky-100/90"></div>
+    <div id="blob-1" class="blob-anim-1 absolute -top-28 -left-24 w-80 sm:w-[30rem] h-80 sm:h-[30rem] rounded-full mix-blend-multiply filter blur-3xl opacity-55 transition-colors duration-1000 bg-amber-200"></div>
+    <div id="blob-2" class="blob-anim-2 absolute top-1/4 -right-24 w-80 sm:w-[32rem] h-80 sm:h-[32rem] rounded-full mix-blend-multiply filter blur-3xl opacity-50 transition-colors duration-1000 bg-rose-200"></div>
+    <div id="blob-3" class="blob-anim-1 absolute -bottom-28 left-1/4 w-80 sm:w-[28rem] h-80 sm:h-[28rem] rounded-full mix-blend-multiply filter blur-3xl opacity-45 transition-colors duration-1000 bg-sky-200"></div>
   </div>
 
-  <!-- 頂部導覽列 (桌機完整顯示，手機精簡顯示 Logo + 快速按鈕) -->
-  <header class="sticky top-0 z-40 px-3 sm:px-4 py-2.5">
-    <nav class="max-w-7xl mx-auto glass-card rounded-full px-4 sm:px-6 py-2 flex items-center justify-between gap-2">
-      <button onclick="navigateTo('home')" class="flex items-center gap-2 text-left group shrink-0">
-        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-400 to-rose-400 flex items-center justify-center text-white font-bold shadow-sm group-hover:scale-105 transition">
+  <!-- 頂部極簡 Apple 風格導覽列 (右上角統一為三條線漢堡功能欄) -->
+  <header class="sticky top-0 z-40 px-3 sm:px-6 py-3">
+    <nav class="max-w-7xl mx-auto glass-card rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between">
+      <!-- 左側品牌標誌 -->
+      <button onclick="navigateTo('home')" class="flex items-center gap-2.5 text-left group">
+        <div class="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:scale-105 transition">
           M
         </div>
-        <div>
-          <span class="font-bold tracking-tight text-slate-800 text-base sm:text-lg">Moodrink</span>
-          <span class="text-xs text-slate-500 hidden sm:inline-block ml-1.5 border-l border-slate-300 pl-2">一杯心情</span>
+        <div class="flex items-baseline gap-2">
+          <span class="font-bold tracking-tight text-slate-900 text-base sm:text-lg">Moodrink</span>
+          <span class="text-xs text-slate-500 font-medium">一杯心情</span>
         </div>
       </button>
 
-      <!-- 電腦版導覽選單 (lg 以上顯示) -->
-      <div class="hidden lg:flex items-center gap-1 text-sm font-medium">
-        <button onclick="navigateTo('home')" data-nav="home" class="nav-btn whitespace-nowrap px-3.5 py-1.5 rounded-full transition">首頁</button>
-        <button onclick="startQuiz()" data-nav="quiz" class="nav-btn whitespace-nowrap px-3.5 py-1.5 rounded-full transition">情緒測驗</button>
-        <button onclick="navigateTo('library')" data-nav="library" class="nav-btn whitespace-nowrap px-3.5 py-1.5 rounded-full transition">飲品圖鑑 (40)</button>
-        <button onclick="openStoreMapAll()" data-nav="storemap" class="nav-btn whitespace-nowrap px-3.5 py-1.5 rounded-full transition flex items-center gap-1">
-          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-500"></i>
-          <span>台北飲品地圖</span>
+      <!-- 右側：上次推薦快速入口 + 三條線功能欄按鈕 -->
+      <div class="flex items-center gap-2.5">
+        <button
+          id="resume-result-pill"
+          onclick="navigateTo('result')"
+          class="hidden items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 hover:bg-white text-xs font-semibold text-slate-800 border border-white shadow-sm transition"
+        >
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span id="resume-result-text">查看上次推薦</span>
         </button>
-        <button onclick="navigateTo('map')" data-nav="map" class="nav-btn whitespace-nowrap px-3.5 py-1.5 rounded-full transition">Mood Map</button>
-        <button onclick="navigateTo('diary')" data-nav="diary" class="nav-btn whitespace-nowrap px-3.5 py-1.5 rounded-full transition flex items-center gap-1">
-          <span>我的心情</span>
-          <span id="diary-count-badge" class="text-[11px] bg-slate-800 text-white px-1.5 py-0.2 rounded-full">0</span>
-        </button>
-        <button onclick="navigateTo('about')" data-nav="about" class="nav-btn whitespace-nowrap px-3.5 py-1.5 rounded-full transition">關於我們</button>
-      </div>
 
-      <!-- 手機版右上角「關於我們」與「心情日記」快捷鍵 (lg 以下顯示) -->
-      <div class="flex lg:hidden items-center gap-1.5">
-        <button onclick="navigateTo('diary')" class="px-2.5 py-1.5 rounded-full glass-pill text-xs font-semibold text-slate-700 flex items-center gap-1">
-          <i data-lucide="book-heart" class="w-3.5 h-3.5 text-rose-500"></i>
-          <span id="diary-count-badge-mobile" class="text-[11px] font-bold">0</span>
-        </button>
-        <button onclick="navigateTo('about')" class="px-2.5 py-1.5 rounded-full glass-pill text-xs font-semibold text-slate-700">
-          關於專題
+        <button
+          onclick="toggleMenuDrawer(true)"
+          aria-label="開啟網站功能選單"
+          class="px-4 py-2 rounded-full bg-slate-900 text-white hover:bg-slate-800 active:scale-95 transition flex items-center gap-2 shadow-sm"
+        >
+          <span class="text-xs font-semibold hidden sm:inline">功能選單</span>
+          <i data-lucide="menu" class="w-4 h-4"></i>
         </button>
       </div>
     </nav>
   </header>
 
-  <!-- 手機版專屬底部導覽列 (Bottom Tab Bar，解決手機畫面擁擠問題，僅在 lg 以下顯示) -->
-  <nav class="lg:hidden fixed bottom-0 left-0 right-0 z-50 px-3 pb-2 pt-1 bg-gradient-to-t from-white/90 via-white/70 to-transparent pointer-events-none">
-    <div class="glass-card rounded-2xl px-2 py-1.5 grid grid-cols-5 gap-1 pointer-events-auto shadow-lg border border-white">
-      <button onclick="navigateTo('home')" data-nav="home" class="mobile-nav-btn flex flex-col items-center justify-center py-1 rounded-xl text-[11px] font-medium text-slate-600">
-        <i data-lucide="home" class="w-4 h-4 mb-0.5"></i>
-        <span>首頁</span>
-      </button>
-      <button onclick="startQuiz()" data-nav="quiz" class="mobile-nav-btn flex flex-col items-center justify-center py-1 rounded-xl text-[11px] font-medium text-slate-600">
-        <i data-lucide="sparkles" class="w-4 h-4 mb-0.5"></i>
-        <span>測驗</span>
-      </button>
-      <button onclick="navigateTo('library')" data-nav="library" class="mobile-nav-btn flex flex-col items-center justify-center py-1 rounded-xl text-[11px] font-medium text-slate-600">
-        <i data-lucide="cup-soda" class="w-4 h-4 mb-0.5"></i>
-        <span>圖鑑(40)</span>
-      </button>
-      <button onclick="openStoreMapAll()" data-nav="storemap" class="mobile-nav-btn flex flex-col items-center justify-center py-1 rounded-xl text-[11px] font-medium text-slate-600">
-        <i data-lucide="map-pin" class="w-4 h-4 mb-0.5"></i>
-        <span>飲品地圖</span>
-      </button>
-      <button onclick="navigateTo('map')" data-nav="map" class="mobile-nav-btn flex flex-col items-center justify-center py-1 rounded-xl text-[11px] font-medium text-slate-600">
-        <i data-lucide="compass" class="w-4 h-4 mb-0.5"></i>
-        <span>座標圖</span>
+  <!-- 右上角展開之全站玻璃功能欄 (Slide-over Hamburger Drawer) -->
+  <div id="menu-drawer-backdrop" onclick="toggleMenuDrawer(false)" class="fixed inset-0 z-50 bg-slate-900/25 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300"></div>
+  <aside id="menu-drawer" class="fixed top-0 right-0 bottom-0 z-50 w-80 sm:w-96 max-w-[88vw] glass-drawer translate-x-full transition-transform duration-300 ease-out flex flex-col justify-between p-6 overflow-y-auto">
+    <div class="space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-200/70 pb-4">
+        <div>
+          <span class="text-[11px] font-bold uppercase tracking-widest text-slate-400">Navigation</span>
+          <h3 class="text-lg font-bold text-slate-900">Moodrink 功能選單</h3>
+        </div>
+        <button onclick="toggleMenuDrawer(false)" aria-label="關閉選單" class="w-9 h-9 rounded-full glass-pill flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- 7 大核心功能選項 -->
+      <div class="space-y-1.5">
+        <button onclick="drawerNav('home')" data-drawer="home" class="drawer-item w-full p-3.5 rounded-2xl text-left flex items-center justify-between transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center"><i data-lucide="home" class="w-4 h-4"></i></div>
+            <div>
+              <div class="font-bold text-sm text-slate-900">首頁</div>
+              <div class="text-[11px] text-slate-500">情緒感知與一日調飲指南</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition"></i>
+        </button>
+
+        <button onclick="drawerNav('quiz')" data-drawer="quiz" class="drawer-item w-full p-3.5 rounded-2xl text-left flex items-center justify-between transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center"><i data-lucide="sparkles" class="w-4 h-4"></i></div>
+            <div>
+              <div class="font-bold text-sm text-slate-900">測驗</div>
+              <div class="text-[11px] text-slate-500">30 秒個人化情緒調飲問答</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition"></i>
+        </button>
+
+        <button onclick="drawerNav('library')" data-drawer="library" class="drawer-item w-full p-3.5 rounded-2xl text-left flex items-center justify-between transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center"><i data-lucide="cup-soda" class="w-4 h-4"></i></div>
+            <div>
+              <div class="font-bold text-sm text-slate-900">飲品圖鑑</div>
+              <div class="text-[11px] text-slate-500">六大分類風味指標與販售品牌</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition"></i>
+        </button>
+
+        <button onclick="drawerNavStoreMap()" data-drawer="storemap" class="drawer-item w-full p-3.5 rounded-2xl text-left flex items-center justify-between transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center"><i data-lucide="map-pin" class="w-4 h-4"></i></div>
+            <div>
+              <div class="font-bold text-sm text-slate-900">飲品地圖</div>
+              <div class="text-[11px] text-slate-500">台北市全門市導航與即時定位</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition"></i>
+        </button>
+
+        <button onclick="drawerNav('map')" data-drawer="map" class="drawer-item w-full p-3.5 rounded-2xl text-left flex items-center justify-between transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center"><i data-lucide="compass" class="w-4 h-4"></i></div>
+            <div>
+              <div class="font-bold text-sm text-slate-900">座標圖</div>
+              <div class="text-[11px] text-slate-500">清爽/濃郁 × 放鬆/提神二維視覺化</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition"></i>
+        </button>
+
+        <button onclick="drawerNav('diary')" data-drawer="diary" class="drawer-item w-full p-3.5 rounded-2xl text-left flex items-center justify-between transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center"><i data-lucide="book-heart" class="w-4 h-4"></i></div>
+            <div>
+              <div class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <span>我的心情飲品紀錄與人格分析</span>
+                <span id="diary-count-badge" class="text-[11px] bg-slate-900 text-white px-2 py-0.2 rounded-full">0</span>
+              </div>
+              <div class="text-[11px] text-slate-500">本機自動保存・專屬飲品人格</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition"></i>
+        </button>
+
+        <button onclick="drawerNav('about')" data-drawer="about" class="drawer-item w-full p-3.5 rounded-2xl text-left flex items-center justify-between transition group">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-slate-200 text-slate-700 flex items-center justify-center"><i data-lucide="award" class="w-4 h-4"></i></div>
+            <div>
+              <div class="font-bold text-sm text-slate-900">關於專題</div>
+              <div class="text-[11px] text-slate-500">設計理念、必要門檻與權重架構</div>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 底部狀態保存說明與手動重置鍵 -->
+    <div class="pt-4 mt-4 border-t border-slate-200/70 space-y-3">
+      <div class="text-[11px] text-slate-500 leading-relaxed flex items-start gap-2">
+        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+        <span>同一裝置開啟將自動保留您的測驗狀態與飲品紀錄，如需清除請點擊下方重置。</span>
+      </div>
+      <button
+        onclick="manualResetAllUserData()"
+        class="w-full py-2.5 px-4 rounded-xl border border-rose-200 bg-rose-50/70 hover:bg-rose-100 text-rose-700 text-xs font-bold transition flex items-center justify-center gap-1.5"
+      >
+        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+        <span>重置所有個人紀錄與測驗狀態</span>
       </button>
     </div>
-  </nav>
+  </aside>
 
   <!-- 主要內容容器 -->
-  <main class="max-w-7xl mx-auto px-3 sm:px-4 pt-3 sm:pt-6 pb-16">
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-8 pb-20">
 
-    <!-- ==================== 01 HOME 首頁 ==================== -->
-    <section id="view-home" class="space-y-8 sm:space-y-12">
-      <div class="text-center max-w-3xl mx-auto pt-3 sm:pt-6 pb-2 space-y-4 sm:space-y-5">
-        <div class="inline-flex items-center gap-2 glass-pill px-3.5 py-1 rounded-full text-[11px] sm:text-xs font-medium text-slate-600 shadow-sm">
-          <span class="w-2 h-2 rounded-full bg-rose-400 animate-ping"></span>
-          <span>資訊傳播學系畢業成果企劃｜情緒 × 需求 × 個人化飲品推薦</span>
+    <!-- ==================== 01 HOME 首頁 (Apple Editorial & Bento 豐富化設計) ==================== -->
+    <section id="view-home" class="space-y-12 sm:space-y-16">
+
+      <!-- 第一屏：Apple 風格視覺宣言 Hero (頂部標籤改為 Moodrink) -->
+      <div class="text-center max-w-4xl mx-auto pt-4 sm:pt-8 space-y-6">
+        <div class="inline-flex items-center gap-2 glass-pill px-4 py-1.5 rounded-full text-xs font-semibold text-slate-800 shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+          <span>Moodrink</span>
         </div>
 
-        <!-- 固定為「今天，你想喝什麼心情？」 -->
-        <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-slate-900 leading-tight px-2">
+        <h1 class="apple-headline text-4xl sm:text-6xl md:text-7xl font-black text-slate-900 px-2">
           今天，你想喝什麼<span class="underline decoration-wavy decoration-rose-400 underline-offset-8">心情</span>？
         </h1>
 
-        <p class="text-slate-600 text-sm sm:text-lg max-w-xl mx-auto leading-relaxed px-2">
-          用 30 秒找到現在最適合你的那一杯。我們不從冰冷的菜單開始，而是先傾聽你當下的情緒與身體需求，並幫你定位台北市手搖品牌門市。
+        <p class="text-slate-600 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed font-normal px-2">
+          把每天「不知道喝什麼」的猶豫，變成一場 30 秒認識當下狀態的感官互動。從情緒出發，為你調配專屬風味並直達台北市街頭門市。
         </p>
 
-        <div class="pt-1 flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-2.5 sm:gap-3 px-4 sm:px-0">
-          <button onclick="startQuiz()" class="px-7 py-3.5 sm:py-4 rounded-full bg-slate-900 text-white text-sm sm:text-base font-semibold shadow-lg hover:bg-slate-800 active:scale-95 transition flex items-center justify-center gap-2">
+        <div class="pt-2 flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 px-4 sm:px-0">
+          <button onclick="startQuiz()" class="px-8 py-4 rounded-full bg-slate-900 text-white text-sm sm:text-base font-semibold shadow-xl hover:bg-slate-800 hover:scale-[1.02] active:scale-95 transition flex items-center justify-center gap-2">
             <span>開始 30 秒情緒調飲</span>
-            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
-          <button onclick="openStoreMapAll()" class="px-6 py-3.5 sm:py-4 rounded-full glass-card text-slate-800 text-sm sm:text-base font-semibold hover:bg-white/90 transition flex items-center justify-center gap-2">
+          <button onclick="openStoreMapAll()" class="px-7 py-4 rounded-full glass-card text-slate-900 text-sm sm:text-base font-semibold hover:bg-white/90 transition flex items-center justify-center gap-2">
             <i data-lucide="map-pin" class="w-4 h-4 text-rose-500"></i>
-            <span>探索台北市手搖飲地圖</span>
+            <span>探索台北市飲品地圖</span>
           </button>
         </div>
       </div>
 
-      <!-- STEP 02 互動情緒泡泡預覽牆 -->
-      <div class="glass-card rounded-3xl p-4 sm:p-8">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 mb-4 sm:mb-6">
+      <!-- 第二屏：互動式液態情緒調色盤 (Step 01) -->
+      <div class="glass-card rounded-[2.2rem] p-5 sm:p-10">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6 sm:mb-8">
           <div>
-            <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Step 01 · Choose Your Mood</span>
-            <h2 class="text-lg sm:text-2xl font-bold text-slate-800">點選你現在的情緒泡泡，直接開始調製</h2>
+            <span class="text-xs font-bold uppercase tracking-widest text-rose-500">Interactive Liquid Spectrum</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">點選當下的情緒光譜，直接啟動調飲</h2>
           </div>
-          <p class="text-xs text-slate-500">點選任一心情，立即進入個人化調飲問答</p>
+          <p class="text-xs sm:text-sm text-slate-500">滑鼠移過或觸控情緒卡片，全站動態玻璃光影將隨之流動變換</p>
         </div>
 
-        <div id="home-mood-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
+        <div id="home-mood-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           <!-- 由 JS 動態生成 8 個情緒泡泡 -->
         </div>
       </div>
 
-      <!-- 專題四大核心層次介紹 -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div class="glass-card rounded-2xl p-4 sm:p-5 space-y-1.5">
-          <div class="text-[11px] font-bold text-rose-500">01 / EMOTION</div>
-          <h3 class="font-bold text-sm sm:text-base text-slate-800">感知當下情緒</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">將抽象心情轉譯為色彩與視覺動態，停下來問自己「現在感覺如何？」。</p>
+      <!-- 第三屏：Apple Bento Grid 風格 — 台北人的一日微情緒調飲指南 (全新非重複豐富內容) -->
+      <div class="space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 px-1">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Daily Rituals in Taipei</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">一日三時段，城市裡的風味處方箋</h2>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500">不同時間點的大腦與身體，需要的從來不是同一杯飲料</p>
         </div>
-        <div class="glass-card rounded-2xl p-4 sm:p-5 space-y-1.5">
-          <div class="text-[11px] font-bold text-amber-600">02 / NEED</div>
-          <h3 class="font-bold text-sm sm:text-base text-slate-800">釐清身體需求</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">區分提神、放鬆、療癒、解膩或單純嘴饞，貼合日常真實情境。</p>
-        </div>
-        <div class="glass-card rounded-2xl p-4 sm:p-5 space-y-1.5">
-          <div class="text-[11px] font-bold text-emerald-600">03 / 40 DRINKS</div>
-          <h3 class="font-bold text-sm sm:text-base text-slate-800">40 款飲品圖鑑</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">涵蓋純茶、奶茶、水果茶、咖啡、氣泡飲與無咖啡因六大類完整資料庫。</p>
-        </div>
-        <div class="glass-card rounded-2xl p-4 sm:p-5 space-y-1.5">
-          <div class="text-[11px] font-bold text-indigo-600">04 / TAIPEI MAP</div>
-          <h3 class="font-bold text-sm sm:text-base text-slate-800">27 大品牌台北門市</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">支援 GPS 定位計算最近門市，一鍵篩選販售店家並啟動地圖導航。</p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <!-- 晨間 09:00 -->
+          <div class="lg:col-span-4 glass-card rounded-[2rem] p-6 sm:p-7 flex flex-col justify-between space-y-6 hover:bg-white/80 transition">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">09:00 AM · 晨間開機</span>
+                <span class="text-2xl">☀️</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">混沌初醒的高效專注</h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                剛踏出捷運站、面對滿檔的早八課堂或晨會，味蕾需要俐落的酸香或柑橘調烘焙感，快速切斷睡意而不造成血糖震盪。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200/60 flex items-center justify-between">
+              <div>
+                <div class="text-[11px] text-slate-400 font-semibold">代表風味處方</div>
+                <div class="text-sm font-bold text-slate-900">西西里氣泡咖啡・無糖四季春</div>
+              </div>
+              <button onclick="quickStartWithMood('tired')" class="w-9 h-9 rounded-full bg-slate-900 text-white flex items-center justify-center hover:scale-105 transition" title="以此情境開始測驗">
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 午後 15:15 -->
+          <div class="lg:col-span-4 glass-card rounded-[2rem] p-6 sm:p-7 flex flex-col justify-between space-y-6 hover:bg-white/80 transition">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold">03:15 PM · 午後換氣</span>
+                <span class="text-2xl">🍑</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">螢幕疲勞後的果香喘息</h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                長時間盯著程式碼與簡報，大腦渴望一點微甜與咀嚼感來釋放壓力。白桃烏龍或紅柚翡翠能帶來恰到好處的多巴胺補給。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200/60 flex items-center justify-between">
+              <div>
+                <div class="text-[11px] text-slate-400 font-semibold">代表風味處方</div>
+                <div class="text-sm font-bold text-slate-900">白桃烏龍凍飲・紅柚翡翠</div>
+              </div>
+              <button onclick="quickStartWithMood('stressed')" class="w-9 h-9 rounded-full bg-slate-900 text-white flex items-center justify-center hover:scale-105 transition" title="以此情境開始測驗">
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 星夜 21:30 -->
+          <div class="lg:col-span-4 glass-card rounded-[2rem] p-6 sm:p-7 flex flex-col justify-between space-y-6 hover:bg-white/80 transition">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold">09:30 PM · 夜間安神</span>
+                <span class="text-2xl">🌙</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900">零咖啡因的溫柔擁抱</h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                結束一整天的奔波，想喝點東西犒賞自己卻怕失眠？系統的「零咖啡因必要門檻」會自動為你過濾出黃金蕎麥、芋頭鮮奶與洋甘菊茶。
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200/60 flex items-center justify-between">
+              <div>
+                <div class="text-[11px] text-slate-400 font-semibold">代表風味處方</div>
+                <div class="text-sm font-bold text-slate-900">黃金蕎麥粉粿・大甲芋頭鮮奶</div>
+              </div>
+              <button onclick="quickStartWithMood('healing')" class="w-9 h-9 rounded-full bg-slate-900 text-white flex items-center justify-center hover:scale-105 transition" title="以此情境開始測驗">
+                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- 第四屏：雙欄式感官轉譯與台北市門市實時探索 Bento 區塊 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="lg:col-span-7 glass-card rounded-[2.2rem] p-6 sm:p-9 flex flex-col justify-between space-y-6">
+          <div class="space-y-3">
+            <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Hard-Gate Filtering System</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
+              不推銷你不喝的成分，<br class="hidden sm:inline" />無咖啡因與無乳製品「零誤差把關」。
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              一般心理測驗常在勾選「不喝牛奶」後仍推薦拿鐵。Moodrink 將咖啡因與乳製品設為最高優先級的「必要門檻」，一旦選擇不攝取，系統立即從候選池中 100% 剔除衝突品項，再以五維度權重精算最適合你的那一杯。
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            <button onclick="navigateTo('library')" class="px-5 py-2.5 rounded-full bg-slate-900 text-white text-xs sm:text-sm font-semibold hover:bg-slate-800 transition">
+              探索飲品圖鑑
+            </button>
+            <button onclick="navigateTo('map')" class="px-5 py-2.5 rounded-full glass-pill text-slate-800 text-xs sm:text-sm font-semibold hover:bg-white transition">
+              開啟二維風味座標圖
+            </button>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 glass-card rounded-[2.2rem] p-6 sm:p-9 flex flex-col justify-between space-y-6 bg-gradient-to-br from-white/80 to-rose-50/60">
+          <div class="space-y-3">
+            <span class="text-xs font-bold uppercase tracking-widest text-rose-600">Taipei Full Store Coverage</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
+              50嵐台北 46 店・龜記 31 店<br />全行政區門市一鍵導航。
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              從大安、信義、中山、西門町到內湖科技園區與北投天母，我們完整建檔台北市各大手搖飲門市地址，開啟定位即可自動排列離你最近的門市。
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-2">
+            <button onclick="openStoreMapAll()" class="px-5 py-2.5 rounded-full bg-rose-600 text-white text-xs sm:text-sm font-semibold hover:bg-rose-500 transition flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="navigation" class="w-4 h-4"></i>
+              <span>立即開啟台北市飲品地圖</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
     </section>
 
-    <!-- ==================== 02 MOOD TEST 互動測驗 (RWD 手機版上下緊湊排版) ==================== -->
+    <!-- ==================== 02 MOOD TEST 互動測驗 ==================== -->
     <section id="view-quiz" class="hidden">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-center">
         
-        <!-- 右側問題卡片在手機版排上方，左側透明杯在手機版高度精簡避免佔滿螢幕 -->
-        <div class="lg:col-span-5 glass-card rounded-3xl p-4 sm:p-6 flex flex-col items-center justify-center relative order-2 lg:order-1">
+        <!-- 動態 SVG 透明調飲杯 -->
+        <div class="lg:col-span-5 glass-card rounded-[2.2rem] p-5 sm:p-6 flex flex-col items-center justify-center relative order-2 lg:order-1">
           <div class="text-xs font-medium text-slate-500 mb-1 flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
             <span id="cup-status-label">即時情緒調飲預覽</span>
@@ -269,28 +473,31 @@
         </div>
 
         <!-- 7 步驟問題卡片 -->
-        <div class="lg:col-span-7 glass-card rounded-3xl p-4 sm:p-8 flex flex-col justify-between order-1 lg:order-2">
+        <div class="lg:col-span-7 glass-card rounded-[2.2rem] p-5 sm:p-8 flex flex-col justify-between order-1 lg:order-2">
           <div>
             <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
               <span id="quiz-step-indicator" class="font-bold text-slate-700">QUESTION 01 / 07</span>
               <span id="quiz-progress-pct">14%</span>
             </div>
-            <div class="w-full h-2 bg-white/60 rounded-full overflow-hidden mb-4 sm:mb-6">
-              <div id="quiz-progress-bar" class="h-full bg-slate-800 rounded-full transition-all duration-500" style="width: 14%"></div>
+            <div class="w-full h-2 bg-white/60 rounded-full overflow-hidden mb-5">
+              <div id="quiz-progress-bar" class="h-full bg-slate-900 rounded-full transition-all duration-500" style="width: 14%"></div>
             </div>
 
             <h2 id="quiz-question-title" class="text-xl sm:text-3xl font-bold text-slate-900 mb-1.5">現在的你，感覺如何？</h2>
-            <p id="quiz-question-sub" class="text-xs sm:text-sm text-slate-500 mb-4 sm:mb-6">挑一個最貼近你當下狀態的情緒色彩</p>
+            <p id="quiz-question-sub" class="text-xs sm:text-sm text-slate-500 mb-5">挑一個最貼近你當下狀態的情緒色彩</p>
 
             <div id="quiz-options-container" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-3"></div>
           </div>
 
-          <div class="flex items-center justify-between pt-4 mt-4 border-t border-slate-200/60">
-            <button id="quiz-prev-btn" onclick="prevQuizStep()" class="px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium text-slate-600 hover:bg-white/60 transition flex items-center gap-1">
+          <div class="flex items-center justify-between pt-5 mt-5 border-t border-slate-200/60">
+            <button id="quiz-prev-btn" onclick="prevQuizStep()" class="px-4 py-2 rounded-full text-xs sm:text-sm font-semibold text-slate-600 hover:bg-white/70 transition flex items-center gap-1">
               <i data-lucide="arrow-left" class="w-4 h-4"></i>
               <span>上一題</span>
             </button>
-            <button onclick="resetQuiz()" class="text-xs text-slate-400 hover:text-slate-600 transition">重置測驗</button>
+            <button onclick="resetQuiz()" class="px-3.5 py-1.5 rounded-full text-xs font-semibold text-rose-600 hover:bg-rose-50 transition flex items-center gap-1">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              <span>重置目前測驗</span>
+            </button>
           </div>
         </div>
 
@@ -302,31 +509,31 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Personal Recommendation Result</span>
-          <h2 class="text-xl sm:text-3xl font-bold text-slate-900">為你調製的今日心情飲品</h2>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">為你調製的今日心情飲品</h2>
         </div>
         <div id="result-rank-tabs" class="flex overflow-x-auto custom-scroll glass-card p-1.5 rounded-full gap-1"></div>
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
-        <div class="lg:col-span-7 glass-card rounded-3xl p-5 sm:p-8 space-y-5">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-7 glass-card rounded-[2.2rem] p-5 sm:p-8 space-y-5">
           <div class="flex flex-wrap items-center justify-between gap-2">
-            <span id="res-category-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-900 text-white">茶類</span>
-            <div class="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+            <span id="res-category-badge" class="px-3.5 py-1 rounded-full text-xs font-semibold bg-slate-900 text-white">茶類</span>
+            <div class="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3.5 py-1 rounded-full">
               <span>規則加權符合度</span>
               <span id="res-match-score" class="text-base sm:text-lg">94%</span>
             </div>
           </div>
 
           <div>
-            <p id="res-mood-title" class="text-xs sm:text-sm font-medium text-rose-600 mb-1">今日 Mood：需要喘口氣的午後</p>
+            <p id="res-mood-title" class="text-xs sm:text-sm font-semibold text-rose-600 mb-1">今日 Mood：需要喘口氣的午後</p>
             <h3 id="res-drink-name" class="text-2xl sm:text-4xl font-bold text-slate-900 mb-1.5">白桃烏龍</h3>
             <p id="res-ice-sugar" class="text-xs font-medium text-slate-500">建議調配：微糖 · 微冰 · 帶清雅果香</p>
           </div>
 
-          <blockquote id="res-quote" class="p-3.5 sm:p-4 rounded-2xl bg-white/60 border-l-4 border-slate-800 text-slate-700 text-xs sm:text-base leading-relaxed italic"></blockquote>
+          <blockquote id="res-quote" class="p-4 rounded-2xl bg-white/65 border-l-4 border-slate-900 text-slate-700 text-xs sm:text-base leading-relaxed italic"></blockquote>
 
           <!-- 販售此飲品的推薦品牌按鈕 + 直接跳轉並自動篩選該飲品所有店家 -->
-          <div class="rounded-2xl bg-amber-50/90 border border-amber-200/90 p-3.5 sm:p-4 space-y-3">
+          <div class="rounded-2xl bg-amber-50/90 border border-amber-200/90 p-4 space-y-3">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <span class="text-xs font-bold text-amber-900 flex items-center gap-1.5">
                 <i data-lucide="store" class="w-4 h-4 text-amber-600 shrink-0"></i>
@@ -334,7 +541,7 @@
               </span>
               <button
                 onclick="goToMapForCurrentResultDrink()"
-                class="w-full sm:w-auto justify-center px-3.5 py-2 rounded-full bg-rose-600 text-white text-xs font-bold hover:bg-rose-500 shadow-sm transition flex items-center gap-1"
+                class="w-full sm:w-auto justify-center px-4 py-2 rounded-full bg-rose-600 text-white text-xs font-bold hover:bg-rose-500 shadow-sm transition flex items-center gap-1"
               >
                 <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
                 <span>前往門市地圖導航（直接顯示店家）</span>
@@ -349,23 +556,24 @@
             <div id="res-metrics-bars" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
           </div>
 
-          <div class="rounded-2xl bg-white/70 p-4 sm:p-5 space-y-2.5 border border-white">
+          <!-- 可解釋推薦：必要門檻 + 五大權重解析 -->
+          <div class="rounded-2xl bg-white/75 p-4 sm:p-5 space-y-2.5 border border-white">
             <div class="flex items-center justify-between flex-wrap gap-1">
               <h4 class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-1.5">
                 <i data-lucide="cpu" class="w-4 h-4 text-indigo-600"></i>
-                <span>為什麼推薦這杯？（Rule-based 演算法解析）</span>
+                <span>為什麼推薦這杯？（必要門檻把關 ＋ 權重解析）</span>
               </h4>
-              <span class="text-[10px] sm:text-[11px] text-slate-400">情緒30% · 需求25% · 口味20% · 甜度10% · 咖啡因10% · 限制5%</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-500 font-medium">情緒25% · 需求25% · 口味20% · 甜度15% · 限制15%</span>
             </div>
             <ul id="res-reasons-list" class="text-xs text-slate-600 space-y-1.5 leading-relaxed"></ul>
           </div>
 
           <div class="flex flex-wrap gap-2.5 pt-1">
-            <button onclick="startQuiz()" class="flex-1 sm:flex-none justify-center px-5 py-2.5 rounded-full bg-slate-900 text-white text-xs sm:text-sm font-medium hover:bg-slate-800 transition flex items-center gap-1.5">
+            <button onclick="resetAndStartQuiz()" class="flex-1 sm:flex-none justify-center px-5 py-2.5 rounded-full bg-slate-900 text-white text-xs sm:text-sm font-semibold hover:bg-slate-800 transition flex items-center gap-1.5">
               <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
               <span>重新測驗</span>
             </button>
-            <button onclick="goToMapForCurrentResultDrink()" class="flex-1 sm:flex-none justify-center px-5 py-2.5 rounded-full bg-rose-600 text-white text-xs sm:text-sm font-medium hover:bg-rose-500 transition flex items-center gap-1.5">
+            <button onclick="goToMapForCurrentResultDrink()" class="flex-1 sm:flex-none justify-center px-5 py-2.5 rounded-full bg-rose-600 text-white text-xs sm:text-sm font-semibold hover:bg-rose-500 transition flex items-center gap-1.5">
               <i data-lucide="navigation" class="w-4 h-4"></i>
               <span>尋找附近門市買這杯</span>
             </button>
@@ -380,10 +588,10 @@
               <span class="text-xs text-slate-400">自動生成社群分享卡</span>
             </div>
 
-            <div id="mood-card-preview" class="rounded-[2rem] p-6 shadow-xl border border-white/80 aspect-[9/15] flex flex-col justify-between relative overflow-hidden transition-all duration-700 bg-gradient-to-br from-rose-100 via-amber-50 to-sky-100">
+            <div id="mood-card-preview" class="rounded-[2.2rem] p-6 shadow-xl border border-white/80 aspect-[9/15] flex flex-col justify-between relative overflow-hidden transition-all duration-700 bg-gradient-to-br from-rose-100 via-amber-50 to-sky-100">
               <div class="flex items-center justify-between text-xs font-semibold text-slate-600 z-10">
                 <span>MOODRINK · 一杯心情</span>
-                <span id="card-date">10.29</span>
+                <span id="card-date">10.30</span>
               </div>
 
               <div class="my-auto text-center space-y-3 z-10 py-4">
@@ -417,30 +625,30 @@
       </div>
     </section>
 
-    <!-- ==================== 04 DRINK LIBRARY 飲品圖鑑資料庫 (40 款完整收錄) ==================== -->
-    <section id="view-library" class="hidden space-y-5">
+    <!-- ==================== 04 DRINK LIBRARY 情緒飲品圖鑑資料庫 (已移除所有總數數字) ==================== -->
+    <section id="view-library" class="hidden space-y-6">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-3">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">04 / 40 Drinks Dataset & Official Brand Links</span>
-          <h2 class="text-xl sm:text-3xl font-bold text-slate-900">情緒飲品圖鑑資料庫（共 40 款）</h2>
-          <p class="text-xs text-slate-500 mt-1">六大分類完整收錄，點擊品牌按鈕可直接前往官網，點擊「查看販售門市」可一鍵過濾出台北市販售店家</p>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Drink Dataset & Official Brand Links</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">情緒飲品圖鑑資料庫</h2>
+          <p class="text-xs text-slate-500 mt-1">點擊品牌按鈕可直接前往官網，點擊「查看販售門市」可一鍵過濾出台北市販售店家</p>
         </div>
         <div id="library-filter-bar" class="flex overflow-x-auto custom-scroll pb-1 gap-1.5"></div>
       </div>
 
       <div id="library-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- JS 渲染 40 張飲品卡片 -->
+        <!-- JS 渲染飲品卡片 -->
       </div>
     </section>
 
-    <!-- ==================== 05 STORE MAP 台北市飲品地圖 (27 大品牌 + 台北市全區門市 + GPS 定位) ==================== -->
-    <section id="view-storemap" class="hidden space-y-4 sm:space-y-5">
+    <!-- ==================== 05 STORE MAP 台北市飲品地圖 (完整收錄 50嵐 46 家、龜記 31 家台北市全門市) ==================== -->
+    <section id="view-storemap" class="hidden space-y-5">
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-3">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-rose-500">05 / Taipei City Store Map & GPS Navigation</span>
-          <h2 class="text-xl sm:text-3xl font-bold text-slate-900">台北市 27 大手搖飲・咖啡廳・超商現萃地圖</h2>
+          <span class="text-xs font-bold uppercase tracking-wider text-rose-500">Taipei City Store Map & GPS Navigation</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">台北市手搖飲・咖啡廳・超商現萃地圖</h2>
           <p class="text-xs sm:text-sm text-slate-600 mt-1">
-            完整收錄各品牌於台北市各行政區（大安、信義、中山、中正、萬華、士林、松山、內湖、南港等）之指標門市，支援 GPS 距離排序與一鍵導航！
+            完整建入 <strong>50嵐台北市全區 46 家門市</strong>、<strong>龜記茗品台北市全區 31 家門市</strong> 與各大指標品牌門市，支援開啟 GPS 定位計算距離與一鍵導航！
           </p>
         </div>
 
@@ -454,14 +662,14 @@
             <span id="gps-btn-text">取得我的位置・找附近店家</span>
           </button>
 
-          <div class="relative w-full sm:w-60">
+          <div class="relative w-full sm:w-64">
             <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
             <input
               id="brand-search-input"
               type="text"
               oninput="renderStoreMap()"
-              placeholder="搜尋品牌或台北行政區..."
-              class="w-full pl-9 pr-4 py-2 rounded-full glass-card text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-slate-800"
+              placeholder="搜尋品牌、路名或台北行政區..."
+              class="w-full pl-9 pr-4 py-2 rounded-full glass-card text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
             />
           </div>
         </div>
@@ -491,36 +699,36 @@
         </div>
         <button
           onclick="clearDrinkStoreFilter()"
-          class="px-3 py-1.5 rounded-full bg-white text-slate-900 text-xs font-bold hover:bg-amber-200 transition flex items-center gap-1"
+          class="px-3.5 py-1.5 rounded-full bg-white text-slate-900 text-xs font-bold hover:bg-amber-200 transition flex items-center gap-1"
         >
           <i data-lucide="x" class="w-3.5 h-3.5"></i>
-          <span>顯示全部 27 家品牌</span>
+          <span>顯示全部品牌</span>
         </button>
       </div>
 
       <!-- 品牌分類篩選器 -->
       <div id="brand-category-bar" class="flex overflow-x-auto custom-scroll pb-1 gap-1.5"></div>
 
-      <!-- 主體：手機版將互動地圖置頂方便查看，電腦版左列表右地圖 -->
+      <!-- 主體：左側品牌卡片清單 + 右側即時互動地圖與門市導航面板 -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
         
         <!-- 左側 7 欄：品牌與台北市門市列表 -->
         <div id="brand-list-container" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-h-[680px] lg:max-h-[780px] overflow-y-auto custom-scroll pr-1 order-2 lg:order-1">
-          <!-- JS 動態渲染 27 個品牌與台北市門市卡片 -->
+          <!-- JS 動態渲染品牌與台北市門市卡片 -->
         </div>
 
         <!-- 右側 5 欄：即時 Google Maps 嵌入預覽 + 台北市門市地址導航超連結 -->
-        <div class="lg:col-span-5 lg:sticky lg:top-20 glass-card rounded-3xl p-4 sm:p-5 space-y-3.5 order-1 lg:order-2">
+        <div class="lg:col-span-5 lg:sticky lg:top-20 glass-card rounded-[2rem] p-4 sm:p-5 space-y-3.5 order-1 lg:order-2">
           <div class="flex items-center justify-between gap-2">
             <div class="min-w-0">
               <span id="active-map-brand-badge" class="text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700">目前選中品牌</span>
-              <h3 id="active-map-title" class="text-lg sm:text-xl font-bold text-slate-900 mt-1 truncate">得正 Oolong Tea Project</h3>
-              <p id="active-map-sub" class="text-xs text-slate-500 truncate">台北忠孝計畫門市</p>
+              <h3 id="active-map-title" class="text-lg sm:text-xl font-bold text-slate-900 mt-1 truncate">50嵐</h3>
+              <p id="active-map-sub" class="text-xs text-slate-500 truncate">台北西門店</p>
             </div>
             <div class="flex gap-1.5 shrink-0">
               <button
                 onclick="searchNearbyOnEmbedMap()"
-                class="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-rose-600 text-white text-xs font-semibold hover:bg-rose-500 transition flex items-center gap-1"
+                class="px-3 py-1.5 sm:py-2 rounded-full bg-rose-600 text-white text-xs font-semibold hover:bg-rose-500 transition flex items-center gap-1"
                 title="根據我的位置搜尋附近這家飲料店"
               >
                 <i data-lucide="compass" class="w-3.5 h-3.5"></i>
@@ -528,10 +736,10 @@
               </button>
               <a
                 id="active-brand-official-btn"
-                href="https://dejeng.com/"
+                href="http://50lan.com/web/pointsout.asp"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-slate-900 text-white text-xs font-semibold hover:bg-slate-700 transition flex items-center gap-1"
+                class="px-3 py-1.5 sm:py-2 rounded-full bg-slate-900 text-white text-xs font-semibold hover:bg-slate-700 transition flex items-center gap-1"
               >
                 <span>官網</span>
                 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
@@ -547,17 +755,17 @@
               loading="lazy"
               allowfullscreen
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=得正%20台北市大安區忠孝東路四段216巷27弄16號&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              src="https://maps.google.com/maps?q=50嵐%20台北市萬華區漢中街136號&t=&z=16&ie=UTF8&iwloc=&output=embed"
             ></iframe>
           </div>
 
-          <!-- 該品牌台北市門市清單與地址導航超連結 -->
+          <!-- 該品牌台北市全部門市清單與地址導航超連結 -->
           <div class="space-y-2">
             <div class="flex items-center justify-between text-xs font-bold text-slate-700">
-              <span>📍 台北市門市地址（點擊地址開啟地圖 App 導航）：</span>
+              <span id="active-branch-count-label">📍 台北市門市地址（點擊地址開啟地圖 App 導航）：</span>
               <span id="distance-sort-hint" class="text-[11px] text-slate-400">可定位排序</span>
             </div>
-            <div id="active-brand-branches" class="space-y-2 max-h-60 overflow-y-auto custom-scroll pr-1">
+            <div id="active-brand-branches" class="space-y-2 max-h-72 overflow-y-auto custom-scroll pr-1">
               <!-- JS 渲染各分店地址超連結 -->
             </div>
           </div>
@@ -566,12 +774,12 @@
       </div>
     </section>
 
-    <!-- ==================== 06 MOOD MAP 情緒 × 飲品二維地圖 (極簡色彩小圓點 + Hover/觸控顯示資訊) ==================== -->
+    <!-- ==================== 06 MOOD MAP 情緒 × 飲品二維座標圖 (極簡色彩小圓點 + Hover/觸控顯示資訊) ==================== -->
     <section id="view-map" class="hidden space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">06 / Information Visualization (40 Drinks)</span>
-          <h2 class="text-xl sm:text-3xl font-bold text-slate-900">Mood Map 情緒飲品二維座標</h2>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Information Visualization</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Mood Map 情緒飲品二維座標</h2>
           <p class="text-xs text-slate-500 mt-1">
             將滑鼠移到「彩色小圓點」上方或直接手指觸控點擊，即可展開該飲品的完整風味座標與販售店家資訊
           </p>
@@ -590,7 +798,7 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
         <!-- 二維座標畫布 (使用小圓點避免擁擠) -->
-        <div class="lg:col-span-8 glass-card rounded-3xl p-4 sm:p-6 relative h-[360px] sm:h-[460px] flex items-center justify-center overflow-hidden select-none">
+        <div class="lg:col-span-8 glass-card rounded-[2.2rem] p-4 sm:p-6 relative h-[360px] sm:h-[460px] flex items-center justify-center overflow-hidden select-none">
           <div class="absolute inset-6 sm:inset-8 border border-dashed border-slate-300/80 rounded-2xl pointer-events-none"></div>
           <div class="absolute left-6 right-6 sm:left-8 sm:right-8 top-1/2 h-px bg-slate-300 pointer-events-none"></div>
           <div class="absolute top-6 bottom-6 sm:top-8 sm:bottom-8 left-1/2 w-px bg-slate-300 pointer-events-none"></div>
@@ -600,43 +808,47 @@
           <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-[11px] font-bold text-slate-600 bg-white/85 px-2 py-0.5 rounded-full shadow-sm">💧 清爽</span>
           <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[11px] font-bold text-slate-600 bg-white/85 px-2 py-0.5 rounded-full shadow-sm">🥛 濃郁</span>
 
-          <!-- 40 個飲品小圓點容器 -->
+          <!-- 飲品小圓點容器 -->
           <div id="mood-map-nodes" class="relative w-full h-full"></div>
         </div>
 
         <!-- 滑鼠移過或觸控圓點後顯示的詳細資訊面板 -->
-        <div id="map-detail-panel" class="lg:col-span-4 glass-card rounded-3xl p-5 sm:p-6 space-y-4"></div>
+        <div id="map-detail-panel" class="lg:col-span-4 glass-card rounded-[2.2rem] p-5 sm:p-6 space-y-4"></div>
       </div>
     </section>
 
-    <!-- ==================== 07 MY MOOD 個人情緒日記 & 飲品人格 ==================== -->
+    <!-- ==================== 07 MY MOOD 我的心情飲品紀錄與人格分析 ==================== -->
     <section id="view-diary" class="hidden space-y-6">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">07 / Personal Mood Diary & Personality</span>
-          <h2 class="text-xl sm:text-3xl font-bold text-slate-900">我的心情飲品紀錄與人格分析</h2>
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Personal Mood Diary & Personality</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">我的心情飲品紀錄與人格分析</h2>
+          <p class="text-xs text-slate-500 mt-1">您的紀錄會自動保存於此裝置中，關閉瀏覽器後再次開啟仍會保留</p>
         </div>
-        <button onclick="clearDiaryHistory()" class="text-xs text-rose-500 hover:underline self-start sm:self-auto">清除歷史紀錄</button>
+        <button onclick="manualResetAllUserData()" class="px-4 py-2 rounded-full border border-rose-200 bg-rose-50/80 text-xs font-bold text-rose-600 hover:bg-rose-100 transition self-start sm:self-auto flex items-center gap-1.5">
+          <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+          <span>重置個人紀錄</span>
+        </button>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-        <div id="personality-card" class="md:col-span-5 glass-card rounded-3xl p-5 sm:p-6 flex flex-col justify-between space-y-4"></div>
-        <div class="md:col-span-7 glass-card rounded-3xl p-5 sm:p-6 space-y-4">
+        <div id="personality-card" class="md:col-span-5 glass-card rounded-[2rem] p-5 sm:p-6 flex flex-col justify-between space-y-4"></div>
+        <div class="md:col-span-7 glass-card rounded-[2rem] p-5 sm:p-6 space-y-4">
           <h3 class="font-bold text-slate-800 text-base">本月情緒分佈統計</h3>
           <div id="diary-mood-bars" class="space-y-2.5"></div>
         </div>
       </div>
 
-      <div class="glass-card rounded-3xl p-5 sm:p-6 space-y-4">
+      <div class="glass-card rounded-[2rem] p-5 sm:p-6 space-y-4">
         <h3 class="font-bold text-slate-800 text-base">近期調飲紀錄</h3>
         <div id="diary-history-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
       </div>
     </section>
 
-    <!-- ==================== 08 ABOUT 關於我們 & 專題成果完整介紹 ==================== -->
+    <!-- ==================== 08 ABOUT 關於專題 (已移除數學公式，更新必要門檻與全新五維度權重) ==================== -->
     <section id="view-about" class="hidden space-y-8 sm:space-y-10">
-      <div class="glass-card rounded-3xl p-6 sm:p-10 text-center max-w-4xl mx-auto space-y-4">
-        <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-slate-900 text-white">資訊傳播學系畢業成果專題｜Project Overview</span>
+      <div class="glass-card rounded-[2.2rem] p-6 sm:p-10 text-center max-w-4xl mx-auto space-y-4">
+        <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-slate-900 text-white">Project Overview</span>
         <h2 class="text-2xl sm:text-5xl font-bold text-slate-900 tracking-tight">Moodrink｜一杯心情</h2>
         <p class="text-sm sm:text-base text-rose-600 font-semibold">「從情緒資訊到飲品選擇之間的個人化互動體驗」</p>
         <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl mx-auto">
@@ -645,7 +857,7 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-        <div class="lg:col-span-5 glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-4">
+        <div class="lg:col-span-5 glass-card rounded-[2rem] p-6 sm:p-8 flex flex-col justify-between space-y-4">
           <div class="space-y-3">
             <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Project Background</span>
             <h3 class="text-xl sm:text-2xl font-bold text-slate-900">為什麼我們需要重新設計「選飲料」這件事？</h3>
@@ -655,17 +867,17 @@
             <div class="space-y-2 pt-1">
               <div class="p-3 rounded-xl bg-white/70 text-xs text-slate-700 font-medium">💬 「今天心情有點悶，想喝點療癒但又不想太甜的…」</div>
               <div class="p-3 rounded-xl bg-white/70 text-xs text-slate-700 font-medium">💬 「選擇太多反而產生選擇疲勞，每次都只能點一樣的。」</div>
-              <div class="p-3 rounded-xl bg-white/70 text-xs text-slate-700 font-medium">💬 「晚上想喝東西撫慰自己，但不能攝取咖啡因或牛奶。」</div>
+              <div class="p-3 rounded-xl bg-white/70 text-xs text-slate-700 font-medium">💬 「晚上想喝東西撫慰自己，但絕對不能有咖啡因或牛奶。」</div>
             </div>
           </div>
           <div class="p-4 rounded-2xl bg-slate-900 text-white text-xs leading-relaxed">
             <strong>資訊架構反轉：</strong><br/>
-            從傳統「品牌 → 菜單 → 商品」轉變為 <strong>「使用者 → 情緒 → 當下需求 → 飲食偏好 → 飲品與附近門市導航」</strong>。
+            從傳統「品牌 → 菜單 → 商品」轉變為 <strong>「使用者 → 情緒 → 當下需求 → 必要門檻篩選 → 飲品與附近門市導航」</strong>。
           </div>
         </div>
 
         <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div class="glass-card rounded-3xl p-5 sm:p-6 flex flex-col justify-between">
+          <div class="glass-card rounded-[2rem] p-5 sm:p-6 flex flex-col justify-between">
             <div class="space-y-3">
               <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold">01</div>
               <h4 class="font-bold text-base sm:text-lg text-slate-900">解決選擇困難</h4>
@@ -676,18 +888,18 @@
             <span class="text-[11px] font-bold text-rose-500 pt-4">降低認知負荷</span>
           </div>
 
-          <div class="glass-card rounded-3xl p-5 sm:p-6 flex flex-col justify-between">
+          <div class="glass-card rounded-[2rem] p-5 sm:p-6 flex flex-col justify-between">
             <div class="space-y-3">
               <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">02</div>
-              <h4 class="font-bold text-base sm:text-lg text-slate-900">40 款結構化資料庫</h4>
+              <h4 class="font-bold text-base sm:text-lg text-slate-900">必要門檻零誤差</h4>
               <p class="text-xs text-slate-600 leading-relaxed">
-                跳脫千篇一律的「店員推薦／熱銷排行」，同時將情緒、功能需求、茶奶果味偏好、甜度、溫度、咖啡因與乳製品限制納入 40 款飲品運算。
+                將「咖啡因接受度」與「乳製品限制」設為前置必要門檻，若選擇不攝取咖啡因或乳製品，系統立即 100% 排除相關飲品。
               </p>
             </div>
-            <span class="text-[11px] font-bold text-amber-600 pt-4">多維度個人化過濾</span>
+            <span class="text-[11px] font-bold text-amber-600 pt-4">絕對安全把關</span>
           </div>
 
-          <div class="glass-card rounded-3xl p-5 sm:p-6 flex flex-col justify-between">
+          <div class="glass-card rounded-[2rem] p-5 sm:p-6 flex flex-col justify-between">
             <div class="space-y-3">
               <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">03</div>
               <h4 class="font-bold text-base sm:text-lg text-slate-900">情緒與日常的連結</h4>
@@ -700,51 +912,55 @@
         </div>
       </div>
 
-      <!-- Rule-based 推薦系統權重設計詳解 -->
-      <div class="glass-card rounded-3xl p-5 sm:p-8 space-y-5">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-2">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Explainable Recommendation Algorithm</span>
-            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">Rule-based 規則式推薦系統與權重設計</h3>
-            <p class="text-xs sm:text-sm text-slate-600 mt-1">
-              本專題為資料庫內 40 款飲品建立結構化屬性標籤，透過六大維度加權公式計算出可解釋的「符合度百分比」：
-            </p>
-          </div>
-          <span class="text-xs font-mono bg-slate-900 text-white px-3.5 py-1.5 rounded-full self-start md:self-auto">
-            Total Score = Σ (Dimension_Match × Weight)
-          </span>
+      <!-- Rule-based 推薦系統與權重設計詳解 (已移除數學公式，更新為必要門檻 + 25%/25%/20%/15%/15%) -->
+      <div class="glass-card rounded-[2.2rem] p-5 sm:p-8 space-y-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Explainable Recommendation System</span>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">Rule-based 規則式推薦系統與權重設計</h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1">
+            本專題不採用黑盒子隨機心理測驗，而是先透過「前置必要門檻」排除使用者無法飲用的品項，再經由五大維度權重計算出可解釋的符合度百分比：
+          </p>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          <div class="p-4 rounded-2xl bg-white/80 border border-rose-100 space-y-1">
-            <div class="text-2xl font-black text-rose-600">30%</div>
-            <div class="font-bold text-xs sm:text-sm text-slate-800">情緒符合度</div>
-            <p class="text-[11px] text-slate-500 leading-relaxed">對應開心、平靜、疲累、焦慮、煩躁、難過、壓力大、需要療癒 8 種狀態。</p>
+        <!-- 前置必要門檻說明條 -->
+        <div class="p-4 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <span class="px-3 py-1 rounded-full bg-rose-500 text-white text-xs font-bold shrink-0">前置必要門檻</span>
+            <div class="text-xs sm:text-sm font-semibold">
+              咖啡因接受度 ＆ 乳製品限制（一票否決制）
+            </div>
           </div>
-          <div class="p-4 rounded-2xl bg-white/80 border border-amber-100 space-y-1">
+          <p class="text-xs text-slate-300">
+            若選擇「不要咖啡因」或「不喝牛奶／避免乳製品」，系統直接排除所有含咖啡因或含奶飲品，絕不推薦衝突選項。
+          </p>
+        </div>
+
+        <!-- 五大符合度百分比權重卡片 (25% / 25% / 20% / 15% / 15%) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+          <div class="p-4 rounded-2xl bg-white/80 border border-rose-100 space-y-1.5">
+            <div class="text-2xl font-black text-rose-600">25%</div>
+            <div class="font-bold text-sm text-slate-800">情緒符合度</div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">對應開心、平靜、疲累、焦慮、煩躁、難過、壓力大、需要療癒 8 種當下情緒狀態。</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white/80 border border-amber-100 space-y-1.5">
             <div class="text-2xl font-black text-amber-600">25%</div>
-            <div class="font-bold text-xs sm:text-sm text-slate-800">當下需求符合度</div>
-            <p class="text-[11px] text-slate-500 leading-relaxed">評估提神醒腦、放鬆舒緩、溫柔療癒、清爽降溫、餐後解膩或補充能量。</p>
+            <div class="font-bold text-sm text-slate-800">當下需求符合度</div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">評估提神醒腦、放鬆舒緩、溫柔療癒、清爽降溫、餐後解膩或補充能量等核心機能。</p>
           </div>
-          <div class="p-4 rounded-2xl bg-white/80 border border-emerald-100 space-y-1">
+          <div class="p-4 rounded-2xl bg-white/80 border border-emerald-100 space-y-1.5">
             <div class="text-2xl font-black text-emerald-600">20%</div>
-            <div class="font-bold text-xs sm:text-sm text-slate-800">口味與口感偏好</div>
-            <p class="text-[11px] text-slate-500 leading-relaxed">比對飲品之茶感、奶香、鮮果、酸甜、濃郁度與氣泡感屬性數值。</p>
+            <div class="font-bold text-sm text-slate-800">口味與口感偏好</div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">比對飲品之茶感、奶香、鮮果、酸甜、濃郁度與氣泡咀嚼感屬性數值。</p>
           </div>
-          <div class="p-4 rounded-2xl bg-white/80 border border-sky-100 space-y-1">
-            <div class="text-2xl font-black text-sky-600">10%</div>
-            <div class="font-bold text-xs sm:text-sm text-slate-800">甜度適配度</div>
-            <p class="text-[11px] text-slate-500 leading-relaxed">依據無糖、微糖、半糖、正常甜與該飲品最佳風味甜度進行加權。</p>
+          <div class="p-4 rounded-2xl bg-white/80 border border-sky-100 space-y-1.5">
+            <div class="text-2xl font-black text-sky-600">15%</div>
+            <div class="font-bold text-sm text-slate-800">甜度適配度</div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">依據無糖、微糖、半糖、正常甜與該飲品最佳風味甜度進行加權適配。</p>
           </div>
-          <div class="p-4 rounded-2xl bg-white/80 border border-indigo-100 space-y-1">
-            <div class="text-2xl font-black text-indigo-600">10%</div>
-            <div class="font-bold text-xs sm:text-sm text-slate-800">咖啡因接受度</div>
-            <p class="text-[11px] text-slate-500 leading-relaxed">精準篩選重度提神、中低茶韻或完全無咖啡因（夜間友善）飲品。</p>
-          </div>
-          <div class="p-4 rounded-2xl bg-white/80 border border-purple-100 space-y-1">
-            <div class="text-2xl font-black text-purple-600">5%</div>
-            <div class="font-bold text-xs sm:text-sm text-slate-800">飲食限制與情境</div>
-            <p class="text-[11px] text-slate-500 leading-relaxed">針對乳製品過敏/不喝奶、控糖期或夜間飲用進行硬性排除與加權。</p>
+          <div class="p-4 rounded-2xl bg-white/80 border border-purple-100 space-y-1.5">
+            <div class="text-2xl font-black text-purple-600">15%</div>
+            <div class="font-bold text-sm text-slate-800">飲食限制與情境</div>
+            <p class="text-[11px] text-slate-500 leading-relaxed">綜合考量飲用溫度偏好、控糖需求以及夜間低負擔飲用情境進行加權。</p>
           </div>
         </div>
       </div>
@@ -757,32 +973,122 @@
     // 1. 情緒色彩系統 (Mood Color System)
     // ============================================================================
     const MOODS = [
-      { id: 'happy', label: '開心', emoji: '☀️', desc: '想延續好心情的輕快感', bgGrad: 'from-amber-100 via-yellow-50 to-orange-100', blob1: 'bg-amber-300', blob2: 'bg-yellow-200', liquid1: '#FDE047', liquid2: '#F59E0B', tagColor: 'bg-amber-100 text-amber-800' },
-      { id: 'calm', label: '平靜', emoji: '🍃', desc: '穩定舒緩、不疾不徐的日常', bgGrad: 'from-emerald-50 via-teal-50 to-cyan-100', blob1: 'bg-emerald-200', blob2: 'bg-teal-200', liquid1: '#A7F3D0', liquid2: '#10B981', tagColor: 'bg-emerald-100 text-emerald-800' },
-      { id: 'tired', label: '疲累', emoji: '🫧', desc: '電量見底，需要充電或喘口氣', bgGrad: 'from-slate-200 via-blue-50 to-indigo-100', blob1: 'bg-slate-300', blob2: 'bg-blue-200', liquid1: '#93C5FD', liquid2: '#4F46E5', tagColor: 'bg-blue-100 text-blue-800' },
-      { id: 'anxious', label: '焦慮', emoji: '🌙', desc: '思緒紛亂，想找回安定節奏', bgGrad: 'from-indigo-100 via-purple-50 to-slate-100', blob1: 'bg-indigo-300', blob2: 'bg-purple-200', liquid1: '#C4B5FD', liquid2: '#7C3AED', tagColor: 'bg-purple-100 text-purple-800' },
-      { id: 'irritable', label: '煩躁', emoji: '⚡', desc: '悶熱阿雜，急需冰涼與清爽降溫', bgGrad: 'from-orange-100 via-rose-50 to-amber-100', blob1: 'bg-orange-300', blob2: 'bg-rose-300', liquid1: '#FDBA74', liquid2: '#EA580C', tagColor: 'bg-orange-100 text-orange-800' },
-      { id: 'sad', label: '難過', emoji: '🌧️', desc: '想被溫柔包裹的低落時刻', bgGrad: 'from-blue-100 via-slate-100 to-indigo-100', blob1: 'bg-blue-300', blob2: 'bg-indigo-200', liquid1: '#7DD3FC', liquid2: '#0284C7', tagColor: 'bg-sky-100 text-sky-800' },
-      { id: 'stressed', label: '壓力大', emoji: '🔥', desc: '事情好多，想好好犒賞自己', bgGrad: 'from-rose-100 via-pink-50 to-amber-50', blob1: 'bg-rose-300', blob2: 'bg-pink-200', liquid1: '#FDA4AF', liquid2: '#E11D48', tagColor: 'bg-rose-100 text-rose-800' },
-      { id: 'healing', label: '需要療癒', emoji: '🌸', desc: '渴望一點甜與柔軟的陪伴', bgGrad: 'from-pink-100 via-rose-50 to-purple-100', blob1: 'bg-pink-300', blob2: 'bg-rose-200', liquid1: '#F9A8D4', liquid2: '#DB2777', tagColor: 'bg-pink-100 text-pink-800' }
+      { id: 'happy', label: '開心', emoji: '☀️', desc: '想延續好心情的輕快感', bgGrad: 'from-amber-100/90 via-yellow-50/85 to-orange-100/90', blob1: 'bg-amber-300', blob2: 'bg-yellow-200', liquid1: '#FDE047', liquid2: '#F59E0B', tagColor: 'bg-amber-100 text-amber-800' },
+      { id: 'calm', label: '平靜', emoji: '🍃', desc: '穩定舒緩、不疾不徐的日常', bgGrad: 'from-emerald-50/90 via-teal-50/85 to-cyan-100/90', blob1: 'bg-emerald-200', blob2: 'bg-teal-200', liquid1: '#A7F3D0', liquid2: '#10B981', tagColor: 'bg-emerald-100 text-emerald-800' },
+      { id: 'tired', label: '疲累', emoji: '🫧', desc: '電量見底，需要充電或喘口氣', bgGrad: 'from-slate-200/90 via-blue-50/85 to-indigo-100/90', blob1: 'bg-slate-300', blob2: 'bg-blue-200', liquid1: '#93C5FD', liquid2: '#4F46E5', tagColor: 'bg-blue-100 text-blue-800' },
+      { id: 'anxious', label: '焦慮', emoji: '🌙', desc: '思緒紛亂，想找回安定節奏', bgGrad: 'from-indigo-100/90 via-purple-50/85 to-slate-100/90', blob1: 'bg-indigo-300', blob2: 'bg-purple-200', liquid1: '#C4B5FD', liquid2: '#7C3AED', tagColor: 'bg-purple-100 text-purple-800' },
+      { id: 'irritable', label: '煩躁', emoji: '⚡', desc: '悶熱阿雜，急需冰涼與清爽降溫', bgGrad: 'from-orange-100/90 via-rose-50/85 to-amber-100/90', blob1: 'bg-orange-300', blob2: 'bg-rose-300', liquid1: '#FDBA74', liquid2: '#EA580C', tagColor: 'bg-orange-100 text-orange-800' },
+      { id: 'sad', label: '難過', emoji: '🌧️', desc: '想被溫柔包裹的低落時刻', bgGrad: 'from-blue-100/90 via-slate-100/85 to-indigo-100/90', blob1: 'bg-blue-300', blob2: 'bg-indigo-200', liquid1: '#7DD3FC', liquid2: '#0284C7', tagColor: 'bg-sky-100 text-sky-800' },
+      { id: 'stressed', label: '壓力大', emoji: '🔥', desc: '事情好多，想好好犒賞自己', bgGrad: 'from-rose-100/90 via-pink-50/85 to-amber-50/90', blob1: 'bg-rose-300', blob2: 'bg-pink-200', liquid1: '#FDA4AF', liquid2: '#E11D48', tagColor: 'bg-rose-100 text-rose-800' },
+      { id: 'healing', label: '需要療癒', emoji: '🌸', desc: '渴望一點甜與柔軟的陪伴', bgGrad: 'from-pink-100/90 via-rose-50/85 to-purple-100/90', blob1: 'bg-pink-300', blob2: 'bg-rose-200', liquid1: '#F9A8D4', liquid2: '#DB2777', tagColor: 'bg-pink-100 text-pink-800' }
     ];
 
     // ============================================================================
-    // 2. 台北市 27 大手搖飲・咖啡廳・超商現萃品牌資料庫 (全面收錄台北市各行政區門市)
+    // 2. 台北市手搖飲・咖啡廳・超商現萃品牌資料庫
+    //    ★ 已完整建入「50嵐 台北市全區 46 家門市」與「龜記茗品 台北市全區 31 家門市」
     // ============================================================================
     const BRANDS = [
       {
         id: '50lan', name: '50嵐', cat: '人氣必喝手搖', emoji: '💛',
-        url: 'http://50lan.com/',
-        feature: '國民經典手搖，1號四季春珍波椰、波霸奶茶長居台北人必喝榜首。',
-        signature: ['四季春+珍波椰', '波霸奶茶', '黃金烏龍'],
+        url: 'http://50lan.com/web/pointsout.asp',
+        feature: '國民經典手搖，1號四季春珍波椰、波霸奶茶長居台北人必喝榜首（完整收錄台北市全區 46 家門市）。',
+        signature: ['1號(四季春+珍波椰)', '波霸奶茶', '黃金烏龍'],
         branches: [
-          { name: '台北西門店(萬華區)', address: '台北市萬華區漢中街136號', lat: 25.0423, lng: 121.5074 },
+          // 中正區 (6家)
+          { name: '台北北車店(中正區)', address: '台北市中正區忠孝西路一段50號B1', lat: 25.0462, lng: 121.5165 },
+          { name: '台北南陽店(中正區)', address: '台北市中正區南陽街15-4號', lat: 25.0451, lng: 121.5163 },
+          { name: '台北開封店(中正區)', address: '台北市中正區開封街一段19號', lat: 25.0460, lng: 121.5142 },
+          { name: '台北公館店(中正區)', address: '台北市中正區羅斯福路四段138號', lat: 25.0138, lng: 121.5352 },
+          { name: '台北汀州店(中正區)', address: '台北市中正區汀州路二段135號', lat: 25.0252, lng: 121.5225 },
+          { name: '台北南昌店(中正區)', address: '台北市中正區南昌路一段106號', lat: 25.0315, lng: 121.5168 },
+          // 大安區 (8家)
           { name: '台北忠孝延吉店(大安區)', address: '台北市大安區延吉街153-5號', lat: 25.0410, lng: 121.5542 },
-          { name: '台北北車南陽店(中正區)', address: '台北市中正區南陽街15-4號', lat: 25.0451, lng: 121.5163 },
-          { name: '台北士林文林店(士林區)', address: '台北市士林區文林路194號', lat: 25.0902, lng: 121.5256 },
+          { name: '台北復興店(大安區)', address: '台北市大安區復興南路一段107巷5弄2號', lat: 25.0432, lng: 121.5448 },
+          { name: '台北大安店(大安區)', address: '台北市大安區大安路一段215號', lat: 25.0355, lng: 121.5460 },
+          { name: '台北通化店(大安區)', address: '台北市大安區通化街45號', lat: 25.0315, lng: 121.5542 },
+          { name: '台北和平店(大安區)', address: '台北市大安區和平東路二段311巷17號', lat: 25.0245, lng: 121.5432 },
+          { name: '台北師大店(大安區)', address: '台北市大安區師大路105巷3號', lat: 25.0222, lng: 121.5285 },
+          { name: '台北永康店(大安區)', address: '台北市大安區信義路二段202號', lat: 25.0336, lng: 121.5302 },
+          { name: '台北樂利店(大安區)', address: '台北市大安區樂利路27號', lat: 25.0272, lng: 121.5522 },
+          // 中山區 (7家)
+          { name: '台北伊通店(中山區)', address: '台北市中山區伊通街66-2號', lat: 25.0502, lng: 121.5348 },
+          { name: '台北長春店(中山區)', address: '台北市中山區長春路146-1號', lat: 25.0545, lng: 121.5342 },
+          { name: '台北吉林店(中山區)', address: '台北市中山區吉林路172號', lat: 25.0575, lng: 121.5302 },
+          { name: '台北合江店(中山區)', address: '台北市中山區合江街118號', lat: 25.0582, lng: 121.5398 },
+          { name: '台北錦州店(中山區)', address: '台北市中山區錦州街421號', lat: 25.0602, lng: 121.5422 },
+          { name: '台北林森店(中山區)', address: '台北市中山區林森北路400號', lat: 25.0588, lng: 121.5255 },
+          { name: '台北大直店(中山區)', address: '台北市中山區大直街55號', lat: 25.0815, lng: 121.5472 },
+          // 信義區 (5家)
           { name: '台北信義莊敬店(信義區)', address: '台北市信義區莊敬路306號', lat: 25.0285, lng: 121.5642 },
-          { name: '台北內湖江南店(內湖區)', address: '台北市內湖區江南街73號', lat: 25.0785, lng: 121.5762 }
+          { name: '台北永吉店(信義區)', address: '台北市信義區永吉路30巷102號', lat: 25.0425, lng: 121.5685 },
+          { name: '台北松山店(信義區)', address: '台北市信義區松山路521號', lat: 25.0385, lng: 121.5775 },
+          { name: '台北吳興店(信義區)', address: '台北市信義區吳興街175號', lat: 25.0272, lng: 121.5625 },
+          { name: '台北虎林店(信義區)', address: '台北市信義區虎林街121號', lat: 25.0418, lng: 121.5758 },
+          // 松山區 (4家)
+          { name: '台北八德店(松山區)', address: '台北市松山區八德路三段74巷2號', lat: 25.0478, lng: 121.5525 },
+          { name: '台北民生店(松山區)', address: '台北市松山區新東街18號', lat: 25.0592, lng: 121.5645 },
+          { name: '台北南京店(松山區)', address: '台北市松山區南京東路五段123巷1弄2號', lat: 25.0522, lng: 121.5622 },
+          { name: '台北饒河店(松山區)', address: '台北市松山區八德路四段676號', lat: 25.0502, lng: 121.5762 },
+          // 萬華區 (3家)
+          { name: '台北西門店(萬華區)', address: '台北市萬華區漢中街136號', lat: 25.0423, lng: 121.5074 },
+          { name: '台北萬大店(萬華區)', address: '台北市萬華區萬大路235號', lat: 25.0258, lng: 121.4998 },
+          { name: '台北昆明店(萬華區)', address: '台北市萬華區昆明街190號', lat: 25.0402, lng: 121.5052 },
+          // 士林區 (4家)
+          { name: '台北士林文林店(士林區)', address: '台北市士林區文林路194號', lat: 25.0902, lng: 121.5256 },
+          { name: '台北天母店(士林區)', address: '台北市士林區德行東路154號', lat: 25.1092, lng: 121.5312 },
+          { name: '台北延平北店(士林區)', address: '台北市士林區社中街152號', lat: 25.0875, lng: 121.5065 },
+          { name: '台北芝山店(士林區)', address: '台北市士林區福華路142號', lat: 25.1032, lng: 121.5225 },
+          // 北投區 (3家)
+          { name: '台北北投店(北投區)', address: '台北市北投區光明路148號', lat: 25.1342, lng: 121.5018 },
+          { name: '台北石牌店(北投區)', address: '台北市北投區裕民一路12號', lat: 25.1155, lng: 121.5162 },
+          { name: '台北中央北店(北投區)', address: '台北市北投區中央北路四段532號', lat: 25.1258, lng: 121.4712 },
+          // 內湖區 (3家)
+          { name: '台北內湖江南店(內湖區)', address: '台北市內湖區江南街73號', lat: 25.0785, lng: 121.5762 },
+          { name: '台北東湖店(內湖區)', address: '台北市內湖區東湖路119巷49弄28號', lat: 25.0685, lng: 121.6152 },
+          { name: '台北內湖成功店(內湖區)', address: '台北市內湖區成功路四段45號', lat: 25.0812, lng: 121.5915 },
+          // 文山、南港、大同區 (3家)
+          { name: '台北景美店(文山區)', address: '台北市文山區景文街68號', lat: 24.9922, lng: 121.5412 },
+          { name: '台北木柵店(文山區)', address: '台北市文山區保儀路55號', lat: 24.9882, lng: 121.5682 },
+          { name: '台北南港店(南港區)', address: '台北市南港區南港路一段167號', lat: 25.0552, lng: 121.6122 }
+        ]
+      },
+      {
+        id: 'guiji', name: '龜記茗品', cat: '果茶與鮮奶系', emoji: '🐢',
+        url: 'https://guiji-group.com/location',
+        feature: '主打「小人物大生活」懷舊鮮果茶，紅柚翡翠與蘋果紅萱果肉飽滿（完整收錄台北市全區 31 家門市）。',
+        signature: ['紅柚翡翠', '蘋果紅萱', '三十三茶王'],
+        branches: [
+          { name: '台北小巨蛋總店(松山區)', address: '台北市松山區八德路三段74巷1號', lat: 25.0478, lng: 121.5525 },
+          { name: '台北民生店(松山區)', address: '台北市松山區民生東路四段112巷1弄1號', lat: 25.0582, lng: 121.5542 },
+          { name: '台北饒河店(松山區)', address: '台北市松山區八德路四段709號', lat: 25.0505, lng: 121.5772 },
+          { name: '台北南西店(大同區)', address: '台北市大同區南京西路18巷6之2號', lat: 25.0528, lng: 121.5204 },
+          { name: '台北寧夏店(大同區)', address: '台北市大同區民生西路229號', lat: 25.0568, lng: 121.5152 },
+          { name: '台北民權西店(大同區)', address: '台北市大同區承德路三段12號', lat: 25.0632, lng: 121.5185 },
+          { name: '台北伊通店(中山區)', address: '台北市中山區伊通街109號', lat: 25.0512, lng: 121.5348 },
+          { name: '台北錦州店(中山區)', address: '台北市中山區錦州街243號', lat: 25.0602, lng: 121.5342 },
+          { name: '台北晴光店(中山區)', address: '台北市中山區雙城街17巷14號', lat: 25.0645, lng: 121.5245 },
+          { name: '台北大直店(中山區)', address: '台北市中山區北安路538巷1弄5號', lat: 25.0812, lng: 121.5468 },
+          { name: '台北遼寧店(中山區)', address: '台北市中山區遼寧街45巷1號', lat: 25.0485, lng: 121.5425 },
+          { name: '台北忠孝復興店(大安區)', address: '台北市大安區復興南路一段135巷15號', lat: 25.0422, lng: 121.5445 },
+          { name: '台北通化店(大安區)', address: '台北市大安區通化街26-5號', lat: 25.0322, lng: 121.5543 },
+          { name: '台北師大店(大安區)', address: '台北市大安區師大路49巷11號', lat: 25.0249, lng: 121.5288 },
+          { name: '台北科技大樓店(大安區)', address: '台北市大安區復興南路二段204號', lat: 25.0255, lng: 121.5435 },
+          { name: '台北延吉店(大安區)', address: '台北市大安區延吉街114號', lat: 25.0425, lng: 121.5545 },
+          { name: '台北永康店(大安區)', address: '台北市大安區永康街10-3號', lat: 25.0328, lng: 121.5298 },
+          { name: '台北信義永吉店(信義區)', address: '台北市信義區永吉路30巷113號', lat: 25.0428, lng: 121.5685 },
+          { name: '台北信義A11店(信義區)', address: '台北市信義區松壽路11號B2', lat: 25.0362, lng: 121.5672 },
+          { name: '台北北醫店(信義區)', address: '台北市信義區莊敬路325巷1號', lat: 25.0278, lng: 121.5638 },
+          { name: '台北松山站前店(信義區)', address: '台北市信義區松山路132號', lat: 25.0482, lng: 121.5778 },
+          { name: '台北南陽店(中正區)', address: '台北市中正區南陽街22號', lat: 25.0448, lng: 121.5162 },
+          { name: '台北公館店(中正區)', address: '台北市中正區羅斯福路三段316巷8弄3-1號', lat: 25.0152, lng: 121.5335 },
+          { name: '台北南昌店(中正區)', address: '台北市中正區南昌路一段86號', lat: 25.0318, lng: 121.5165 },
+          { name: '台北西門店(萬華區)', address: '台北市萬華區漢中街53號', lat: 25.0442, lng: 121.5076 },
+          { name: '台北內湖江南店(內湖區)', address: '台北市內湖區江南街83號', lat: 25.0785, lng: 121.5765 },
+          { name: '台北東湖店(內湖區)', address: '台北市內湖區東湖路128號', lat: 25.0688, lng: 121.6155 },
+          { name: '台北士林店(士林區)', address: '台北市士林區小東街19號', lat: 25.0895, lng: 121.5262 },
+          { name: '台北天母店(士林區)', address: '台北市士林區天母西路3-25號', lat: 25.1185, lng: 121.5265 },
+          { name: '台北石牌店(北投區)', address: '台北市北投區石牌路二段75巷1號', lat: 25.1158, lng: 121.5158 },
+          { name: '台北南港店(南港區)', address: '台北市南港區興中路38號', lat: 25.0555, lng: 121.6068 }
         ]
       },
       {
@@ -847,18 +1153,6 @@
           { name: '台北站前店(中正區)', address: '台北市中正區南陽街32號', lat: 25.0445, lng: 121.5162 },
           { name: '台北大安忠孝店(大安區)', address: '台北市大安區大安路一段31巷21號', lat: 25.0439, lng: 121.5468 },
           { name: '台北松山饒河店(松山區)', address: '台北市松山區饒河街160號', lat: 25.0508, lng: 121.5752 }
-        ]
-      },
-      {
-        id: 'guiji', name: '龜記茗品', cat: '果茶與鮮奶系', emoji: '🐢',
-        url: 'https://guiji-group.com/',
-        feature: '主打懷舊古早味鮮果茶，紅柚翡翠與蘋果紅萱果肉飽滿。',
-        signature: ['紅柚翡翠', '蘋果紅萱', '三十三茶王'],
-        branches: [
-          { name: '台北小巨蛋店(松山區)', address: '台北市松山區八德路三段74巷1號', lat: 25.0478, lng: 121.5525 },
-          { name: '台北南西店(大同區)', address: '台北市大同區南京西路18巷6之2號', lat: 25.0528, lng: 121.5204 },
-          { name: '台北信義永吉店(信義區)', address: '台北市信義區永吉路30巷113號', lat: 25.0428, lng: 121.5685 },
-          { name: '台北師大店(大安區)', address: '台北市大安區師大路49巷11號', lat: 25.0249, lng: 121.5288 }
         ]
       },
       {
@@ -1087,10 +1381,10 @@
     ];
 
     // ============================================================================
-    // 3. 40 款完整飲品資料庫 (原 12 款 + 新增 28 款，每分類 6~7 款)
+    // 3. 飲品資料庫 (包含純茶、奶茶、水果茶、咖啡、氣泡飲、無咖啡因六大類)
     // ============================================================================
     const DRINKS = [
-      // ==================== 【純茶類 Pure Tea - 共 7 款】 ====================
+      // 純茶
       {
         id: 'four-seasons-tea', name: '四季春青茶', emoji: '🍃', category: '純茶',
         tea: 5, milk: 0, fruit: 0, refreshing: 5, sweetLevel: '無糖', caffeine: 'medium', dairy: false,
@@ -1113,12 +1407,12 @@
       },
       {
         id: 'alishan-jinxuan', name: '阿里山冰露金萱茶', emoji: '🌱', category: '純茶',
-        tea: 5, milk: 1, fruit: 0, refreshing: 5, sweetLevel: '無糖', caffeine: 'low', dairy: false,
+        tea: 5, milk: 0, fruit: 0, refreshing: 5, sweetLevel: '無糖', caffeine: 'low', dairy: false,
         healing: 4, energy: 3, mapX: 22, mapY: 56,
         moods: ['calm', 'anxious', 'tired'], needs: ['放鬆', '清爽', '解膩'], vibes: ['茶感', '清爽'],
         brandIds: ['dejeng', '50lan', 'tenren', 'chichasanchen'],
-        moodTitle: '自帶淡淡天然奶香的高山微風',
-        quote: '金萱特有的品種淡雅奶香與清甜回甘，不苦不澀，溫和撫平緊繃的午後神經。',
+        moodTitle: '自帶淡淡品種清香的高山微風',
+        quote: '金萱特有的清甜回甘，不苦不澀、不含乳製品，溫和撫平緊繃的午後神經。',
         shortQuote: '不疾不徐的回甘，像山間吹來的一陣微風。'
       },
       {
@@ -1162,7 +1456,7 @@
         shortQuote: '給忙碌的大腦，來一場三分鐘的森林浴。'
       },
 
-      // ==================== 【奶茶類 Milk Tea - 共 7 款】 ====================
+      // 奶茶
       {
         id: 'brown-sugar-boba', name: '手炒黑糖珍珠鮮奶', emoji: '🧋', category: '奶茶',
         tea: 0, milk: 5, fruit: 0, refreshing: 1, sweetLevel: '正常甜', caffeine: 'none', dairy: true,
@@ -1234,7 +1528,7 @@
         shortQuote: '大口吸進滿滿配料，煩惱瞬間少一半。'
       },
 
-      // ==================== 【水果茶類 Fruit Tea - 共 7 款】 ====================
+      // 水果茶
       {
         id: 'peach-oolong', name: '白桃烏龍凍飲', emoji: '🍑', category: '水果茶',
         tea: 4, milk: 0, fruit: 4, refreshing: 5, sweetLevel: '微糖', caffeine: 'medium', dairy: false,
@@ -1282,7 +1576,7 @@
         moods: ['calm', 'happy', 'healing'], needs: ['清爽', '放鬆', '療癒'], vibes: ['水果', '茶感', '清爽'],
         brandIds: ['guiji', 'daming', 'dayungs'],
         moodTitle: '清脆蘋果香與溫潤茶韻的邂逅',
-        quote: '香甜富士蘋果汁結合自帶奶韻的金萱紅烏龍，溫和果甜不刺舌，一年四季都百喝不膩。',
+        quote: '香甜富士蘋果汁結合自帶韻味的紅烏龍，溫和果甜不刺舌，一年四季都百喝不膩。',
         shortQuote: '一天一蘋果，把溫柔甜美留在心頭。'
       },
       {
@@ -1306,7 +1600,7 @@
         shortQuote: '清爽無負擔，讓味蕾與心情一起深呼吸。'
       },
 
-      // ==================== 【咖啡類 Coffee - 共 6 款】 ====================
+      // 咖啡
       {
         id: 'iced-americano', name: '職人冰美式咖啡', emoji: '☕', category: '咖啡',
         tea: 0, milk: 0, fruit: 0, refreshing: 4, sweetLevel: '無糖', caffeine: 'high', dairy: false,
@@ -1338,23 +1632,23 @@
         shortQuote: '用檸檬與咖啡的火花，點亮昏沉的午後。'
       },
       {
-        id: 'oat-milk-latte', name: '北歐烤燕麥奶拿鐵', emoji: '🌾', category: '咖啡',
+        id: 'oat-milk-latte', name: '北歐烤燕麥奶拿鐵(植物奶)', emoji: '🌾', category: '咖啡',
         tea: 0, milk: 4, fruit: 0, refreshing: 3, sweetLevel: '無糖', caffeine: 'high', dairy: false,
         healing: 4, energy: 4, mapX: 58, mapY: 70,
         moods: ['calm', 'tired', 'anxious'], needs: ['提神', '放鬆', '補充能量'], vibes: ['濃郁', '奶香'],
         brandIds: ['starbucks', 'louisa', 'cama', '711', 'familymart'],
-        moodTitle: '零乳糖負擔的穀物溫潤拿鐵',
-        quote: '以植物性燕麥奶取代牛奶，帶有迷人的烤穀物堅果香氣，對乳糖不耐者最友善的溫柔提神選擇。',
+        moodTitle: '零乳製品負擔的穀物溫潤拿鐵',
+        quote: '以植物性燕麥奶取代牛奶，帶有迷人的烤穀物堅果香氣，對不喝牛奶者最友善的溫柔提神選擇。',
         shortQuote: '輕盈無負擔的穀物香，陪你穩健前行。'
       },
       {
-        id: 'raw-coconut-americano', name: '生椰冰美式/拿鐵', emoji: '🥥', category: '咖啡',
-        tea: 0, milk: 3, fruit: 3, refreshing: 4, sweetLevel: '微糖', caffeine: 'high', dairy: false,
+        id: 'raw-coconut-americano', name: '生椰冰美式(純植物系)', emoji: '🥥', category: '咖啡',
+        tea: 0, milk: 2, fruit: 3, refreshing: 4, sweetLevel: '微糖', caffeine: 'high', dairy: false,
         healing: 4, energy: 4, mapX: 46, mapY: 74,
-        moods: ['happy', 'tired', 'irritable'], needs: ['提神', '清爽', '療癒'], vibes: ['清爽', '水果', '奶香'],
+        moods: ['happy', 'tired', 'irritable'], needs: ['提神', '清爽', '療癒'], vibes: ['清爽', '水果'],
         brandIds: ['louisa', 'cama', 'starbucks'],
         moodTitle: '一秒飛往海島度假的清甜咖啡',
-        quote: '清甜椰子水與椰漿融合濃縮咖啡，不加牛奶卻自帶絲滑口感與熱帶果香，讓上班日也有度假心情。',
+        quote: '清甜椰子水融合濃縮咖啡，不含牛奶卻自帶絲滑口感與熱帶果香，讓上班日也有度假心情。',
         shortQuote: '即使人在辦公室，靈魂也能去海邊吹吹風。'
       },
       {
@@ -1368,7 +1662,7 @@
         shortQuote: '當茶遇見咖啡，連猶豫不決都被溫柔接住了。'
       },
 
-      // ==================== 【氣泡飲類 Sparkling - 共 6 款】 ====================
+      // 氣泡飲
       {
         id: 'berry-sparkling', name: '野莓果香仲夏氣泡飲', emoji: '🫧', category: '氣泡飲',
         tea: 0, milk: 0, fruit: 5, refreshing: 5, sweetLevel: '半糖', caffeine: 'none', dairy: false,
@@ -1386,7 +1680,7 @@
         moods: ['happy', 'tired', 'calm'], needs: ['清爽', '放鬆', '解膩'], vibes: ['水果', '酸甜', '氣泡感', '清爽'],
         brandIds: ['soma', 'louisa', 'cama'],
         moodTitle: '清香微甜的柚香微氣泡',
-        quote: '酸甜黃金柚子醬與沁涼氣泡水完美結合，沒有咖啡因卻能帶來極致清爽的甦醒感。',
+        quote: '酸甜黃金柚子醬與沁涼氣泡水完美結合，完全零咖啡因卻能帶來極致清爽的甦醒感。',
         shortQuote: '每一顆上升的氣泡，都在替心情加油。'
       },
       {
@@ -1416,7 +1710,7 @@
         moods: ['happy', 'healing', 'sad'], needs: ['療癒', '清爽', '放鬆'], vibes: ['水果', '氣泡感', '清爽'],
         brandIds: ['soma', 'taotao', 'starbucks'],
         moodTitle: '粉紅微氣泡的浪漫微醺感',
-        quote: '零酒精卻擁有如香檳般的粉紅細緻氣泡，有機玫瑰露與荔枝果香讓平凡的日子也充滿慶祝感。',
+        quote: '零酒精、零咖啡因卻擁有如香檳般的粉紅細緻氣泡，有機玫瑰露與荔枝果香讓平凡日子也充滿慶祝感。',
         shortQuote: '不需要特別的節日，今天就能為自己乾杯。'
       },
       {
@@ -1430,7 +1724,7 @@
         shortQuote: '零糖分的暢快氣泡，給自律又想放鬆的你。'
       },
 
-      // ==================== 【無咖啡因類 Caffeine-Free - 共 7 款】 ====================
+      // 無咖啡因
       {
         id: 'honey-lemon', name: '蜂蜜檸檬蘆薈凍飲', emoji: '🍋', category: '無咖啡因',
         tea: 0, milk: 0, fruit: 5, refreshing: 5, sweetLevel: '半糖', caffeine: 'none', dairy: false,
@@ -1438,7 +1732,7 @@
         moods: ['irritable', 'tired', 'happy'], needs: ['清爽', '解膩', '放鬆'], vibes: ['水果', '酸甜', '清爽'],
         brandIds: ['50lan', 'chingshin', 'macu', 'coco'],
         moodTitle: '一掃悶氣的酸甜微風',
-        quote: '微酸檸檬與溫潤龍眼蜜的交織，既沒有咖啡因負擔，又能瞬間喚醒味蕾，幫你把煩悶感一掃而空。',
+        quote: '微酸檸檬與溫潤龍眼蜜的交織，既沒有咖啡因與乳製品負擔，又能瞬間喚醒味蕾。',
         shortQuote: '酸甜剛剛好，生活偶爾也需要一點清爽刺激。'
       },
       {
@@ -1452,14 +1746,14 @@
         shortQuote: '今晚不追求效率，只追求無負擔的舒緩休息。'
       },
       {
-        id: 'rich-cocoa-latte', name: '頂級濃可可/阿華田歐蕾', emoji: '🍫', category: '無咖啡因',
+        id: 'rich-cocoa-latte', name: '黃金阿華田拿鐵(麥芽牛乳)', emoji: '🍫', category: '無咖啡因',
         tea: 0, milk: 5, fruit: 0, refreshing: 1, sweetLevel: '半糖', caffeine: 'none', dairy: true,
         healing: 5, energy: 3, mapX: 90, mapY: 28,
         moods: ['sad', 'stressed', 'healing', 'anxious'], needs: ['療癒', '補充能量', '放鬆'], vibes: ['奶香', '濃郁'],
-        brandIds: ['50lan', 'milksha', 'kebuke', 'starbucks'],
-        moodTitle: '被可可溫柔擁抱的時刻',
-        quote: '濃醇苦甜的可可香氣能帶來滿滿安全感，當你覺得世界有點冷的時候，這杯就是你的隨身毛毯。',
-        shortQuote: '苦甜交織的可可，是最懂大人的溫柔。'
+        brandIds: ['50lan', 'milksha', 'kebuke', 'chingshin'],
+        moodTitle: '被濃厚麥芽牛乳溫柔擁抱的時刻',
+        quote: '香濃黃金大麥芽與溫熱鮮乳交織，帶來滿滿童年安全感，當你覺得世界有點冷的時候，這杯就是你的隨身毛毯。',
+        shortQuote: '溫暖濃醇的麥芽奶香，是最懂大人的溫柔。'
       },
       {
         id: 'taro-fresh-milk', name: '大甲芋頭鮮奶(芋泥波波)', emoji: '🍠', category: '無咖啡因',
@@ -1504,19 +1798,19 @@
     ];
 
     // ============================================================================
-    // 4. 測驗 7 題結構定義
+    // 4. 測驗 7 題結構定義 (更新權重標示：25% / 25% / 20% / 15% / 必要門檻 / 15%)
     // ============================================================================
     const QUIZ_QUESTIONS = [
       {
         key: 'mood',
         title: 'Q1｜現在的你，心情感覺如何？',
-        sub: '選擇一個最貼近當下狀態的情緒泡泡（權重 30%）',
+        sub: '選擇一個最貼近當下狀態的情緒泡泡（符合度權重 25%）',
         options: MOODS.map(m => ({ value: m.id, label: m.label, emoji: m.emoji, desc: m.desc }))
       },
       {
         key: 'need',
         title: 'Q2｜現在的你，最需要什麼？',
-        sub: '這杯飲料今天要扮演什麼角色？（權重 25%）',
+        sub: '這杯飲料今天要扮演什麼角色？（符合度權重 25%）',
         options: [
           { value: '提神', label: '提神醒腦', emoji: '⚡', desc: '趕走瞌睡與混沌' },
           { value: '放鬆', label: '放鬆舒緩', emoji: '🌿', desc: '讓緊繃神經慢下來' },
@@ -1530,7 +1824,7 @@
       {
         key: 'vibe',
         title: 'Q3｜今天想喝哪種風味感覺？',
-        sub: '直覺挑選最吸引你的口感方向（權重 20%）',
+        sub: '直覺挑選最吸引你的口感方向（符合度權重 20%）',
         options: [
           { value: '茶感', label: '回甘茶感', emoji: '🍵', desc: '明顯茶香韻味' },
           { value: '奶香', label: '溫潤奶香', emoji: '🥛', desc: '滑順鮮奶與歐蕾' },
@@ -1544,7 +1838,7 @@
       {
         key: 'sweetness',
         title: 'Q4｜今天的甜度偏好？',
-        sub: '選擇你今天想攝取的糖分程度（權重 10%）',
+        sub: '選擇你今天想攝取的糖分程度（符合度權重 15%）',
         options: [
           { value: '無糖', label: '無糖 0%', emoji: '🌿', desc: '純粹原味零負擔' },
           { value: '微糖', label: '微糖 30%', emoji: '✨', desc: '微微襯托茶果香' },
@@ -1555,7 +1849,7 @@
       {
         key: 'temp',
         title: 'Q5｜想喝冰的還是熱的？',
-        sub: '溫度也會影響杯中視覺與心情感受',
+        sub: '溫度也會影響杯中視覺與心情感受（飲食情境權重）',
         options: [
           { value: '冰', label: '冰涼暢快', emoji: '🧊', desc: '微冰或少冰更清爽' },
           { value: '常溫', label: '溫和常溫', emoji: '💧', desc: '順口不刺激' },
@@ -1564,31 +1858,34 @@
       },
       {
         key: 'caffeine',
-        title: 'Q6｜對於咖啡因的接受度？',
-        sub: '根據現在的時間與身體狀況選擇（權重 10%）',
+        title: 'Q6｜對於咖啡因的接受度？（必要門檻）',
+        sub: '若選擇「完全無咖啡因」，系統將 100% 排除所有含咖啡因飲品',
         options: [
           { value: '需要', label: '需要咖啡因', emoji: '☕', desc: '需要明顯提神效果' },
           { value: '可以接受', label: '可以接受', emoji: '👌', desc: '一般茶飲或咖啡皆可' },
-          { value: '希望低咖啡因', label: '希望低咖啡因', emoji: '🌙', desc: '午後微茶感不影響睡眠' },
-          { value: '不要咖啡因', label: '完全無咖啡因', emoji: '💤', desc: '夜晚或穀麥/果茶首選' }
+          { value: '希望低咖啡因', label: '希望低咖啡因', emoji: '🌙', desc: '僅保留微茶感或無咖啡因' },
+          { value: '不要咖啡因', label: '完全無咖啡因 (硬性門檻)', emoji: '💤', desc: '嚴格排除所有含咖啡因飲品' }
         ]
       },
       {
         key: 'restriction',
-        title: 'Q7｜有沒有其他飲食限制或情境？',
-        sub: '最後一步，幫你做精準條件過濾（權重 5%）',
+        title: 'Q7｜飲食限制與當下情境？（必要門檻 ＋ 權重 15%）',
+        sub: '若選擇「不喝牛奶/避乳製品」，系統將 100% 排除所有含奶飲品',
         options: [
-          { value: '沒有特殊限制', label: '沒有特殊限制', emoji: '✨', desc: '所有飲品皆可推薦' },
-          { value: '避免乳製品', label: '不喝牛奶/避乳製品', emoji: '🚫', desc: '排除鮮奶茶與拿鐵' },
-          { value: '正在控制糖分', label: '正在控制糖分', emoji: '🥗', desc: '優先推薦低糖原茶' },
-          { value: '晚上飲用', label: '現在是晚上飲用', emoji: '🌃', desc: '優先推薦無/低咖啡因' }
+          { value: '沒有特殊限制', label: '沒有特殊限制', emoji: '✨', desc: '所有符合條件飲品皆可推薦' },
+          { value: '避免乳製品', label: '不喝牛奶/避乳製品 (硬性門檻)', emoji: '🚫', desc: '嚴格排除所有含鮮奶與奶蓋飲品' },
+          { value: '正在控制糖分', label: '正在控制糖分', emoji: '🥗', desc: '優先推薦無糖/微糖低負擔飲品' },
+          { value: '晚上飲用', label: '現在是晚上飲用', emoji: '🌃', desc: '排除高咖啡因並優先推薦舒緩飲品' }
         ]
       }
     ];
 
     // ============================================================================
-    // 5. 全域狀態管理
+    // 5. 全域狀態管理與 LocalStorage 跨次持久化保存 (同裝置開啟不重置)
     // ============================================================================
+    const STORAGE_KEY_DIARY = 'moodrink_diary_v1';
+    const STORAGE_KEY_STATE = 'moodrink_saved_state_v2';
+
     let currentView = 'home';
     let quizStep = 0;
     let answers = { mood: 'tired', need: '', vibe: '', sweetness: '', temp: '', caffeine: '', restriction: '' };
@@ -1596,7 +1893,7 @@
     let selectedRankIndex = 0;
     let libraryCategory = '全部';
     let storeCategory = '全部品牌';
-    let activeBrandId = 'dejeng';
+    let activeBrandId = '50lan';
     let activeBranchIndex = 0;
     let activeMoodMapDrinkId = 'peach-oolong';
 
@@ -1604,6 +1901,107 @@
     let userLocation = null;
     let hasAskedLocationOnce = false;
 
+    // 儲存使用者目前測驗選項與推薦結果至 LocalStorage
+    function persistCurrentState() {
+      try {
+        const payload = {
+          answers,
+          quizStep,
+          rankedDrinkIds: rankedResults.map(r => ({
+            role: r.role,
+            drinkId: r.drink.id,
+            score: r.score,
+            reasons: r.reasons
+          })),
+          selectedRankIndex
+        };
+        localStorage.setItem(STORAGE_KEY_STATE, JSON.stringify(payload));
+        updateResumePill();
+      } catch (e) {}
+    }
+
+    // 載入同一裝置上次保存的狀態 (不自動重置)
+    function loadPersistedState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_STATE);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed.answers) answers = { ...answers, ...parsed.answers };
+        if (typeof parsed.quizStep === 'number') quizStep = parsed.quizStep;
+        if (Array.isArray(parsed.rankedDrinkIds) && parsed.rankedDrinkIds.length > 0) {
+          rankedResults = parsed.rankedDrinkIds.map(item => {
+            const drinkObj = DRINKS.find(d => d.id === item.drinkId) || DRINKS[0];
+            return { role: item.role, drink: drinkObj, score: item.score, reasons: item.reasons || [] };
+          });
+          selectedRankIndex = parsed.selectedRankIndex || 0;
+        }
+        if (answers.mood) applyMoodTheme(answers.mood);
+        updateResumePill();
+      } catch (e) {}
+    }
+
+    function updateResumePill() {
+      const pill = document.getElementById('resume-result-pill');
+      const text = document.getElementById('resume-result-text');
+      if (rankedResults && rankedResults.length > 0 && rankedResults[0].drink) {
+        pill.classList.remove('hidden');
+        pill.classList.add('inline-flex');
+        text.textContent = `上次推薦：${rankedResults[0].drink.name}`;
+      } else {
+        pill.classList.add('hidden');
+        pill.classList.remove('inline-flex');
+      }
+    }
+
+    // 使用者手動點擊「重置所有個人紀錄與測驗狀態」
+    function manualResetAllUserData() {
+      localStorage.removeItem(STORAGE_KEY_DIARY);
+      localStorage.removeItem(STORAGE_KEY_STATE);
+      answers = { mood: 'tired', need: '', vibe: '', sweetness: '', temp: '', caffeine: '', restriction: '' };
+      quizStep = 0;
+      rankedResults = [];
+      selectedRankIndex = 0;
+      updateDiaryBadge();
+      updateResumePill();
+      toggleMenuDrawer(false);
+      if (currentView === 'diary') renderDiaryView();
+      if (currentView === 'quiz') renderQuizStep();
+      if (currentView === 'result') navigateTo('home');
+      alert('已為您重置所有個人測驗狀態與歷史心情紀錄！');
+    }
+
+    // 右上角三條線選單開關
+    function toggleMenuDrawer(open) {
+      const backdrop = document.getElementById('menu-drawer-backdrop');
+      const drawer = document.getElementById('menu-drawer');
+      if (open) {
+        backdrop.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          backdrop.classList.remove('opacity-0');
+          drawer.classList.remove('translate-x-full');
+        });
+      } else {
+        backdrop.classList.add('opacity-0');
+        drawer.classList.add('translate-x-full');
+        setTimeout(() => backdrop.classList.add('hidden'), 300);
+      }
+    }
+
+    function drawerNav(viewName) {
+      toggleMenuDrawer(false);
+      if (viewName === 'quiz') {
+        startQuiz();
+      } else {
+        navigateTo(viewName);
+      }
+    }
+
+    function drawerNavStoreMap() {
+      toggleMenuDrawer(false);
+      openStoreMapAll();
+    }
+
+    // GPS 距離計算
     function calcDistanceKm(lat1, lng1, lat2, lng2) {
       const R = 6371;
       const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -1640,7 +2038,7 @@
             statusText.textContent = `已取得您的位置（${userLocation.lat.toFixed(3)}, ${userLocation.lng.toFixed(3)}）！台北市各門市已依距離由近到遠排序。`;
           }
           const hint = document.getElementById('distance-sort-hint');
-          if (hint) hint.textContent = '已依距離排序';
+          if (hint) hint.textContent = '已依距離由近到遠排序';
 
           sortAllBrandBranchesByDistance();
           renderStoreMap();
@@ -1704,11 +2102,13 @@
       }).join('');
     }
 
+    // 初始化
     window.addEventListener('DOMContentLoaded', () => {
+      loadPersistedState();
       renderHomeMoodGrid();
       renderLibrary();
       renderStoreMap();
-      selectBrandForMap('dejeng', 0);
+      selectBrandForMap('50lan', 0);
       renderMoodMap();
       updateDiaryBadge();
       navigateTo('home');
@@ -1716,7 +2116,7 @@
     });
 
     // ============================================================================
-    // 6. 頁面路由與背景色彩連動 (支援電腦版與手機底部導覽列同步高亮)
+    // 6. 頁面路由與選單高亮
     // ============================================================================
     function navigateTo(viewName) {
       currentView = viewName;
@@ -1725,19 +2125,11 @@
         if (el) el.classList.toggle('hidden', v !== viewName);
       });
 
-      // 電腦版導覽按鈕高亮
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        const isCurrent = btn.getAttribute('data-nav') === viewName || (viewName === 'result' && btn.getAttribute('data-nav') === 'quiz');
-        btn.className = `nav-btn whitespace-nowrap px-3.5 py-1.5 rounded-full transition flex items-center gap-1 ${
-          isCurrent ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:bg-white/60'
-        }`;
-      });
-
-      // 手機底部導覽按鈕高亮
-      document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
-        const isCurrent = btn.getAttribute('data-nav') === viewName || (viewName === 'result' && btn.getAttribute('data-nav') === 'quiz');
-        btn.className = `mobile-nav-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-[11px] font-bold transition ${
-          isCurrent ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:bg-white/60'
+      // 更新漢堡選單內的當前項目樣式
+      document.querySelectorAll('.drawer-item').forEach(btn => {
+        const isCurrent = btn.getAttribute('data-drawer') === viewName || (viewName === 'result' && btn.getAttribute('data-drawer') === 'quiz');
+        btn.className = `drawer-item w-full p-3.5 rounded-2xl text-left flex items-center justify-between transition group ${
+          isCurrent ? 'bg-slate-900/10 ring-1 ring-slate-900/20' : 'hover:bg-white/80'
         }`;
       });
 
@@ -1748,6 +2140,7 @@
 
       if (viewName === 'diary') renderDiaryView();
       if (viewName === 'map') selectMapDrink(activeMoodMapDrinkId);
+      if (viewName === 'result' && rankedResults.length > 0) renderResultView();
       window.scrollTo({ top: 0, behavior: 'smooth' });
       lucide.createIcons();
     }
@@ -1793,8 +2186,8 @@
       const b2 = document.getElementById('blob-2');
 
       bg.className = `absolute inset-0 transition-all duration-1000 bg-gradient-to-br ${m.bgGrad}`;
-      b1.className = `blob-anim-1 absolute -top-24 -left-24 w-72 sm:w-96 h-72 sm:h-96 rounded-full mix-blend-multiply filter blur-3xl opacity-50 transition-colors duration-1000 ${m.blob1}`;
-      b2.className = `blob-anim-2 absolute top-1/3 -right-20 w-80 sm:w-[28rem] h-80 sm:h-[28rem] rounded-full mix-blend-multiply filter blur-3xl opacity-50 transition-colors duration-1000 ${m.blob2}`;
+      b1.className = `blob-anim-1 absolute -top-28 -left-24 w-80 sm:w-[30rem] h-80 sm:h-[30rem] rounded-full mix-blend-multiply filter blur-3xl opacity-55 transition-colors duration-1000 ${m.blob1}`;
+      b2.className = `blob-anim-2 absolute top-1/4 -right-24 w-80 sm:w-[32rem] h-80 sm:h-[32rem] rounded-full mix-blend-multiply filter blur-3xl opacity-50 transition-colors duration-1000 ${m.blob2}`;
 
       const stop1 = document.getElementById('liquid-stop-1');
       const stop2 = document.getElementById('liquid-stop-2');
@@ -1813,14 +2206,14 @@
         <button
           onmouseenter="applyMoodTheme('${m.id}')"
           onclick="quickStartWithMood('${m.id}')"
-          class="group glass-card rounded-2xl p-3.5 sm:p-4 text-left hover:scale-[1.03] hover:bg-white/85 active:scale-95 transition-all duration-300 flex flex-col justify-between"
+          class="group glass-card rounded-3xl p-4 sm:p-5 text-left hover:scale-[1.02] hover:bg-white/85 active:scale-95 transition-all duration-300 flex flex-col justify-between"
         >
-          <div class="flex items-center justify-between mb-1.5 sm:mb-2">
-            <span class="text-xl sm:text-2xl group-hover:scale-125 transition-transform duration-300">${m.emoji}</span>
-            <span class="text-[10px] sm:text-[11px] font-semibold px-2 py-0.5 rounded-full ${m.tagColor}">${m.label}</span>
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-2xl sm:text-3xl group-hover:scale-125 transition-transform duration-300">${m.emoji}</span>
+            <span class="text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full ${m.tagColor}">${m.label}</span>
           </div>
           <div>
-            <div class="font-bold text-slate-800 text-sm sm:text-base mb-0.5">覺得${m.label}</div>
+            <div class="font-bold text-slate-900 text-sm sm:text-base mb-0.5">覺得${m.label}</div>
             <p class="text-[11px] sm:text-xs text-slate-500 line-clamp-1">${m.desc}</p>
           </div>
         </button>
@@ -1828,15 +2221,23 @@
     }
 
     function quickStartWithMood(moodId) {
-      answers = { mood: moodId, need: '', vibe: '', sweetness: '', temp: '', caffeine: '', restriction: '' };
+      answers.mood = moodId;
       quizStep = 1;
       applyMoodTheme(moodId);
+      persistCurrentState();
       navigateTo('quiz');
       renderQuizStep();
     }
 
     function startQuiz() {
+      navigateTo('quiz');
+      renderQuizStep();
+    }
+
+    function resetAndStartQuiz() {
+      answers = { mood: 'tired', need: '', vibe: '', sweetness: '', temp: '', caffeine: '', restriction: '' };
       quizStep = 0;
+      persistCurrentState();
       navigateTo('quiz');
       renderQuizStep();
     }
@@ -1844,12 +2245,14 @@
     function resetQuiz() {
       answers = { mood: 'tired', need: '', vibe: '', sweetness: '', temp: '', caffeine: '', restriction: '' };
       quizStep = 0;
+      persistCurrentState();
       renderQuizStep();
     }
 
     function prevQuizStep() {
       if (quizStep > 0) {
         quizStep--;
+        persistCurrentState();
         renderQuizStep();
       } else {
         navigateTo('home');
@@ -1872,7 +2275,7 @@
         return `
           <button
             onclick="selectQuizOption('${q.key}', '${opt.value}')"
-            class="p-3 sm:p-4 rounded-2xl text-left transition-all duration-200 border ${
+            class="p-3.5 sm:p-4 rounded-2xl text-left transition-all duration-200 border ${
               selected
                 ? 'bg-slate-900 text-white border-slate-900 shadow-md scale-[1.02]'
                 : 'bg-white/65 hover:bg-white text-slate-800 border-white/80 hover:scale-[1.01]'
@@ -1892,17 +2295,18 @@
     function selectQuizOption(key, value) {
       answers[key] = value;
       if (key === 'mood') applyMoodTheme(value);
-
+      persistCurrentState();
       updateInteractiveCup();
 
       if (quizStep < QUIZ_QUESTIONS.length - 1) {
         quizStep++;
+        persistCurrentState();
         renderQuizStep();
       } else {
         const cupWrapper = document.getElementById('cup-wrapper');
         const statusLabel = document.getElementById('cup-status-label');
         cupWrapper.classList.add('shaking');
-        statusLabel.textContent = '正在從 40 款飲品中為你調製...';
+        statusLabel.textContent = '正在過濾必要門檻並計算最佳飲品...';
 
         setTimeout(() => {
           cupWrapper.classList.remove('shaking');
@@ -1937,103 +2341,141 @@
         answers.need ? `需求:${answers.need}` : null,
         answers.vibe ? `風味:${answers.vibe}` : null,
         answers.sweetness || null,
-        answers.temp || null
+        answers.temp || null,
+        answers.caffeine === '不要咖啡因' ? '🚫無咖啡因' : null,
+        answers.restriction === '避免乳製品' ? '🚫無乳製品' : null
       ].filter(Boolean);
 
       document.getElementById('quiz-recipe-tags').innerHTML = tags.map(t =>
-        `<span class="px-2 py-0.5 rounded-full bg-white/80 text-[10px] sm:text-[11px] font-medium text-slate-700 border border-white shadow-sm">${t}</span>`
+        `<span class="px-2.5 py-0.5 rounded-full bg-white/85 text-[10px] sm:text-[11px] font-semibold text-slate-700 border border-white shadow-sm">${t}</span>`
       ).join('');
     }
 
     // ============================================================================
-    // 8. Rule-based 規則式推薦演算法 (針對 40 款飲品計算分數)
+    // 8. Rule-based 規則式推薦演算法
+    //    ★ 升級：咖啡因與乳製品改為「前置必要門檻 (Hard Gate)」，絕不提供衝突飲品
+    //    ★ 權重分配：情緒 25% + 當下需求 25% + 口味偏好 20% + 甜度適配 15% + 飲食限制與情境 15% = 100%
     // ============================================================================
     function calculateRecommendations() {
-      const scored = DRINKS.map(drink => {
+      // 第一步：必要門檻硬性過濾 (Hard Gate Filtering)
+      const noCaffeineRequired = answers.caffeine === '不要咖啡因';
+      const lowCaffeinePreferred = answers.caffeine === '希望低咖啡因';
+      const noDairyRequired = answers.restriction === '避免乳製品';
+
+      let eligiblePool = DRINKS.filter(drink => {
+        // 若使用者選擇「不要咖啡因」，嚴格排除任何含有咖啡因的飲品
+        if (noCaffeineRequired && drink.caffeine !== 'none') {
+          return false;
+        }
+        // 若使用者選擇「希望低咖啡因」，排除高咖啡因飲品
+        if (lowCaffeinePreferred && drink.caffeine === 'high') {
+          return false;
+        }
+        // 若使用者選擇「避免乳製品」，嚴格排除任何含有牛奶/鮮奶油的飲品
+        if (noDairyRequired && drink.dairy === true) {
+          return false;
+        }
+        return true;
+      });
+
+      // 安全防護：萬一極端條件下池子少於 3 杯，仍確保嚴守無咖啡因與無奶原則
+      if (eligiblePool.length === 0) {
+        eligiblePool = DRINKS.filter(d => (!noCaffeineRequired || d.caffeine === 'none') && (!noDairyRequired || !d.dairy));
+      }
+
+      // 第二步：五大維度百分比權重計算 (25% + 25% + 20% + 15% + 15% = 100%)
+      const scored = eligiblePool.map(drink => {
         let score = 0;
         let reasons = [];
 
-        const moodObj = MOODS.find(m => m.id === answers.mood) || MOODS[0];
-        if (drink.moods.includes(answers.mood)) {
-          score += 30;
-          reasons.push(`✓ 情緒契合（+30%）：你選擇了「${moodObj.label}」，此飲品能對應當下情緒狀態。`);
-        } else {
-          score += 14;
+        // 必要門檻通過證明
+        if (noCaffeineRequired) {
+          reasons.push(`🛡️ 必要門檻把關：已為您 100% 排除含咖啡因飲品（此款為完全零咖啡因）。`);
+        } else if (answers.caffeine === '需要' && (drink.caffeine === 'high' || drink.caffeine === 'medium')) {
+          reasons.push(`⚡ 咖啡因門檻符合：具備您所需的提神咖啡因含量。`);
+        }
+        if (noDairyRequired) {
+          reasons.push(`🛡️ 必要門檻把關：已為您 100% 排除含牛奶／乳製品飲品。`);
         }
 
+        // 1. 情緒符合度 (25%)
+        const moodObj = MOODS.find(m => m.id === answers.mood) || MOODS[0];
+        if (drink.moods.includes(answers.mood)) {
+          score += 25;
+          reasons.push(`✓ 情緒符合度（+25%）：精準對應您當下的「${moodObj.label}」情緒狀態。`);
+        } else {
+          score += 12;
+        }
+
+        // 2. 當下需求符合度 (25%)
         if (drink.needs.includes(answers.need)) {
           score += 25;
-          reasons.push(`✓ 需求滿足（+25%）：符合你當下渴望「${answers.need}」的核心機能。`);
+          reasons.push(`✓ 需求符合度（+25%）：滿足您當下渴望「${answers.need}」的核心需求。`);
         } else if (
           (answers.need === '療癒' && drink.healing >= 4) ||
           (answers.need === '提神' && drink.energy >= 4) ||
           (answers.need === '清爽' && drink.refreshing >= 4)
         ) {
           score += 18;
-          reasons.push(`✓ 需求相近（+18%）：具備良好的「${answers.need}」屬性指標。`);
+          reasons.push(`✓ 需求相近度（+18%）：具備良好的「${answers.need}」機能指標。`);
         } else {
           score += 10;
         }
 
+        // 3. 口味與口感偏好 (20%)
         if (drink.vibes.includes(answers.vibe)) {
           score += 20;
-          reasons.push(`✓ 風味偏好（+20%）：精準命中你想喝「${answers.vibe}」的口感期待。`);
+          reasons.push(`✓ 口味與口感偏好（+20%）：完全命中您想喝「${answers.vibe}」的風味期待。`);
         } else {
-          score += 8;
+          score += 9;
         }
 
+        // 4. 甜度適配度 (15%)
         if (drink.sweetLevel === answers.sweetness) {
-          score += 10;
-          reasons.push(`✓ 甜度契合（+10%）：最佳調配甜度正好為「${answers.sweetness}」。`);
+          score += 15;
+          reasons.push(`✓ 甜度適配度（+15%）：此飲品的最佳賞味甜度正好為「${answers.sweetness}」。`);
         } else {
-          score += 6;
+          score += 9;
         }
 
-        const cafMatch =
-          (answers.caffeine === '需要' && (drink.caffeine === 'high' || drink.caffeine === 'medium')) ||
-          (answers.caffeine === '可以接受') ||
-          (answers.caffeine === '希望低咖啡因' && (drink.caffeine === 'low' || drink.caffeine === 'none')) ||
-          (answers.caffeine === '不要咖啡因' && drink.caffeine === 'none');
-
-        if (cafMatch) {
-          score += 10;
-          reasons.push(`✓ 咖啡因篩選（+10%）：符合「${answers.caffeine}」的生理需求。`);
-        } else if (answers.caffeine === '不要咖啡因' && drink.caffeine !== 'none') {
-          score -= 22;
-        }
-
-        let restrictionPass = true;
-        if (answers.restriction === '避免乳製品' && drink.dairy) {
-          restrictionPass = false;
-          score -= 28;
-        } else if (answers.restriction === '晚上飲用' && drink.caffeine === 'high') {
-          restrictionPass = false;
-          score -= 18;
-        } else if (answers.restriction === '正在控制糖分' && drink.sweetLevel === '正常甜') {
-          restrictionPass = false;
-          score -= 12;
-        }
-
-        if (restrictionPass) {
-          score += 5;
-          if (answers.restriction && answers.restriction !== '沒有特殊限制') {
-            reasons.push(`✓ 飲食限制（+5%）：已為你排除衝突條件（${answers.restriction}）。`);
+        // 5. 飲食限制與情境 (15%)
+        let contextScore = 15;
+        if (answers.restriction === '正在控制糖分') {
+          if (drink.sweetLevel === '無糖' || drink.sweetLevel === '微糖') {
+            reasons.push(`✓ 飲食限制與情境（+15%）：符合您「正在控制糖分」的低負擔情境。`);
+          } else {
+            contextScore = 7;
           }
+        } else if (answers.restriction === '晚上飲用') {
+          if (drink.caffeine === 'none' || drink.caffeine === 'low') {
+            reasons.push(`✓ 飲食限制與情境（+15%）：夜間飲用溫和無負擔，不影響睡眠品質。`);
+          } else {
+            contextScore = 6;
+          }
+        } else {
+          reasons.push(`✓ 飲食限制與情境（+15%）：符合您當下的飲用溫度與日常情境設定。`);
         }
+        score += contextScore;
 
-        const clampedScore = Math.max(55, Math.min(99, Math.round(score)));
+        const clampedScore = Math.max(60, Math.min(99, Math.round(score)));
         return { drink, score: clampedScore, reasons };
       });
 
       scored.sort((a, b) => b.score - a.score);
+
+      const first = scored[0];
+      const second = scored[1] || scored[0];
+      const third = scored[2] || scored[1] || scored[0];
+
       rankedResults = [
-        { role: 'Best Match 最佳契合', ...scored[0] },
-        { role: 'Alternative 順位替代', ...scored[1] },
-        { role: 'Something Different 換個心情', ...scored[4] }
+        { role: 'Best Match 最佳契合', ...first },
+        { role: 'Alternative 順位替代', ...second },
+        { role: 'Something Different 換個心情', ...third }
       ];
 
       selectedRankIndex = 0;
       saveToDiary(rankedResults[0]);
+      persistCurrentState();
       navigateTo('result');
       renderResultView();
     }
@@ -2063,7 +2505,7 @@
       document.getElementById('res-mood-title').textContent = `今日 Mood：${d.moodTitle}`;
       document.getElementById('res-drink-name').textContent = d.name;
       document.getElementById('res-ice-sugar').textContent =
-        `專屬建議調配：${answers.sweetness || d.sweetLevel} · ${answers.temp || '微冰'} · 適合「${moodObj.label}」的你`;
+        `專屬建議調配：${answers.sweetness || d.sweetLevel} · ${answers.temp || '微冰'} · ${d.caffeine === 'none' ? '零咖啡因' : '含茶/咖啡韻'} · ${d.dairy ? '含鮮乳' : '不含乳製品'}`;
       document.getElementById('res-quote').textContent = `「${d.quote}」`;
 
       document.getElementById('res-shop-buttons').innerHTML = renderBrandLinksHtml(d.brandIds);
@@ -2076,13 +2518,13 @@
         { label: '提神指數', val: d.energy }
       ];
       document.getElementById('res-metrics-bars').innerHTML = metrics.map(m => `
-        <div class="bg-white/60 rounded-xl p-2.5 sm:p-3 border border-white">
+        <div class="bg-white/65 rounded-xl p-3 border border-white">
           <div class="flex justify-between text-xs font-semibold text-slate-700 mb-1">
             <span>${m.label}</span>
             <span>${'★'.repeat(m.val)}${'☆'.repeat(5 - m.val)}</span>
           </div>
           <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
-            <div class="h-full bg-slate-800 rounded-full" style="width: ${m.val * 20}%"></div>
+            <div class="h-full bg-slate-900 rounded-full" style="width: ${m.val * 20}%"></div>
           </div>
         </div>
       `).join('');
@@ -2098,12 +2540,13 @@
       document.getElementById('card-short-quote').textContent = `「${d.shortQuote}」`;
       document.getElementById('card-match-badge').textContent = `Match ${current.score}%`;
       document.getElementById('mood-card-preview').className =
-        `rounded-[2rem] p-6 shadow-xl border border-white/80 aspect-[9/15] flex flex-col justify-between relative overflow-hidden transition-all duration-700 bg-gradient-to-br ${moodObj.bgGrad}`;
+        `rounded-[2.2rem] p-6 shadow-xl border border-white/80 aspect-[9/15] flex flex-col justify-between relative overflow-hidden transition-all duration-700 bg-gradient-to-br ${moodObj.bgGrad}`;
       lucide.createIcons();
     }
 
     function switchResultTab(idx) {
       selectedRankIndex = idx;
+      persistCurrentState();
       renderResultView();
     }
 
@@ -2119,29 +2562,30 @@
     }
 
     // ============================================================================
-    // 10. 飲品圖鑑資料庫 (04 DRINK LIBRARY - 40 款飲品)
+    // 10. 飲品圖鑑資料庫 (04 DRINK LIBRARY - 已移除按鈕與分類上的所有數字)
     // ============================================================================
     function renderLibrary() {
       const categories = ['全部', '純茶', '奶茶', '水果茶', '咖啡', '氣泡飲', '無咖啡因'];
-      document.getElementById('library-filter-bar').innerHTML = categories.map(cat => {
-        const count = cat === '全部' ? DRINKS.length : DRINKS.filter(d => d.category === cat).length;
-        return `
-          <button
-            onclick="filterLibrary('${cat}')"
-            class="whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-semibold transition ${
-              libraryCategory === cat ? 'bg-slate-900 text-white shadow-sm' : 'glass-pill text-slate-600 hover:bg-white'
-            }"
-          >${cat} (${count})</button>
-        `;
-      }).join('');
+      document.getElementById('library-filter-bar').innerHTML = categories.map(cat => `
+        <button
+          onclick="filterLibrary('${cat}')"
+          class="whitespace-nowrap px-4 py-1.5 rounded-full text-xs font-semibold transition ${
+            libraryCategory === cat ? 'bg-slate-900 text-white shadow-sm' : 'glass-pill text-slate-600 hover:bg-white'
+          }"
+        >${cat}</button>
+      `).join('');
 
       const list = libraryCategory === '全部' ? DRINKS : DRINKS.filter(d => d.category === libraryCategory);
       document.getElementById('library-grid').innerHTML = list.map(d => `
-        <div class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between hover:bg-white/85 transition space-y-3.5">
+        <div class="glass-card rounded-[1.8rem] p-5 flex flex-col justify-between hover:bg-white/85 transition space-y-4">
           <div>
             <div class="flex items-center justify-between mb-2.5">
               <span class="text-3xl">${d.emoji}</span>
-              <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-900 text-white">${d.category}</span>
+              <div class="flex items-center gap-1.5">
+                ${d.caffeine === 'none' ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">無咖啡因</span>' : ''}
+                ${!d.dairy ? '<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-100 text-sky-800">無乳製品</span>' : ''}
+                <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-900 text-white">${d.category}</span>
+              </div>
             </div>
             <h3 class="font-bold text-base sm:text-lg text-slate-900">${d.name}</h3>
             <p class="text-xs text-rose-600 font-medium mb-1.5">${d.moodTitle}</p>
@@ -2178,7 +2622,7 @@
     }
 
     // ============================================================================
-    // 11. 台北市飲品門市地圖 (05 STORE MAP - 27 大品牌 + 台北市全區門市)
+    // 11. 台北市飲品門市地圖 (05 STORE MAP - 含 50嵐 46 店 & 龜記 31 店可捲動完整清單)
     // ============================================================================
     function renderStoreMap() {
       const filterBanner = document.getElementById('drink-filter-banner');
@@ -2225,16 +2669,22 @@
 
       const listEl = document.getElementById('brand-list-container');
       if (filtered.length === 0) {
-        listEl.innerHTML = `<div class="col-span-full glass-card rounded-2xl p-8 text-center text-sm text-slate-500">找不到符合條件的品牌或台北市門市，請點擊上方「顯示全部 27 家品牌」或嘗試其他關鍵字。</div>`;
+        listEl.innerHTML = `<div class="col-span-full glass-card rounded-2xl p-8 text-center text-sm text-slate-500">找不到符合條件的品牌或台北市門市，請點擊上方「顯示全部品牌」或嘗試其他關鍵字。</div>`;
         return;
       }
 
       listEl.innerHTML = filtered.map(b => {
         const isSelected = b.id === activeBrandId;
+        // 若使用者有輸入行政區或路名關鍵字，優先篩選匹配的門市顯示
+        const matchingBranches = query
+          ? b.branches.filter(br => br.name.toLowerCase().includes(query) || br.address.toLowerCase().includes(query))
+          : b.branches;
+        const displayBranches = matchingBranches.length > 0 ? matchingBranches : b.branches;
+
         return `
           <div
             onclick="selectBrandForMap('${b.id}', 0)"
-            class="cursor-pointer rounded-2xl p-4 sm:p-5 transition-all duration-200 flex flex-col justify-between border ${
+            class="cursor-pointer rounded-[1.8rem] p-4 sm:p-5 transition-all duration-200 flex flex-col justify-between border ${
               isSelected
                 ? 'bg-white border-slate-900 ring-2 ring-slate-900/10 shadow-lg'
                 : 'glass-card hover:bg-white/85 border-white/80'
@@ -2269,42 +2719,45 @@
               </div>
             </div>
 
-            <!-- 台北市各區門市與直接開啟地圖導航超連結 -->
+            <!-- 台北市各區門市可捲動清單與直接開啟地圖導航超連結 -->
             <div class="mt-3.5 pt-3 border-t border-slate-200/70 space-y-1.5">
               <div class="text-[11px] font-bold text-slate-500 flex items-center justify-between">
-                <span>台北市門市（點擊地址直接導航）：</span>
-                <span class="text-rose-600">${userLocation ? '依距離排序' : `台北市 ${b.branches.length} 店`}</span>
+                <span>台北市門市（可上下滑動查看全部）：</span>
+                <span class="text-rose-600">${userLocation ? '依距離排序' : `台北市共 ${b.branches.length} 家門市`}</span>
               </div>
-              ${b.branches.map((br, idx) => {
-                const originParam = userLocation ? `&origin=${userLocation.lat},${userLocation.lng}` : '';
-                const navUrl = `https://www.google.com/maps/dir/?api=1${originParam}&destination=${encodeURIComponent(b.name + ' ' + br.address)}`;
-                const distBadge = br.distanceKm !== undefined
-                  ? `<span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded ml-1">${br.distanceKm.toFixed(1)} km</span>`
-                  : '';
-                return `
-                  <div class="flex items-center justify-between gap-1.5 text-xs bg-slate-50/90 hover:bg-rose-50/70 p-2 rounded-xl transition">
-                    <button
-                      type="button"
-                      onclick="event.stopPropagation(); selectBrandForMap('${b.id}', ${idx})"
-                      class="text-left truncate flex-1 font-medium text-slate-700 hover:text-slate-900"
-                      title="在地圖預覽：${br.address}"
-                    >
-                      📍 <strong>${br.name}</strong>${distBadge}｜${br.address}
-                    </button>
-                    <a
-                      href="${navUrl}"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onclick="event.stopPropagation()"
-                      class="px-2 py-1 rounded-lg bg-rose-600 text-white text-[10px] sm:text-[11px] font-semibold hover:bg-rose-500 transition shrink-0 flex items-center gap-0.5"
-                      title="直接開啟 Google Maps App 導航至 ${br.address}"
-                    >
-                      <i data-lucide="navigation" class="w-3 h-3"></i>
-                      <span>導航</span>
-                    </a>
-                  </div>
-                `;
-              }).join('')}
+              <div class="max-h-48 overflow-y-auto custom-scroll space-y-1.5 pr-1">
+                ${displayBranches.map((br) => {
+                  const realIdx = b.branches.indexOf(br);
+                  const originParam = userLocation ? `&origin=${userLocation.lat},${userLocation.lng}` : '';
+                  const navUrl = `https://www.google.com/maps/dir/?api=1${originParam}&destination=${encodeURIComponent(b.name + ' ' + br.address)}`;
+                  const distBadge = br.distanceKm !== undefined
+                    ? `<span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded ml-1">${br.distanceKm.toFixed(1)} km</span>`
+                    : '';
+                  return `
+                    <div class="flex items-center justify-between gap-1.5 text-xs bg-slate-50/90 hover:bg-rose-50/70 p-2 rounded-xl transition">
+                      <button
+                        type="button"
+                        onclick="event.stopPropagation(); selectBrandForMap('${b.id}', ${realIdx})"
+                        class="text-left truncate flex-1 font-medium text-slate-700 hover:text-slate-900"
+                        title="在地圖預覽：${br.address}"
+                      >
+                        📍 <strong>${br.name}</strong>${distBadge}｜${br.address}
+                      </button>
+                      <a
+                        href="${navUrl}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onclick="event.stopPropagation()"
+                        class="px-2 py-1 rounded-lg bg-rose-600 text-white text-[10px] sm:text-[11px] font-semibold hover:bg-rose-500 transition shrink-0 flex items-center gap-0.5"
+                        title="直接開啟 Google Maps App 導航至 ${br.address}"
+                      >
+                        <i data-lucide="navigation" class="w-3 h-3"></i>
+                        <span>導航</span>
+                      </a>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
             </div>
           </div>
         `;
@@ -2330,6 +2783,7 @@
       const distText = br.distanceKm !== undefined ? ` · 距您約 ${br.distanceKm.toFixed(1)} km` : '';
       document.getElementById('active-map-sub').textContent = `${br.name}（${br.address}${distText}）`;
       document.getElementById('active-brand-official-btn').setAttribute('href', b.url);
+      document.getElementById('active-branch-count-label').textContent = `📍 ${b.name} 台北市全區門市（共 ${b.branches.length} 家）：`;
 
       const mapQuery = encodeURIComponent(`${b.name} ${br.address}`);
       document.getElementById('google-map-iframe').src =
@@ -2350,7 +2804,7 @@
                 onclick="selectBrandForMap('${b.id}', ${idx})"
                 class="font-bold text-xs text-left block hover:underline truncate w-full"
               >
-                ${item.name}${dTag} ${active ? '· 顯示中' : ''}
+                ${item.name}${dTag} ${active ? '· 地圖顯示中' : ''}
               </button>
               <a
                 href="${navUrl}"
@@ -2382,7 +2836,7 @@
     }
 
     // ============================================================================
-    // 12. Mood Map 情緒飲品二維座標圖 (改為精緻彩色小圓點，Hover 或觸控才顯示資訊)
+    // 12. Mood Map 情緒飲品二維座標圖 (精緻彩色小圓點，Hover 或觸控才顯示資訊)
     // ============================================================================
     const CATEGORY_DOT_COLORS = {
       '純茶': 'bg-emerald-500 ring-emerald-200',
@@ -2407,12 +2861,10 @@
             class="-translate-x-1/2 -translate-y-1/2 absolute group focus:outline-none p-1.5 z-10 hover:z-30"
             aria-label="${d.name}"
           >
-            <!-- 極簡彩色圓點 -->
             <span class="block rounded-full transition-all duration-200 ring-4 shadow-md ${dotColor} ${
               isSelected ? 'w-4 h-4 scale-125 ring-slate-900/30' : 'w-3 h-3 group-hover:scale-150'
             }"></span>
 
-            <!-- 滑鼠 Hover 或選中時才浮現的膠囊標籤 -->
             <span class="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2.5 py-1 rounded-full bg-slate-900 text-white text-[11px] font-bold whitespace-nowrap shadow-lg transition-all duration-200 ${
               isSelected ? 'opacity-100 scale-100' : 'opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100'
             }">
@@ -2427,7 +2879,6 @@
       activeMoodMapDrinkId = drinkId;
       const d = DRINKS.find(item => item.id === drinkId) || DRINKS[0];
 
-      // 更新圓點選中狀態
       renderMoodMap();
 
       document.getElementById('map-detail-panel').innerHTML = `
@@ -2462,11 +2913,11 @@
     }
 
     // ============================================================================
-    // 13. 個人 Mood Diary 與飲品人格分析 (LocalStorage)
+    // 13. 個人 Mood Diary 與飲品人格分析 (LocalStorage 自動保存，同裝置不遺失)
     // ============================================================================
     function getDiaryHistory() {
       try {
-        return JSON.parse(localStorage.getItem('moodrink_diary_v1') || '[]');
+        return JSON.parse(localStorage.getItem(STORAGE_KEY_DIARY) || '[]');
       } catch {
         return [];
       }
@@ -2489,22 +2940,14 @@
         score: bestResult.score
       };
       history.unshift(entry);
-      localStorage.setItem('moodrink_diary_v1', JSON.stringify(history.slice(0, 24)));
+      localStorage.setItem(STORAGE_KEY_DIARY, JSON.stringify(history.slice(0, 36)));
       updateDiaryBadge();
     }
 
     function updateDiaryBadge() {
       const count = getDiaryHistory().length;
       const badge = document.getElementById('diary-count-badge');
-      const badgeMobile = document.getElementById('diary-count-badge-mobile');
       if (badge) badge.textContent = count;
-      if (badgeMobile) badgeMobile.textContent = count;
-    }
-
-    function clearDiaryHistory() {
-      localStorage.removeItem('moodrink_diary_v1');
-      updateDiaryBadge();
-      renderDiaryView();
     }
 
     function renderDiaryView() {
@@ -2548,7 +2991,7 @@
           </div>
           <p class="text-xs text-slate-600 leading-relaxed">${personality.desc}</p>
         </div>
-        <div class="text-[11px] text-slate-400 pt-3 border-t border-slate-200/60">已累積 ${history.length} 次心情調飲紀錄</div>
+        <div class="text-[11px] text-slate-400 pt-3 border-t border-slate-200/60">已於此裝置累積 ${history.length} 次心情調飲紀錄</div>
       `;
 
       const moodCounts = {};
@@ -2562,7 +3005,7 @@
               <span>${pct}% (${cnt}次)</span>
             </div>
             <div class="w-full h-2 bg-white/70 rounded-full overflow-hidden">
-              <div class="h-full bg-slate-800 rounded-full" style="width: ${pct}%"></div>
+              <div class="h-full bg-slate-900 rounded-full" style="width: ${pct}%"></div>
             </div>
           </div>
         `;
