@@ -84,7 +84,7 @@
 
   <!-- 頂部極簡 Apple 風格導覽列 (右上角統一為三條線漢堡功能欄) -->
   <header class="sticky top-0 z-40 px-3 sm:px-6 py-3">
-    <nav class="max-w-7xl mx-auto glass-card rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between">
+    <nav id="top-nav-container" class="max-w-7xl mx-auto glass-card rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between transition-all duration-300">
       <!-- 左側品牌標誌 -->
       <button onclick="navigateTo('home')" class="flex items-center gap-2.5 text-left group">
         <div class="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:scale-105 transition">
@@ -234,7 +234,7 @@
   </aside>
 
   <!-- 主要內容容器 -->
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-8 pb-20">
+  <main id="main-container" class="max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-8 pb-20 transition-all duration-300">
 
     <!-- ==================== 01 HOME 首頁 (Apple Editorial & Bento 豐富化設計) ==================== -->
     <section id="view-home" class="space-y-12 sm:space-y-16">
@@ -271,9 +271,9 @@
         <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6 sm:mb-8">
           <div>
             <span class="text-xs font-bold uppercase tracking-widest text-rose-500">Interactive Liquid Spectrum</span>
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">點選當下的情緒光譜<br class="hidden sm:inline" />直接啟動調飲</h2>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">點選當下的情緒光譜，直接啟動調飲</h2>
           </div>
-          <p class="text-xs sm:text-sm text-slate-500">滑鼠移過或觸控情緒卡片<br class="hidden sm:inline" />全站動態玻璃光影將隨之流動變換</p>
+          <p class="text-xs sm:text-sm text-slate-500">滑鼠移過或觸控情緒卡片，全站動態玻璃光影將隨之流動變換</p>
         </div>
 
         <div id="home-mood-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
@@ -369,7 +369,7 @@
           <div class="space-y-3">
             <span class="text-xs font-bold uppercase tracking-widest text-indigo-600">Hard-Gate Filtering System</span>
             <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
-              不推銷你不喝的成分<br class="hidden sm:inline" />無咖啡因與無乳製品「零誤差把關」
+              不推銷你不喝的成分，<br class="hidden sm:inline" />無咖啡因與無乳製品「零誤差把關」。
             </h3>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
               一般心理測驗常在勾選「不喝牛奶」後仍推薦拿鐵。Moodrink 將咖啡因與乳製品設為最高優先級的「必要門檻」，一旦選擇不攝取，系統立即從候選池中 100% 剔除衝突品項，再以五維度權重精算最適合你的那一杯。
@@ -389,7 +389,7 @@
           <div class="space-y-3">
             <span class="text-xs font-bold uppercase tracking-widest text-rose-600">Taipei Full Store Coverage</span>
             <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight">
-              全行政區門市一鍵導航
+              50嵐台北 46 店・龜記 31 店<br />全行政區門市一鍵導航。
             </h3>
             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
               從大安、信義、中山、西門町到內湖科技園區與北投天母，我們完整建檔台北市各大手搖飲門市地址，開啟定位即可自動排列離你最近的門市。
@@ -406,7 +406,7 @@
 
     </section>
 
-    <!-- ==================== 02 MOOD TEST 互動測驗 ==================== -->
+    <!-- ==================== 02 MOOD TEST 互動測驗 (已移除所有括號附註) ==================== -->
     <section id="view-quiz" class="hidden">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-center">
         
@@ -625,7 +625,7 @@
       </div>
     </section>
 
-    <!-- ==================== 04 DRINK LIBRARY 情緒飲品圖鑑資料庫 (已移除所有總數數字) ==================== -->
+    <!-- ==================== 04 DRINK LIBRARY 情緒飲品圖鑑資料庫 ==================== -->
     <section id="view-library" class="hidden space-y-6">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-3">
         <div>
@@ -641,54 +641,87 @@
       </div>
     </section>
 
-    <!-- ==================== 05 STORE MAP 台北市飲品地圖 (完整收錄 50嵐 46 家、龜記 31 家台北市全門市) ==================== -->
-    <section id="view-storemap" class="hidden space-y-5">
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-3">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-rose-500">Taipei City Store Map & GPS Navigation</span>
-          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">台北市手搖飲・咖啡廳・超商現萃地圖</h2>
-          <p class="text-xs sm:text-sm text-slate-600 mt-1">
-            <strong>建入各大指標品牌門市，支援開啟 GPS 定位計算距離與一鍵導航！</strong>
-          </p>
+    <!-- ==================== 05 STORE MAP 台北市飲品地圖 (全新寬版 Filters 篩選介面，參考兩張附圖設計) ==================== -->
+    <section id="view-storemap" class="hidden space-y-6">
+
+      <!-- 頂部搜尋列與工具列 (如同附圖頂部 Search by name or location + GPS 定位 + 檢視切換) -->
+      <div class="glass-card rounded-[2rem] p-4 sm:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] font-bold uppercase tracking-widest text-rose-500">Taipei Drink & Cafe Explorer</span>
+            <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-900/10 text-slate-700">台北市全區門市導航</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">台北市手搖飲與咖啡廳地圖</h2>
         </div>
 
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+        <!-- 中間寬幅搜尋框 -->
+        <div class="flex-1 max-w-xl w-full relative">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+          <input
+            id="brand-search-input"
+            type="text"
+            oninput="renderStoreMap()"
+            placeholder="搜尋品牌名稱、招牌飲品、路名或台北市行政區（如：大安區、中山區、50嵐）..."
+            class="w-full pl-11 pr-10 py-3 rounded-2xl bg-white/85 border border-slate-200/80 text-xs sm:text-sm text-slate-800 placeholder-slate-400 shadow-inner focus:outline-none focus:ring-2 focus:ring-slate-900 transition"
+          />
+          <button
+            onclick="clearSearchInput()"
+            title="清除搜尋字詞"
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- 右側定位與雙模式切換 -->
+        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
           <button
             id="gps-locate-btn"
             onclick="requestUserLocation()"
-            class="px-4 py-2.5 rounded-full bg-rose-600 text-white text-xs sm:text-sm font-bold hover:bg-rose-500 shadow-md transition flex items-center justify-center gap-1.5 shrink-0"
+            class="px-4 py-2.5 rounded-2xl bg-rose-600 text-white text-xs sm:text-sm font-bold hover:bg-rose-500 shadow-sm transition flex items-center gap-1.5"
           >
             <i data-lucide="locate-fixed" class="w-4 h-4"></i>
-            <span id="gps-btn-text">取得我的位置・找附近店家</span>
+            <span id="gps-btn-text">定位找附近店家</span>
           </button>
 
-          <div class="relative w-full sm:w-64">
-            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-            <input
-              id="brand-search-input"
-              type="text"
-              oninput="renderStoreMap()"
-              placeholder="搜尋品牌、路名或台北行政區..."
-              class="w-full pl-9 pr-4 py-2 rounded-full glass-card text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-slate-900"
-            />
+          <!-- 切換附圖一 (上圖下三欄卡片) 與 附圖二 (中清單右大圖) -->
+          <div class="glass-pill p-1 rounded-2xl flex items-center gap-1">
+            <button
+              id="layout-btn-banner"
+              onclick="setMapLayoutMode('banner')"
+              class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-slate-900 text-white shadow-sm"
+              title="寬幅地圖 + 下方卡片網格"
+            >
+              <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+              <span class="hidden sm:inline">卡片網格</span>
+            </button>
+            <button
+              id="layout-btn-split"
+              onclick="setMapLayoutMode('split')"
+              class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900"
+              title="左側清單 + 右側常駐地圖"
+            >
+              <i data-lucide="columns" class="w-3.5 h-3.5"></i>
+              <span class="hidden sm:inline">分欄對照</span>
+            </button>
           </div>
         </div>
       </div>
 
       <!-- GPS 定位狀態提示條 -->
-      <div id="gps-status-banner" class="hidden rounded-2xl bg-emerald-50/90 border border-emerald-200 px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs text-emerald-900">
+      <div id="gps-status-banner" class="hidden rounded-2xl bg-emerald-50/95 border border-emerald-200 px-5 py-3 flex flex-wrap items-center justify-between gap-2 text-xs text-emerald-900 shadow-sm">
         <div class="flex items-center gap-2 font-medium">
           <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping shrink-0"></span>
           <span id="gps-status-text">已取得您的目前位置！台北市各品牌門市已自動依距離由近到遠排序。</span>
         </div>
-        <button onclick="searchNearbyOnEmbedMap()" class="px-3 py-1 rounded-full bg-emerald-700 text-white font-semibold hover:bg-emerald-600 transition">
+        <button onclick="searchNearbyOnEmbedMap()" class="px-3.5 py-1.5 rounded-full bg-emerald-700 text-white font-semibold hover:bg-emerald-600 transition">
           在地圖搜尋我附近的此品牌
         </button>
       </div>
 
       <!-- 專屬飲品販售店家篩選提示橫幅 -->
-      <div id="drink-filter-banner" class="hidden rounded-2xl bg-slate-900 text-white px-4 sm:px-5 py-3 flex flex-wrap items-center justify-between gap-3 shadow-md">
-        <div class="flex items-center gap-2.5">
+      <div id="drink-filter-banner" class="hidden rounded-2xl bg-slate-900 text-white px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 shadow-md">
+        <div class="flex items-center gap-3">
           <span id="filter-drink-emoji" class="text-2xl">🍑</span>
           <div>
             <div class="text-[10px] sm:text-[11px] text-amber-300 font-bold uppercase tracking-wider">專屬飲品販售店家直達模式</div>
@@ -699,82 +732,198 @@
         </div>
         <button
           onclick="clearDrinkStoreFilter()"
-          class="px-3.5 py-1.5 rounded-full bg-white text-slate-900 text-xs font-bold hover:bg-amber-200 transition flex items-center gap-1"
+          class="px-4 py-1.5 rounded-full bg-white text-slate-900 text-xs font-bold hover:bg-amber-200 transition flex items-center gap-1"
         >
           <i data-lucide="x" class="w-3.5 h-3.5"></i>
           <span>顯示全部品牌</span>
         </button>
       </div>
 
-      <!-- 品牌分類篩選器 -->
-      <div id="brand-category-bar" class="flex overflow-x-auto custom-scroll pb-1 gap-1.5"></div>
+      <!-- 主體寬版雙欄架構：左側 Filters 篩選面板 + 右側 Results & Map -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-      <!-- 主體：左側品牌卡片清單 + 右側即時互動地圖與門市導航面板 -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
-        
-        <!-- 左側 7 欄：品牌與台北市門市列表 -->
-        <div id="brand-list-container" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-h-[680px] lg:max-h-[780px] overflow-y-auto custom-scroll pr-1 order-2 lg:order-1">
-          <!-- JS 動態渲染品牌與台北市門市卡片 -->
-        </div>
-
-        <!-- 右側 5 欄：即時 Google Maps 嵌入預覽 + 台北市門市地址導航超連結 -->
-        <div class="lg:col-span-5 lg:sticky lg:top-20 glass-card rounded-[2rem] p-4 sm:p-5 space-y-3.5 order-1 lg:order-2">
-          <div class="flex items-center justify-between gap-2">
-            <div class="min-w-0">
-              <span id="active-map-brand-badge" class="text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700">目前選中品牌</span>
-              <h3 id="active-map-title" class="text-lg sm:text-xl font-bold text-slate-900 mt-1 truncate">50嵐</h3>
-              <p id="active-map-sub" class="text-xs text-slate-500 truncate">台北西門店</p>
+        <!-- 左側 Filters 獨立篩選欄 (3 欄寬，仿照附圖 Filters 設計) -->
+        <aside class="lg:col-span-3 glass-card rounded-[2rem] p-5 sm:p-6 space-y-6 lg:sticky lg:top-20">
+          <div class="flex items-center justify-between border-b border-slate-200/70 pb-3.5">
+            <div class="flex items-center gap-2">
+              <i data-lucide="sliders-horizontal" class="w-4 h-4 text-slate-800"></i>
+              <h3 class="text-base font-extrabold text-slate-900">篩選條件 Filters</h3>
             </div>
-            <div class="flex gap-1.5 shrink-0">
-              <button
-                onclick="searchNearbyOnEmbedMap()"
-                class="px-3 py-1.5 sm:py-2 rounded-full bg-rose-600 text-white text-xs font-semibold hover:bg-rose-500 transition flex items-center gap-1"
-                title="根據我的位置搜尋附近這家飲料店"
-              >
-                <i data-lucide="compass" class="w-3.5 h-3.5"></i>
-                <span>搜附近</span>
-              </button>
-              <a
-                id="active-brand-official-btn"
-                href="http://50lan.com/web/pointsout.asp"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="px-3 py-1.5 sm:py-2 rounded-full bg-slate-900 text-white text-xs font-semibold hover:bg-slate-700 transition flex items-center gap-1"
-              >
-                <span>官網</span>
-                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-              </a>
+            <button onclick="resetStoreMapFilters()" class="text-xs font-bold text-sky-600 hover:text-sky-700 hover:underline transition">
+              Reset 重置
+            </button>
+          </div>
+
+          <!-- 1. 品牌類型方塊 (仿照附圖二 Property type 2x2 圖示方塊) -->
+          <div class="space-y-2.5">
+            <label class="text-xs font-bold text-slate-700 block">品牌類型 Store Type</label>
+            <div id="brand-category-bar" class="grid grid-cols-2 gap-2">
+              <!-- 由 JS 渲染 6 個分類方塊 -->
             </div>
           </div>
 
-          <!-- 嵌入式互動 Google Map -->
-          <div class="w-full h-52 sm:h-64 rounded-2xl overflow-hidden border border-white shadow-inner bg-slate-100 relative">
-            <iframe
-              id="google-map-iframe"
-              class="w-full h-full border-0"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=50嵐%20台北市萬華區漢中街136號&t=&z=16&ie=UTF8&iwloc=&output=embed"
-            ></iframe>
-          </div>
-
-          <!-- 該品牌台北市全部門市清單與地址導航超連結 -->
+          <!-- 2. 台北市行政區下拉選單 (仿照附圖一 Dropdown 篩選器) -->
           <div class="space-y-2">
-            <div class="flex items-center justify-between text-xs font-bold text-slate-700">
-              <span id="active-branch-count-label">📍 台北市門市地址（點擊地址開啟地圖 App 導航）：</span>
-              <span id="distance-sort-hint" class="text-[11px] text-slate-400">可定位排序</span>
+            <label for="district-select" class="text-xs font-bold text-slate-700 block">台北市行政區 District</label>
+            <div class="relative">
+              <select
+                id="district-select"
+                onchange="onDistrictFilterChange(this.value)"
+                class="w-full appearance-none rounded-xl bg-white/90 border border-slate-200 px-3.5 py-2.5 pr-9 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 cursor-pointer"
+              >
+                <option value="全部行政區">台北市全部行政區 (12區)</option>
+                <option value="大安區">大安區</option>
+                <option value="信義區">信義區</option>
+                <option value="中山區">中山區</option>
+                <option value="中正區">中正區</option>
+                <option value="松山區">松山區</option>
+                <option value="萬華區">萬華區</option>
+                <option value="士林區">士林區</option>
+                <option value="北投區">北投區</option>
+                <option value="內湖區">內湖區</option>
+                <option value="南港區">南港區</option>
+                <option value="文山區">文山區</option>
+                <option value="大同區">大同區</option>
+              </select>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
             </div>
-            <div id="active-brand-branches" class="space-y-2 max-h-72 overflow-y-auto custom-scroll pr-1">
-              <!-- JS 渲染各分店地址超連結 -->
+          </div>
+
+          <!-- 3. 飲品與門市特色標籤 (仿照附圖一 Conveniences 圓角膠囊多選按鈕) -->
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-slate-700">飲品特色篩選 Features</label>
+              <span class="text-[10px] text-slate-400">可複選點擊</span>
             </div>
+            <div id="store-feature-pills" class="flex flex-wrap gap-2">
+              <!-- 由 JS 渲染膠囊按鈕 -->
+            </div>
+          </div>
+
+          <!-- 4. 單一品牌快速鎖定 -->
+          <div class="space-y-2">
+            <label for="specific-brand-select" class="text-xs font-bold text-slate-700 block">指定單一品牌 Brand</label>
+            <div class="relative">
+              <select
+                id="specific-brand-select"
+                onchange="onSpecificBrandFilterChange(this.value)"
+                class="w-full appearance-none rounded-xl bg-white/90 border border-slate-200 px-3.5 py-2.5 pr-9 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 cursor-pointer"
+              >
+                <option value="ALL">顯示所有符合品牌</option>
+              </select>
+              <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            </div>
+          </div>
+
+          <!-- 底部套用與統計按鈕 (仿照附圖一底部深色 APPLY 按鈕) -->
+          <button
+            onclick="renderStoreMap()"
+            class="w-full py-3 px-4 rounded-xl bg-slate-900 text-white text-xs font-bold tracking-wider uppercase hover:bg-slate-800 active:scale-98 transition shadow-md flex items-center justify-center gap-2"
+          >
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span id="apply-filter-btn-text">套用篩選條件</span>
+          </button>
+        </aside>
+
+        <!-- 右側主顯示區 (9 欄寬：包含結果數量列、互動地圖與寬敞門市卡片) -->
+        <div class="lg:col-span-9 space-y-5">
+
+          <!-- 結果統計與排序列 (仿照附圖 "16 Results" + 右側排序選單) -->
+          <div class="flex flex-wrap items-center justify-between gap-3 px-1">
+            <div class="flex items-baseline gap-2.5">
+              <h3 id="store-results-count" class="text-xl sm:text-2xl font-extrabold text-slate-900">24 家品牌結果</h3>
+              <span id="store-branches-total" class="text-xs font-semibold text-slate-500">（涵蓋台北市 145 間門市）</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <span class="text-xs text-slate-500 font-medium">排序方式：</span>
+              <select
+                id="store-sort-select"
+                onchange="renderStoreMap()"
+                class="rounded-xl glass-pill px-3 py-1.5 text-xs font-bold text-slate-800 focus:outline-none cursor-pointer"
+              >
+                <option value="default">熱門指標優先</option>
+                <option value="distance">距離我最近優先 (GPS)</option>
+                <option value="branches">台北門市數量最多優先</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 動態切換容器：模式 A (上寬幅地圖 + 下方三欄卡片) 或 模式 B (左清單 + 右側固定地圖) -->
+          <div id="store-content-layout" class="space-y-6">
+
+            <!-- 互動地圖與當前選中品牌門市導航中心 -->
+            <div id="map-panel-wrapper" class="glass-card rounded-[2rem] p-4 sm:p-6 space-y-4">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1 border-b border-slate-200/60">
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2">
+                    <span id="active-map-brand-badge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700">目前選中品牌</span>
+                    <span id="distance-sort-hint" class="text-[11px] text-slate-400 font-medium">點擊下方任一品牌或門市即可切換地圖定位</span>
+                  </div>
+                  <h3 id="active-map-title" class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1 truncate">50嵐</h3>
+                  <p id="active-map-sub" class="text-xs sm:text-sm text-slate-600 truncate">台北西門店</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2 shrink-0">
+                  <button
+                    onclick="searchNearbyOnEmbedMap()"
+                    class="px-3.5 py-2 rounded-xl bg-rose-600 text-white text-xs font-bold hover:bg-rose-500 transition flex items-center gap-1.5 shadow-sm"
+                    title="根據我的位置搜尋附近這家飲料店"
+                  >
+                    <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+                    <span>搜尋我附近的此品牌</span>
+                  </button>
+                  <a
+                    id="active-brand-official-btn"
+                    href="http://50lan.com/web/pointsout.asp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-3.5 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-700 transition flex items-center gap-1.5 shadow-sm"
+                  >
+                    <span>品牌官網</span>
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- 地図與該品牌門市快速導航分欄 -->
+              <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 items-stretch">
+                <!-- Google Map 嵌入畫面 -->
+                <div class="xl:col-span-7 w-full h-64 sm:h-80 rounded-2xl overflow-hidden border border-white shadow-inner bg-slate-100 relative">
+                  <iframe
+                    id="google-map-iframe"
+                    class="w-full h-full border-0"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://maps.google.com/maps?q=50嵐%20台北市萬華區漢中街136號&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  ></iframe>
+                </div>
+
+                <!-- 當前品牌台北市全門市導航列表 -->
+                <div class="xl:col-span-5 flex flex-col justify-between bg-white/55 rounded-2xl p-3.5 border border-white/80">
+                  <div class="flex items-center justify-between text-xs font-bold text-slate-800 mb-2 px-1">
+                    <span id="active-branch-count-label">📍 台北市門市地址與一鍵導航：</span>
+                  </div>
+                  <div id="active-brand-branches" class="space-y-2 max-h-64 sm:max-h-72 overflow-y-auto custom-scroll pr-1">
+                    <!-- JS 渲染各分店地址超連結 -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 品牌與門市結果卡片網格 (寬敞排版) -->
+            <div id="brand-list-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+              <!-- JS 動態渲染品牌與台北市門市卡片 -->
+            </div>
+
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- ==================== 06 MOOD MAP 情緒 × 飲品二維座標圖 (極簡色彩小圓點 + Hover/觸控顯示資訊) ==================== -->
+    <!-- ==================== 06 MOOD MAP 情緒 × 飲品二維座標圖 ==================== -->
     <section id="view-map" class="hidden space-y-5">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
@@ -845,7 +994,7 @@
       </div>
     </section>
 
-    <!-- ==================== 08 ABOUT 關於專題 (已移除數學公式，更新必要門檻與全新五維度權重) ==================== -->
+    <!-- ==================== 08 ABOUT 關於專題 ==================== -->
     <section id="view-about" class="hidden space-y-8 sm:space-y-10">
       <div class="glass-card rounded-[2.2rem] p-6 sm:p-10 text-center max-w-4xl mx-auto space-y-4">
         <span class="px-3.5 py-1 rounded-full text-xs font-bold bg-slate-900 text-white">Project Overview</span>
@@ -912,7 +1061,7 @@
         </div>
       </div>
 
-      <!-- Rule-based 推薦系統與權重設計詳解 (已移除數學公式，更新為必要門檻 + 25%/25%/20%/15%/15%) -->
+      <!-- Rule-based 推薦系統與權重設計詳解 -->
       <div class="glass-card rounded-[2.2rem] p-5 sm:p-8 space-y-6">
         <div>
           <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Explainable Recommendation System</span>
@@ -984,14 +1133,15 @@
     ];
 
     // ============================================================================
-    // 2. 台北市手搖飲・咖啡廳・超商現萃品牌資料庫
-    //    ★ 已完整建入「50嵐 台北市全區 46 家門市」與「龜記茗品 台北市全區 31 家門市」
+    // 2. 台北市手搖飲與咖啡廳品牌資料庫
+    //    ★ 已完整移除 7-11、全家與 cama café
+    //    ★ 完整保留「50嵐 台北市全區 46 家門市」與「龜記茗品 台北市全區 31 家門市」
     // ============================================================================
     const BRANDS = [
       {
         id: '50lan', name: '50嵐', cat: '人氣必喝手搖', emoji: '💛',
         url: 'http://50lan.com/web/pointsout.asp',
-        feature: '國民經典手搖，1號四季春珍波椰、波霸奶茶長居台北人必喝榜首。',
+        feature: '國民經典手搖，1號四季春珍波椰、波霸奶茶長居台北人必喝榜首（完整收錄台北市全區 46 家門市）。',
         signature: ['1號(四季春+珍波椰)', '波霸奶茶', '黃金烏龍'],
         branches: [
           // 中正區 (6家)
@@ -1055,7 +1205,7 @@
       {
         id: 'guiji', name: '龜記茗品', cat: '果茶與鮮奶系', emoji: '🐢',
         url: 'https://guiji-group.com/location',
-        feature: '主打「小人物大生活」懷舊鮮果茶，紅柚翡翠與蘋果紅萱果肉飽滿。',
+        feature: '主打「小人物大生活」懷舊鮮果茶，紅柚翡翠與蘋果紅萱果肉飽滿（完整收錄台北市全區 31 家門市）。',
         signature: ['紅柚翡翠', '蘋果紅萱', '三十三茶王'],
         branches: [
           { name: '台北小巨蛋總店(松山區)', address: '台北市松山區八德路三段74巷1號', lat: 25.0478, lng: 121.5525 },
@@ -1344,44 +1494,11 @@
           { name: '台北台大公館門市(大安區)', address: '台北市大安區羅斯福路三段335號', lat: 25.0168, lng: 121.5322 },
           { name: '台北信義永春門市(信義區)', address: '台北市信義區忠孝東路五段422號', lat: 25.0405, lng: 121.5762 }
         ]
-      },
-      {
-        id: 'cama', name: 'cama café', cat: '連鎖咖啡廳', emoji: '🫘',
-        url: 'https://www.camacafe.com/',
-        feature: '門市新鮮現烘咖啡豆，濃郁堅果香氣與重烘焙提神效果極佳。',
-        signature: ['招牌現烘黑咖啡', '經典拿鐵', '海鹽焦糖拿鐵'],
-        branches: [
-          { name: 'CAMA豆留森林(士林區陽明山)', address: '台北市士林區格致路70號', lat: 25.1378, lng: 121.5468 },
-          { name: 'CAMA豆留文青(信義區松菸)', address: '台北市信義區光復南路133號', lat: 25.0438, lng: 121.5605 },
-          { name: '台北敦南門市(大安區)', address: '台北市大安區敦化南路二段5號', lat: 25.0328, lng: 121.5488 }
-        ]
-      },
-      {
-        id: '711', name: '7-ELEVEN 現萃茶 / CITY PRIMA', cat: '超商現萃茶/咖啡', emoji: '🏪',
-        url: 'https://www.citycafe.com.tw/',
-        feature: '24小時隨時買得到！CITY PRIMA 精品美式與現萃茶四季春青茶、一顆檸檬青茶隨手解渴。',
-        signature: ['現萃茶四季春青茶', 'CITY CAFE 冰美式', '西西里風檸檬氣泡咖啡'],
-        branches: [
-          { name: '7-11 博源門市(中正區公館)', address: '台北市中正區思源街16號', lat: 25.0132, lng: 121.5335 },
-          { name: '7-11 鑫忠孝門市(大安區)', address: '台北市大安區忠孝東路四段170巷6號', lat: 25.0415, lng: 121.5512 },
-          { name: '7-11 松高門市(信義區)', address: '台北市信義區松高路16號', lat: 25.0392, lng: 121.5662 }
-        ]
-      },
-      {
-        id: 'familymart', name: '全家 Let\'s Café / 私品茶', cat: '超商現萃茶/咖啡', emoji: '💙',
-        url: 'https://nevent.family.com.tw/letscafe/',
-        feature: '全家私品茶與單品咖啡系列，仙女紅茶、仙女醇奶茶與慢煮焦糖拿鐵全天候陪伴。',
-        signature: ['私品茶仙女紅茶', '單品冰美式', '濃厚靜岡抹茶拿鐵'],
-        branches: [
-          { name: '全家 台北敦新店(大安區)', address: '台北市大安區敦化南路一段236巷1號', lat: 25.0398, lng: 121.5486 },
-          { name: '全家 台北成都店(萬華區)', address: '台北市萬華區成都路47號', lat: 25.0422, lng: 121.5065 },
-          { name: '全家 台北中山店(中山區)', address: '台北市中山區南京西路10號', lat: 25.0525, lng: 121.5218 }
-        ]
       }
     ];
 
     // ============================================================================
-    // 3. 飲品資料庫 (包含純茶、奶茶、水果茶、咖啡、氣泡飲、無咖啡因六大類)
+    // 3. 飲品資料庫 (已移除所有 711、familymart、cama 關聯)
     // ============================================================================
     const DRINKS = [
       // 純茶
@@ -1390,7 +1507,7 @@
         tea: 5, milk: 0, fruit: 0, refreshing: 5, sweetLevel: '無糖', caffeine: 'medium', dairy: false,
         healing: 2, energy: 4, mapX: 15, mapY: 75,
         moods: ['tired', 'irritable', 'calm'], needs: ['提神', '清爽', '解膩'], vibes: ['茶感', '清爽'],
-        brandIds: ['50lan', 'dejeng', 'chingshin', '711'],
+        brandIds: ['50lan', 'dejeng', 'chingshin'],
         moodTitle: '重新整理思緒的時刻',
         quote: '今天的你不需要太複雜的味道。一杯清爽、茶韻明亮的四季春，最適合幫大腦重新開機。',
         shortQuote: '把雜訊過濾掉，留下一口乾淨的茶香。'
@@ -1400,7 +1517,7 @@
         tea: 5, milk: 0, fruit: 0, refreshing: 4, sweetLevel: '無糖', caffeine: 'medium', dairy: false,
         healing: 3, energy: 4, mapX: 32, mapY: 68,
         moods: ['calm', 'tired', 'happy'], needs: ['提神', '清爽', '放鬆'], vibes: ['茶感', '清爽'],
-        brandIds: ['kebuke', 'hechalou', 'daming', 'familymart'],
+        brandIds: ['kebuke', 'hechalou', 'daming'],
         moodTitle: '自帶果香與薄荷尾韻的從容',
         quote: '嚴選台灣紅玉與熟成紅茶，帶有淡淡天然薄荷與肉桂香，適合想安靜獨處或專注思考的你。',
         shortQuote: '簡單純粹的原茶，最能喝見心裡的平靜。'
@@ -1462,7 +1579,7 @@
         tea: 0, milk: 5, fruit: 0, refreshing: 1, sweetLevel: '正常甜', caffeine: 'none', dairy: true,
         healing: 5, energy: 2, mapX: 88, mapY: 22,
         moods: ['sad', 'stressed', 'healing'], needs: ['療癒', '補充能量', '單純嘴饞'], vibes: ['奶香', '濃郁'],
-        brandIds: ['truedan', 'milksha', '50lan', '711'],
+        brandIds: ['truedan', 'milksha', '50lan'],
         moodTitle: '無條件犒賞自己的時刻',
         quote: '辛苦了！面對壓力與低落，溫潤的鮮奶與黑糖香氣是最直接的擁抱，今天允許自己放縱一下吧。',
         shortQuote: '有些疲憊，只有滿滿的黑糖與珍珠能聽懂。'
@@ -1482,7 +1599,7 @@
         tea: 4, milk: 4, fruit: 0, refreshing: 2, sweetLevel: '微糖', caffeine: 'medium', dairy: true,
         healing: 5, energy: 3, mapX: 76, mapY: 48,
         moods: ['calm', 'anxious', 'sad', 'healing'], needs: ['療癒', '放鬆', '補充能量'], vibes: ['茶感', '奶香', '濃郁'],
-        brandIds: ['starbucks', 'milksha', 'familymart', '50lan'],
+        brandIds: ['starbucks', 'milksha', '50lan'],
         moodTitle: '靜下心來的綠意陪伴',
         quote: '微苦回甘的抹茶與綿密鮮奶交融，既有茶氨酸帶來的安定感，也有溫柔奶香的包覆。',
         shortQuote: '在微苦與回甘之間，找到屬於自己的平衡。'
@@ -1606,7 +1723,7 @@
         tea: 0, milk: 0, fruit: 0, refreshing: 4, sweetLevel: '無糖', caffeine: 'high', dairy: false,
         healing: 2, energy: 5, mapX: 28, mapY: 92,
         moods: ['tired', 'stressed'], needs: ['提神', '清爽'], vibes: ['清爽', '濃郁'],
-        brandIds: ['starbucks', 'louisa', 'cama', '711', 'familymart'],
+        brandIds: ['starbucks', 'louisa'],
         moodTitle: '全力衝刺的清醒模式',
         quote: '乾淨俐落的烘焙香氣與冰涼口感，為靈魂注入精準的清醒能量，陪你俐落解決眼前的挑戰。',
         shortQuote: '先喝下這口清醒，接下來的難關我們一個個過。'
@@ -1616,7 +1733,7 @@
         tea: 0, milk: 5, fruit: 0, refreshing: 2, sweetLevel: '半糖', caffeine: 'high', dairy: true,
         healing: 5, energy: 4, mapX: 78, mapY: 76,
         moods: ['tired', 'stressed', 'sad', 'healing'], needs: ['提神', '療癒', '補充能量'], vibes: ['奶香', '濃郁'],
-        brandIds: ['starbucks', 'cama', 'louisa', 'familymart'],
+        brandIds: ['starbucks', 'louisa'],
         moodTitle: '既要清醒、也要被溫柔哄著',
         quote: '濃縮咖啡的微苦被綿密熱鮮奶與海鹽焦糖醬溫柔包覆，鹹甜交織的香氣替疲憊的你打氣。',
         shortQuote: '苦味交給咖啡，甜味留給今天的自己。'
@@ -1626,7 +1743,7 @@
         tea: 0, milk: 0, fruit: 4, refreshing: 5, sweetLevel: '微糖', caffeine: 'high', dairy: false,
         healing: 3, energy: 5, mapX: 20, mapY: 88,
         moods: ['irritable', 'tired', 'happy'], needs: ['提神', '清爽', '解膩'], vibes: ['酸甜', '水果', '氣泡感', '清爽'],
-        brandIds: ['711', 'cama', 'louisa', 'starbucks'],
+        brandIds: ['louisa', 'starbucks'],
         moodTitle: '酸爽帶勁的夏日大腦喚醒劑',
         quote: '屏東檸檬汁的明亮酸香結合義式濃縮咖啡與微氣泡，完全顛覆黑咖啡的苦澀，暢快又醒腦。',
         shortQuote: '用檸檬與咖啡的火花，點亮昏沉的午後。'
@@ -1636,7 +1753,7 @@
         tea: 0, milk: 4, fruit: 0, refreshing: 3, sweetLevel: '無糖', caffeine: 'high', dairy: false,
         healing: 4, energy: 4, mapX: 58, mapY: 70,
         moods: ['calm', 'tired', 'anxious'], needs: ['提神', '放鬆', '補充能量'], vibes: ['濃郁', '奶香'],
-        brandIds: ['starbucks', 'louisa', 'cama', '711', 'familymart'],
+        brandIds: ['starbucks', 'louisa'],
         moodTitle: '零乳製品負擔的穀物溫潤拿鐵',
         quote: '以植物性燕麥奶取代牛奶，帶有迷人的烤穀物堅果香氣，對不喝牛奶者最友善的溫柔提神選擇。',
         shortQuote: '輕盈無負擔的穀物香，陪你穩健前行。'
@@ -1646,7 +1763,7 @@
         tea: 0, milk: 2, fruit: 3, refreshing: 4, sweetLevel: '微糖', caffeine: 'high', dairy: false,
         healing: 4, energy: 4, mapX: 46, mapY: 74,
         moods: ['happy', 'tired', 'irritable'], needs: ['提神', '清爽', '療癒'], vibes: ['清爽', '水果'],
-        brandIds: ['louisa', 'cama', 'starbucks'],
+        brandIds: ['louisa', 'starbucks'],
         moodTitle: '一秒飛往海島度假的清甜咖啡',
         quote: '清甜椰子水融合濃縮咖啡，不含牛奶卻自帶絲滑口感與熱帶果香，讓上班日也有度假心情。',
         shortQuote: '即使人在辦公室，靈魂也能去海邊吹吹風。'
@@ -1678,7 +1795,7 @@
         tea: 0, milk: 0, fruit: 4, refreshing: 5, sweetLevel: '半糖', caffeine: 'none', dairy: false,
         healing: 4, energy: 3, mapX: 22, mapY: 66,
         moods: ['happy', 'tired', 'calm'], needs: ['清爽', '放鬆', '解膩'], vibes: ['水果', '酸甜', '氣泡感', '清爽'],
-        brandIds: ['soma', 'louisa', 'cama'],
+        brandIds: ['soma', 'louisa'],
         moodTitle: '清香微甜的柚香微氣泡',
         quote: '酸甜黃金柚子醬與沁涼氣泡水完美結合，完全零咖啡因卻能帶來極致清爽的甦醒感。',
         shortQuote: '每一顆上升的氣泡，都在替心情加油。'
@@ -1718,7 +1835,7 @@
         tea: 4, milk: 0, fruit: 1, refreshing: 5, sweetLevel: '無糖', caffeine: 'medium', dairy: false,
         healing: 3, energy: 4, mapX: 14, mapY: 86,
         moods: ['tired', 'irritable', 'calm'], needs: ['提神', '清爽', '解膩'], vibes: ['茶感', '氣泡感', '清爽'],
-        brandIds: ['soma', '711', 'starbucks'],
+        brandIds: ['soma', 'starbucks'],
         moodTitle: '如香檳般俐落的無糖茶氣泡',
         quote: '將冷萃紅玉紅茶打入高壓綿密氣泡，兼具啤酒花的爽快口感與紅玉茶香，控糖期也能暢快乾杯。',
         shortQuote: '零糖分的暢快氣泡，給自律又想放鬆的你。'
@@ -1795,22 +1912,22 @@
         quote: '100% 天然無咖啡因的南非博士茶與洋甘菊花香，溫和舒緩緊繃了一整天的身心，夜晚也能安心飲用。',
         shortQuote: '今天已經很努力了，喝完這杯就好好休息吧。'
       }
-    ];
+    ].filter(d => d.brandIds && d.brandIds.length > 0);
 
     // ============================================================================
-    // 4. 測驗 7 題結構定義 (更新權重標示：25% / 25% / 20% / 15% / 必要門檻 / 15%)
+    // 4. 測驗 7 題結構定義 (★ 已刪除所有括號附註)
     // ============================================================================
     const QUIZ_QUESTIONS = [
       {
         key: 'mood',
         title: 'Q1｜現在的你，心情感覺如何？',
-        sub: '選擇一個最貼近當下狀態的情緒泡泡（符合度權重 25%）',
+        sub: '選擇一個最貼近當下狀態的情緒泡泡',
         options: MOODS.map(m => ({ value: m.id, label: m.label, emoji: m.emoji, desc: m.desc }))
       },
       {
         key: 'need',
         title: 'Q2｜現在的你，最需要什麼？',
-        sub: '這杯飲料今天要扮演什麼角色？（符合度權重 25%）',
+        sub: '這杯飲料今天要扮演什麼角色？',
         options: [
           { value: '提神', label: '提神醒腦', emoji: '⚡', desc: '趕走瞌睡與混沌' },
           { value: '放鬆', label: '放鬆舒緩', emoji: '🌿', desc: '讓緊繃神經慢下來' },
@@ -1824,7 +1941,7 @@
       {
         key: 'vibe',
         title: 'Q3｜今天想喝哪種風味感覺？',
-        sub: '直覺挑選最吸引你的口感方向（符合度權重 20%）',
+        sub: '直覺挑選最吸引你的口感方向',
         options: [
           { value: '茶感', label: '回甘茶感', emoji: '🍵', desc: '明顯茶香韻味' },
           { value: '奶香', label: '溫潤奶香', emoji: '🥛', desc: '滑順鮮奶與歐蕾' },
@@ -1838,7 +1955,7 @@
       {
         key: 'sweetness',
         title: 'Q4｜今天的甜度偏好？',
-        sub: '選擇你今天想攝取的糖分程度（符合度權重 15%）',
+        sub: '選擇你今天想攝取的糖分程度',
         options: [
           { value: '無糖', label: '無糖 0%', emoji: '🌿', desc: '純粹原味零負擔' },
           { value: '微糖', label: '微糖 30%', emoji: '✨', desc: '微微襯托茶果香' },
@@ -1849,7 +1966,7 @@
       {
         key: 'temp',
         title: 'Q5｜想喝冰的還是熱的？',
-        sub: '溫度也會影響杯中視覺與心情感受（飲食情境權重）',
+        sub: '溫度也會影響杯中視覺與心情感受',
         options: [
           { value: '冰', label: '冰涼暢快', emoji: '🧊', desc: '微冰或少冰更清爽' },
           { value: '常溫', label: '溫和常溫', emoji: '💧', desc: '順口不刺激' },
@@ -1858,22 +1975,22 @@
       },
       {
         key: 'caffeine',
-        title: 'Q6｜對於咖啡因的接受度？（必要門檻）',
+        title: 'Q6｜對於咖啡因的接受度？',
         sub: '若選擇「完全無咖啡因」，系統將 100% 排除所有含咖啡因飲品',
         options: [
           { value: '需要', label: '需要咖啡因', emoji: '☕', desc: '需要明顯提神效果' },
           { value: '可以接受', label: '可以接受', emoji: '👌', desc: '一般茶飲或咖啡皆可' },
           { value: '希望低咖啡因', label: '希望低咖啡因', emoji: '🌙', desc: '僅保留微茶感或無咖啡因' },
-          { value: '不要咖啡因', label: '完全無咖啡因 (硬性門檻)', emoji: '💤', desc: '嚴格排除所有含咖啡因飲品' }
+          { value: '不要咖啡因', label: '完全無咖啡因', emoji: '💤', desc: '嚴格排除所有含咖啡因飲品' }
         ]
       },
       {
         key: 'restriction',
-        title: 'Q7｜飲食限制與當下情境？（必要門檻 ＋ 權重 15%）',
+        title: 'Q7｜飲食限制與當下情境？',
         sub: '若選擇「不喝牛奶/避乳製品」，系統將 100% 排除所有含奶飲品',
         options: [
           { value: '沒有特殊限制', label: '沒有特殊限制', emoji: '✨', desc: '所有符合條件飲品皆可推薦' },
-          { value: '避免乳製品', label: '不喝牛奶/避乳製品 (硬性門檻)', emoji: '🚫', desc: '嚴格排除所有含鮮奶與奶蓋飲品' },
+          { value: '避免乳製品', label: '不喝牛奶/避乳製品', emoji: '🚫', desc: '嚴格排除所有含鮮奶與奶蓋飲品' },
           { value: '正在控制糖分', label: '正在控制糖分', emoji: '🥗', desc: '優先推薦無糖/微糖低負擔飲品' },
           { value: '晚上飲用', label: '現在是晚上飲用', emoji: '🌃', desc: '排除高咖啡因並優先推薦舒緩飲品' }
         ]
@@ -1892,7 +2009,14 @@
     let rankedResults = [];
     let selectedRankIndex = 0;
     let libraryCategory = '全部';
+
+    // 飲品地圖升級版篩選狀態
     let storeCategory = '全部品牌';
+    let selectedDistrict = '全部行政區';
+    let selectedSpecificBrand = 'ALL';
+    let selectedStoreFeatures = [];
+    let mapLayoutMode = 'banner'; // 'banner' (如圖一：上寬幅地圖+下三欄卡片) 或 'split' (如圖二：左清單+右常駐地圖)
+
     let activeBrandId = '50lan';
     let activeBranchIndex = 0;
     let activeMoodMapDrinkId = 'peach-oolong';
@@ -1900,6 +2024,14 @@
     let filterDrinkForStoreMap = null;
     let userLocation = null;
     let hasAskedLocationOnce = false;
+
+    const STORE_FEATURE_OPTIONS = [
+      { id: 'caffeine_free', label: '提供無咖啡因', icon: 'moon' },
+      { id: 'dairy_free', label: '無乳製品友善', icon: 'droplet' },
+      { id: 'pure_tea', label: '純茶回甘首選', icon: 'leaf' },
+      { id: 'fresh_fruit', label: '鮮果茶飲滿載', icon: 'cherry' },
+      { id: 'chewy_topping', label: '珍珠/粉粿/凍飲控', icon: 'sparkles' }
+    ];
 
     // 儲存使用者目前測驗選項與推薦結果至 LocalStorage
     function persistCurrentState() {
@@ -2024,7 +2156,7 @@
         return;
       }
 
-      if (btnText) btnText.textContent = '正在取得位置...';
+      if (btnText) btnText.textContent = '定位中...';
 
       navigator.geolocation.getCurrentPosition(
         (pos) => {
@@ -2032,7 +2164,7 @@
           if (btnText) btnText.textContent = '已定位・更新位置';
           if (banner) {
             banner.classList.remove('hidden');
-            banner.className = 'rounded-2xl bg-emerald-50/90 border border-emerald-200 px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs text-emerald-900';
+            banner.className = 'rounded-2xl bg-emerald-50/95 border border-emerald-200 px-5 py-3 flex flex-wrap items-center justify-between gap-2 text-xs text-emerald-900 shadow-sm';
           }
           if (statusText) {
             statusText.textContent = `已取得您的位置（${userLocation.lat.toFixed(3)}, ${userLocation.lng.toFixed(3)}）！台北市各門市已依距離由近到遠排序。`;
@@ -2040,15 +2172,18 @@
           const hint = document.getElementById('distance-sort-hint');
           if (hint) hint.textContent = '已依距離由近到遠排序';
 
+          const sortSel = document.getElementById('store-sort-select');
+          if (sortSel) sortSel.value = 'distance';
+
           sortAllBrandBranchesByDistance();
           renderStoreMap();
           selectBrandForMap(activeBrandId, 0);
         },
         () => {
-          if (btnText) btnText.textContent = '取得我的位置・找附近店家';
+          if (btnText) btnText.textContent = '定位找附近店家';
           if (banner) {
             banner.classList.remove('hidden');
-            banner.className = 'rounded-2xl bg-amber-50 border border-amber-200 px-4 py-2.5 flex items-center justify-between text-xs text-amber-900';
+            banner.className = 'rounded-2xl bg-amber-50 border border-amber-200 px-5 py-3 flex items-center justify-between text-xs text-amber-900';
             statusText.textContent = '尚未開啟定位權限（允許位置權限即可自動計算台北市最近門市距離）。';
           }
         },
@@ -2105,6 +2240,7 @@
     // 初始化
     window.addEventListener('DOMContentLoaded', () => {
       loadPersistedState();
+      populateSpecificBrandSelect();
       renderHomeMoodGrid();
       renderLibrary();
       renderStoreMap();
@@ -2116,7 +2252,7 @@
     });
 
     // ============================================================================
-    // 6. 頁面路由與選單高亮
+    // 6. 頁面路由與選單高亮 (飲品地圖自動切換至 1600px 超寬容器)
     // ============================================================================
     function navigateTo(viewName) {
       currentView = viewName;
@@ -2124,6 +2260,17 @@
         const el = document.getElementById(`view-${v}`);
         if (el) el.classList.toggle('hidden', v !== viewName);
       });
+
+      // 當進入飲品地圖時，自動將主容器與導覽列拓寬至 1600px，避免擁擠
+      const mainContainer = document.getElementById('main-container');
+      const topNav = document.getElementById('top-nav-container');
+      if (viewName === 'storemap') {
+        mainContainer.className = 'max-w-[1600px] mx-auto px-3 sm:px-8 pt-4 sm:pt-6 pb-20 transition-all duration-300';
+        topNav.className = 'max-w-[1600px] mx-auto glass-card rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between transition-all duration-300';
+      } else {
+        mainContainer.className = 'max-w-7xl mx-auto px-3 sm:px-6 pt-4 sm:pt-8 pb-20 transition-all duration-300';
+        topNav.className = 'max-w-7xl mx-auto glass-card rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between transition-all duration-300';
+      }
 
       // 更新漢堡選單內的當前項目樣式
       document.querySelectorAll('.drawer-item').forEach(btn => {
@@ -2157,8 +2304,15 @@
 
       filterDrinkForStoreMap = targetDrink;
       storeCategory = '全部品牌';
+      selectedDistrict = '全部行政區';
+      selectedSpecificBrand = 'ALL';
+      selectedStoreFeatures = [];
       const searchInput = document.getElementById('brand-search-input');
       if (searchInput) searchInput.value = '';
+      const distSel = document.getElementById('district-select');
+      if (distSel) distSel.value = '全部行政區';
+      const brandSel = document.getElementById('specific-brand-select');
+      if (brandSel) brandSel.value = 'ALL';
 
       navigateTo('storemap');
       renderStoreMap();
@@ -2353,8 +2507,6 @@
 
     // ============================================================================
     // 8. Rule-based 規則式推薦演算法
-    //    ★ 升級：咖啡因與乳製品改為「前置必要門檻 (Hard Gate)」，絕不提供衝突飲品
-    //    ★ 權重分配：情緒 25% + 當下需求 25% + 口味偏好 20% + 甜度適配 15% + 飲食限制與情境 15% = 100%
     // ============================================================================
     function calculateRecommendations() {
       // 第一步：必要門檻硬性過濾 (Hard Gate Filtering)
@@ -2363,22 +2515,18 @@
       const noDairyRequired = answers.restriction === '避免乳製品';
 
       let eligiblePool = DRINKS.filter(drink => {
-        // 若使用者選擇「不要咖啡因」，嚴格排除任何含有咖啡因的飲品
         if (noCaffeineRequired && drink.caffeine !== 'none') {
           return false;
         }
-        // 若使用者選擇「希望低咖啡因」，排除高咖啡因飲品
         if (lowCaffeinePreferred && drink.caffeine === 'high') {
           return false;
         }
-        // 若使用者選擇「避免乳製品」，嚴格排除任何含有牛奶/鮮奶油的飲品
         if (noDairyRequired && drink.dairy === true) {
           return false;
         }
         return true;
       });
 
-      // 安全防護：萬一極端條件下池子少於 3 杯，仍確保嚴守無咖啡因與無奶原則
       if (eligiblePool.length === 0) {
         eligiblePool = DRINKS.filter(d => (!noCaffeineRequired || d.caffeine === 'none') && (!noDairyRequired || !d.dairy));
       }
@@ -2388,7 +2536,6 @@
         let score = 0;
         let reasons = [];
 
-        // 必要門檻通過證明
         if (noCaffeineRequired) {
           reasons.push(`🛡️ 必要門檻把關：已為您 100% 排除含咖啡因飲品（此款為完全零咖啡因）。`);
         } else if (answers.caffeine === '需要' && (drink.caffeine === 'high' || drink.caffeine === 'medium')) {
@@ -2562,7 +2709,7 @@
     }
 
     // ============================================================================
-    // 10. 飲品圖鑑資料庫 (04 DRINK LIBRARY - 已移除按鈕與分類上的所有數字)
+    // 10. 飲品圖鑑資料庫 (04 DRINK LIBRARY)
     // ============================================================================
     function renderLibrary() {
       const categories = ['全部', '純茶', '奶茶', '水果茶', '咖啡', '氣泡飲', '無咖啡因'];
@@ -2622,8 +2769,107 @@
     }
 
     // ============================================================================
-    // 11. 台北市飲品門市地圖 (05 STORE MAP - 含 50嵐 46 店 & 龜記 31 店可捲動完整清單)
+    // 11. 台北市飲品門市地圖 (05 STORE MAP - 寬版 Filters 多維度篩選與雙檢視模式)
     // ============================================================================
+    function populateSpecificBrandSelect() {
+      const sel = document.getElementById('specific-brand-select');
+      if (!sel) return;
+      sel.innerHTML = `<option value="ALL">顯示所有符合品牌 (${BRANDS.length}家)</option>` +
+        BRANDS.map(b => `<option value="${b.id}">${b.emoji} ${b.name} (${b.branches.length}門市)</option>`).join('');
+    }
+
+    function clearSearchInput() {
+      const inp = document.getElementById('brand-search-input');
+      if (inp) {
+        inp.value = '';
+        renderStoreMap();
+      }
+    }
+
+    function onDistrictFilterChange(val) {
+      selectedDistrict = val;
+      renderStoreMap();
+    }
+
+    function onSpecificBrandFilterChange(val) {
+      selectedSpecificBrand = val;
+      if (val !== 'ALL') {
+        selectBrandForMap(val, 0);
+      }
+      renderStoreMap();
+    }
+
+    function toggleStoreFeaturePill(featId) {
+      if (selectedStoreFeatures.includes(featId)) {
+        selectedStoreFeatures = selectedStoreFeatures.filter(f => f !== featId);
+      } else {
+        selectedStoreFeatures.push(featId);
+      }
+      renderStoreMap();
+    }
+
+    function resetStoreMapFilters() {
+      filterDrinkForStoreMap = null;
+      storeCategory = '全部品牌';
+      selectedDistrict = '全部行政區';
+      selectedSpecificBrand = 'ALL';
+      selectedStoreFeatures = [];
+      const inp = document.getElementById('brand-search-input');
+      if (inp) inp.value = '';
+      const distSel = document.getElementById('district-select');
+      if (distSel) distSel.value = '全部行政區';
+      const brandSel = document.getElementById('specific-brand-select');
+      if (brandSel) brandSel.value = 'ALL';
+      const sortSel = document.getElementById('store-sort-select');
+      if (sortSel) sortSel.value = 'default';
+      renderStoreMap();
+    }
+
+    function setMapLayoutMode(mode) {
+      mapLayoutMode = mode;
+      const btnBanner = document.getElementById('layout-btn-banner');
+      const btnSplit = document.getElementById('layout-btn-split');
+      const layoutWrap = document.getElementById('store-content-layout');
+      const mapPanel = document.getElementById('map-panel-wrapper');
+      const listContainer = document.getElementById('brand-list-container');
+
+      if (mode === 'split') {
+        btnSplit.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-slate-900 text-white shadow-sm';
+        btnBanner.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900';
+        layoutWrap.className = 'grid grid-cols-1 xl:grid-cols-12 gap-6 items-start';
+        listContainer.className = 'xl:col-span-6 grid grid-cols-1 gap-4 max-h-[820px] overflow-y-auto custom-scroll pr-1 order-2 xl:order-1';
+        mapPanel.className = 'xl:col-span-6 xl:sticky xl:top-20 glass-card rounded-[2rem] p-5 space-y-4 order-1 xl:order-2';
+      } else {
+        btnBanner.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-slate-900 text-white shadow-sm';
+        btnSplit.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900';
+        layoutWrap.className = 'space-y-6';
+        mapPanel.className = 'glass-card rounded-[2rem] p-4 sm:p-6 space-y-4';
+        listContainer.className = 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5';
+      }
+      renderStoreMap();
+    }
+
+    // 檢查品牌是否符合所選的飲品特色膠囊
+    function brandMatchesFeature(brand, featId) {
+      const brandDrinks = DRINKS.filter(d => d.brandIds.includes(brand.id));
+      if (featId === 'caffeine_free') {
+        return brandDrinks.some(d => d.caffeine === 'none') || brand.id === '8yo' || brand.id === 'aniceholiday';
+      }
+      if (featId === 'dairy_free') {
+        return brandDrinks.some(d => !d.dairy);
+      }
+      if (featId === 'pure_tea') {
+        return brandDrinks.some(d => d.category === '純茶') || brand.cat === '特色茶專賣' || brand.cat === '精品茶系';
+      }
+      if (featId === 'fresh_fruit') {
+        return brandDrinks.some(d => d.category === '水果茶') || brand.cat === '果茶與鮮奶系';
+      }
+      if (featId === 'chewy_topping') {
+        return ['50lan', 'aniceholiday', 'wootea', 'wanpo', 'truedan', 'coco', 'milksha', 'chunshuitang'].includes(brand.id);
+      }
+      return true;
+    }
+
     function renderStoreMap() {
       const filterBanner = document.getElementById('drink-filter-banner');
       if (filterDrinkForStoreMap) {
@@ -2634,69 +2880,160 @@
         filterBanner.classList.add('hidden');
       }
 
-      const cats = ['全部品牌', '人氣必喝手搖', '特色茶專賣', '果茶與鮮奶系', '精品茶系', '連鎖咖啡廳', '超商現萃茶/咖啡'];
-      document.getElementById('brand-category-bar').innerHTML = cats.map(c => `
-        <button
-          onclick="filterStoreCategory('${c}')"
-          class="whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs font-semibold transition ${
-            storeCategory === c && !filterDrinkForStoreMap ? 'bg-slate-900 text-white shadow-sm' : 'glass-pill text-slate-700 hover:bg-white'
-          }"
-        >${c}</button>
-      `).join('');
+      // 渲染左側 2x2 品牌類型方塊 (移除超商分類)
+      const catItems = [
+        { name: '全部品牌', icon: 'layout-grid', short: '全部類型' },
+        { name: '人氣必喝手搖', icon: 'flame', short: '人氣手搖' },
+        { name: '特色茶專賣', icon: 'leaf', short: '特色原茶' },
+        { name: '果茶與鮮奶系', icon: 'cherry', short: '果茶鮮奶' },
+        { name: '精品茶系', icon: 'award', short: '精品現萃' },
+        { name: '連鎖咖啡廳', icon: 'coffee', short: '連鎖咖啡' }
+      ];
+
+      document.getElementById('brand-category-bar').innerHTML = catItems.map(c => {
+        const active = storeCategory === c.name && !filterDrinkForStoreMap;
+        return `
+          <button
+            onclick="filterStoreCategory('${c.name}')"
+            class="p-3 rounded-2xl text-left transition-all border flex flex-col items-start justify-between gap-1.5 ${
+              active
+                ? 'bg-slate-900 text-white border-slate-900 shadow-md'
+                : 'bg-white/80 hover:bg-white text-slate-700 border-slate-200/80'
+            }"
+          >
+            <i data-lucide="${c.icon}" class="w-4 h-4 ${active ? 'text-amber-300' : 'text-slate-500'}"></i>
+            <span class="text-xs font-bold leading-tight">${c.short}</span>
+          </button>
+        `;
+      }).join('');
+
+      // 渲染飲品特色膠囊按鈕 (仿照附圖一 Conveniences 膠囊)
+      const pillsEl = document.getElementById('store-feature-pills');
+      if (pillsEl) {
+        pillsEl.innerHTML = STORE_FEATURE_OPTIONS.map(opt => {
+          const isAct = selectedStoreFeatures.includes(opt.id);
+          return `
+            <button
+              type="button"
+              onclick="toggleStoreFeaturePill('${opt.id}')"
+              class="px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 border ${
+                isAct
+                  ? 'bg-white text-slate-900 border-slate-900 ring-1 ring-slate-900 shadow-sm'
+                  : 'bg-white/65 hover:bg-white text-slate-600 border-slate-200/80'
+              }"
+            >
+              <i data-lucide="${opt.icon}" class="w-3.5 h-3.5 ${isAct ? 'text-rose-600' : 'text-slate-400'}"></i>
+              <span>${opt.label}</span>
+            </button>
+          `;
+        }).join('');
+      }
 
       const query = (document.getElementById('brand-search-input')?.value || '').trim().toLowerCase();
+      const sortMode = document.getElementById('store-sort-select')?.value || 'default';
 
       let filtered = BRANDS.filter(b => {
         if (filterDrinkForStoreMap && !filterDrinkForStoreMap.brandIds.includes(b.id)) {
           return false;
         }
+        if (selectedSpecificBrand !== 'ALL' && b.id !== selectedSpecificBrand) {
+          return false;
+        }
         const matchCat = storeCategory === '全部品牌' || b.cat === storeCategory;
+        const matchDistrict = selectedDistrict === '全部行政區' ||
+          b.branches.some(br => br.name.includes(selectedDistrict) || br.address.includes(selectedDistrict));
+        const matchFeatures = selectedStoreFeatures.every(fId => brandMatchesFeature(b, fId));
         const matchQuery = !query ||
           b.name.toLowerCase().includes(query) ||
           b.feature.toLowerCase().includes(query) ||
           b.signature.some(s => s.toLowerCase().includes(query)) ||
           b.branches.some(br => br.name.toLowerCase().includes(query) || br.address.toLowerCase().includes(query));
-        return matchCat && matchQuery;
+
+        return matchCat && matchDistrict && matchFeatures && matchQuery;
       });
 
-      if (userLocation) {
-        filtered.sort((a, b) => {
-          const minA = Math.min(...a.branches.map(br => br.distanceKm || 9999));
-          const minB = Math.min(...b.branches.map(br => br.distanceKm || 9999));
-          return minA - minB;
-        });
+      // 排序邏輯
+      if (sortMode === 'distance' || userLocation) {
+        if (sortMode === 'distance' && !userLocation) {
+          requestUserLocation();
+        }
+        if (userLocation) {
+          filtered.sort((a, b) => {
+            const minA = Math.min(...a.branches.map(br => br.distanceKm || 9999));
+            const minB = Math.min(...b.branches.map(br => br.distanceKm || 9999));
+            return minA - minB;
+          });
+        }
+      } else if (sortMode === 'branches') {
+        filtered.sort((a, b) => b.branches.length - a.branches.length);
       }
+
+      // 統計符合條件的門市總數
+      let totalMatchedBranches = 0;
+      filtered.forEach(b => {
+        const mBranches = b.branches.filter(br => {
+          const okDist = selectedDistrict === '全部行政區' || br.name.includes(selectedDistrict) || br.address.includes(selectedDistrict);
+          const okQ = !query || br.name.toLowerCase().includes(query) || br.address.toLowerCase().includes(query);
+          return okDist && okQ;
+        });
+        totalMatchedBranches += (mBranches.length > 0 ? mBranches.length : b.branches.length);
+      });
+
+      const countEl = document.getElementById('store-results-count');
+      const totalBrEl = document.getElementById('store-branches-total');
+      const applyBtnText = document.getElementById('apply-filter-btn-text');
+      if (countEl) countEl.textContent = `${filtered.length} 家品牌結果`;
+      if (totalBrEl) totalBrEl.textContent = `（共 ${totalMatchedBranches} 間符合條件門市）`;
+      if (applyBtnText) applyBtnText.textContent = `顯示 ${filtered.length} 家品牌 (${totalMatchedBranches} 門市)`;
 
       const listEl = document.getElementById('brand-list-container');
       if (filtered.length === 0) {
-        listEl.innerHTML = `<div class="col-span-full glass-card rounded-2xl p-8 text-center text-sm text-slate-500">找不到符合條件的品牌或台北市門市，請點擊上方「顯示全部品牌」或嘗試其他關鍵字。</div>`;
+        listEl.innerHTML = `
+          <div class="col-span-full glass-card rounded-3xl p-10 text-center space-y-3">
+            <div class="text-3xl">🔍</div>
+            <div class="text-base font-bold text-slate-800">找不到符合目前篩選條件的品牌或台北市門市</div>
+            <p class="text-xs text-slate-500">建議點擊左側「Reset 重置」放寬篩選條件，或嘗試其他關鍵字。</p>
+            <button onclick="resetStoreMapFilters()" class="px-5 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition">
+              重置所有篩選條件
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
         return;
       }
 
       listEl.innerHTML = filtered.map(b => {
         const isSelected = b.id === activeBrandId;
-        // 若使用者有輸入行政區或路名關鍵字，優先篩選匹配的門市顯示
-        const matchingBranches = query
-          ? b.branches.filter(br => br.name.toLowerCase().includes(query) || br.address.toLowerCase().includes(query))
-          : b.branches;
+        const matchingBranches = b.branches.filter(br => {
+          const okDist = selectedDistrict === '全部行政區' || br.name.includes(selectedDistrict) || br.address.includes(selectedDistrict);
+          const okQ = !query || br.name.toLowerCase().includes(query) || br.address.toLowerCase().includes(query);
+          return okDist && okQ;
+        });
         const displayBranches = matchingBranches.length > 0 ? matchingBranches : b.branches;
+        const firstRealIdx = b.branches.indexOf(displayBranches[0]);
 
         return `
           <div
-            onclick="selectBrandForMap('${b.id}', 0)"
-            class="cursor-pointer rounded-[1.8rem] p-4 sm:p-5 transition-all duration-200 flex flex-col justify-between border ${
+            onclick="selectBrandForMap('${b.id}', ${Math.max(0, firstRealIdx)})"
+            class="cursor-pointer rounded-[2rem] p-5 sm:p-6 transition-all duration-200 flex flex-col justify-between border ${
               isSelected
-                ? 'bg-white border-slate-900 ring-2 ring-slate-900/10 shadow-lg'
-                : 'glass-card hover:bg-white/85 border-white/80'
+                ? 'bg-white border-slate-900 ring-2 ring-slate-900/15 shadow-xl'
+                : 'glass-card hover:bg-white/90 border-white/85 hover:-translate-y-0.5'
             }"
           >
-            <div class="space-y-2">
-              <div class="flex items-start justify-between gap-2">
-                <div class="flex items-center gap-2">
-                  <span class="text-2xl">${b.emoji}</span>
+            <div class="space-y-3">
+              <!-- 頂部品牌視覺標頭 -->
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-2xl bg-slate-100/90 border border-white flex items-center justify-center text-2xl shadow-sm shrink-0">
+                    ${b.emoji}
+                  </div>
                   <div>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">${b.cat}</span>
-                    <h3 class="font-bold text-slate-900 text-sm sm:text-base mt-0.5">${b.name}</h3>
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-900/10 text-slate-700">${b.cat}</span>
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-600">台北 ${displayBranches.length} 店</span>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-base sm:text-lg mt-1">${b.name}</h3>
                   </div>
                 </div>
                 <a
@@ -2704,7 +3041,7 @@
                   target="_blank"
                   rel="noopener noreferrer"
                   onclick="event.stopPropagation()"
-                  class="px-2.5 py-1 rounded-full bg-slate-900 text-white text-[11px] font-semibold hover:bg-rose-600 transition flex items-center gap-1 shrink-0"
+                  class="px-3 py-1.5 rounded-xl bg-slate-900 text-white text-[11px] font-bold hover:bg-rose-600 transition flex items-center gap-1 shrink-0"
                   title="開啟 ${b.name} 官方網站"
                 >
                   <span>官網</span>
@@ -2714,18 +3051,19 @@
 
               <p class="text-xs text-slate-600 leading-relaxed">${b.feature}</p>
 
-              <div class="flex flex-wrap gap-1 pt-0.5">
-                ${b.signature.map(sig => `<span class="text-[10px] sm:text-[11px] px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 border border-amber-200/60">⭐ ${sig}</span>`).join('')}
+              <!-- 招牌必點標籤 -->
+              <div class="flex flex-wrap gap-1.5 pt-0.5">
+                ${b.signature.map(sig => `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-lg bg-amber-50/90 text-amber-900 border border-amber-200/70">⭐ ${sig}</span>`).join('')}
               </div>
             </div>
 
             <!-- 台北市各區門市可捲動清單與直接開啟地圖導航超連結 -->
-            <div class="mt-3.5 pt-3 border-t border-slate-200/70 space-y-1.5">
+            <div class="mt-4 pt-3.5 border-t border-slate-200/70 space-y-2">
               <div class="text-[11px] font-bold text-slate-500 flex items-center justify-between">
-                <span>台北市門市（可上下滑動查看全部）：</span>
-                <span class="text-rose-600">${userLocation ? '依距離排序' : `台北市共 ${b.branches.length} 家門市`}</span>
+                <span>📍 門市列表（點擊定位預覽 / 導航）：</span>
+                <span class="text-rose-600">${selectedDistrict !== '全部行政區' ? selectedDistrict : (userLocation ? '依距離排序' : `共 ${displayBranches.length} 家`)}</span>
               </div>
-              <div class="max-h-48 overflow-y-auto custom-scroll space-y-1.5 pr-1">
+              <div class="max-h-52 overflow-y-auto custom-scroll space-y-1.5 pr-1">
                 ${displayBranches.map((br) => {
                   const realIdx = b.branches.indexOf(br);
                   const originParam = userLocation ? `&origin=${userLocation.lat},${userLocation.lng}` : '';
@@ -2734,21 +3072,22 @@
                     ? `<span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded ml-1">${br.distanceKm.toFixed(1)} km</span>`
                     : '';
                   return `
-                    <div class="flex items-center justify-between gap-1.5 text-xs bg-slate-50/90 hover:bg-rose-50/70 p-2 rounded-xl transition">
+                    <div class="flex items-center justify-between gap-2 text-xs bg-slate-50/95 hover:bg-rose-50/80 p-2.5 rounded-xl border border-slate-200/50 transition">
                       <button
                         type="button"
                         onclick="event.stopPropagation(); selectBrandForMap('${b.id}', ${realIdx})"
-                        class="text-left truncate flex-1 font-medium text-slate-700 hover:text-slate-900"
+                        class="text-left min-w-0 flex-1 font-medium text-slate-700 hover:text-slate-900"
                         title="在地圖預覽：${br.address}"
                       >
-                        📍 <strong>${br.name}</strong>${distBadge}｜${br.address}
+                        <div class="font-bold text-slate-900 truncate">${br.name}${distBadge}</div>
+                        <div class="text-[11px] text-slate-500 truncate mt-0.5">${br.address}</div>
                       </button>
                       <a
                         href="${navUrl}"
                         target="_blank"
                         rel="noopener noreferrer"
                         onclick="event.stopPropagation()"
-                        class="px-2 py-1 rounded-lg bg-rose-600 text-white text-[10px] sm:text-[11px] font-semibold hover:bg-rose-500 transition shrink-0 flex items-center gap-0.5"
+                        class="px-2.5 py-1.5 rounded-lg bg-rose-600 text-white text-[11px] font-bold hover:bg-rose-500 transition shrink-0 flex items-center gap-1 shadow-sm"
                         title="直接開啟 Google Maps App 導航至 ${br.address}"
                       >
                         <i data-lucide="navigation" class="w-3 h-3"></i>
@@ -2796,7 +3135,7 @@
         const dTag = item.distanceKm !== undefined ? `（${item.distanceKm.toFixed(1)} km）` : '';
         return `
           <div class="p-2.5 sm:p-3 rounded-2xl border transition flex items-center justify-between gap-2 ${
-            active ? 'bg-slate-900 text-white border-slate-900' : 'bg-white/75 text-slate-800 border-white hover:bg-white'
+            active ? 'bg-slate-900 text-white border-slate-900 shadow-sm' : 'bg-white/85 text-slate-800 border-slate-200/70 hover:bg-white'
           }">
             <div class="min-w-0 flex-1">
               <button
@@ -2836,7 +3175,7 @@
     }
 
     // ============================================================================
-    // 12. Mood Map 情緒飲品二維座標圖 (精緻彩色小圓點，Hover 或觸控才顯示資訊)
+    // 12. Mood Map 情緒飲品二維座標圖
     // ============================================================================
     const CATEGORY_DOT_COLORS = {
       '純茶': 'bg-emerald-500 ring-emerald-200',
@@ -2913,7 +3252,7 @@
     }
 
     // ============================================================================
-    // 13. 個人 Mood Diary 與飲品人格分析 (LocalStorage 自動保存，同裝置不遺失)
+    // 13. 個人 Mood Diary 與飲品人格分析
     // ============================================================================
     function getDiaryHistory() {
       try {
